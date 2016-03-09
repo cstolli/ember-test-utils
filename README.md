@@ -45,6 +45,7 @@ describeComponent('component-name', 'description', {
     registryHelper.teardown()
   }
 })
+```
 
 `registryHelper.setup` requires some explanation.  It takes a *resolver* as the first argument, since it must restore it when tests are finished.  For a vanilla Ember project, this resolver is usually located at `tests/helpers/resolver`.
 

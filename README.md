@@ -12,8 +12,7 @@
 # ember-test-utils
 
  * [Installation](#Installation)
- * [API](#API)
- * [Examples](#Examples)
+ * [Getting Started](#Getting Started)
  * [Contributing](#Contributing)
 
 ## Installation
@@ -21,32 +20,92 @@
 ember install ember-test-utils
 ```
 
-## API
+## Getting Started
 
-| Attribute | Type | Value | Description |
-| --------- | ---- | ----- | ----------- |
-| ` ` | ` ` | ` ` | Coming soon |
+**ember-test-utils** provides a set of utilities to help you in testing Ember components.  Wether you're adding integration or unit tests, you can use `registryHelper` to stub out factories.  This library requires you use `ember-cli-mocha` and `ember-mocha` as your testing framework.
 
-## Examples
+### Using `registryHelper`
 
-### Example
-```handlebars
-Coming soon
+`registryHelper` must be properly initialized with `beforeSetup` and destroyed with `teardown`
+
+```js
+import {registryHelper} from 'ember-test-utils'
+import resolver from 'path/to/resolver'
+
+describeComponent('component-name', 'description', {
+  unit: true,
+
+  beforeSetup () {
+    registryHelper.setup(resolver, {
+      'component:component-name': ComponentClass
+    })
+  },
+
+  teardown () {
+    registryHelper.teardown()
+  }
+})
+
+`registryHelper.setup` requires some explanation.  It takes a *resolver* as the first argument, since it must restore it when tests are finished.  For a vanilla Ember project, this resolver is usually located at `tests/helpers/resolver`.
+
+The *registry hash* which specifies the factories you want to stub, is an object keyed on the factory name.  The convention for the name is *<type:name>*.
+
+```
+registryHelper.setup(resolver, {
+  'component:component-name': ComponentClass,
+  'template:components/component-name': hbs`Mr. Fancy Pants`,
+  'helpers:helper-name': HelperFunction,
+  'controller:controller-name': ControllerClass
+})
 ```
 
-## Development
-### Setup
+### Integration vs. Unit tests
+
+`registryHelper` can be used in either integration or unit tests.  Just specify, `unit: true` or `integration: true` in the test module.
+
+If inside an integration tests, all dependencies are loaded/injected.  This environment will allow you to test your components with their dependencies intact.  You can use `registryHelper` to then stub individual dependencies out.
+
+If inside a unit test, the environment is completely isolated.  No dependencies are loaded so you'll need to specify those dependencies with the `needs` array.
+
+
 ```
-git clone git@github.com:ciena-frost/ember-test-utils.git
-cd ember-test-utils
-npm install && bower install
+describeComponent('component-name', 'description', {
+  unit: true,
+
+  needs: [
+    'component:nested-component-name'
+  ],
+
+  beforeSetup () {
+    registryHelper.setup(resolver, {
+      'component:nested-component-name': NestedComponentClass
+    })
+  },
+
+  teardown () {
+    registryHelper.teardown()
+  }
+})
 ```
 
-### Development Server
-A dummy application for development is available under `ember-test-utils/tests/dummy`.
-To run the server run `ember server` (or `npm start`) from the root of the repository and
-visit the app at http://localhost:4200.
+##Contributing
 
-### Testing
-Run `npm test` from the root of the project to run linting checks as well as execute the test suite
-and output code coverage.
+This following outlines the details of collaborating on this Ember addon:
+
+### Installation
+
+* `git clone` this repository
+* `npm install`
+* `bower install`
+
+### Running Tests
+
+* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
+* `ember test`
+* `ember test --server`
+
+### Building
+
+* `ember build`
+
+For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).

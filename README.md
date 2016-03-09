@@ -51,7 +51,7 @@ describeComponent('component-name', 'description', {
 
 The *registry hash* which specifies the factories you want to stub, is an object keyed on the factory name.  The convention for the name is *<type:name>*.
 
-```
+```js
 registryHelper.setup(resolver, {
   'component:component-name': ComponentClass,
   'template:components/component-name': hbs`Mr. Fancy Pants`,
@@ -69,7 +69,7 @@ If inside an integration tests, all dependencies are loaded/injected.  This envi
 If inside a unit test, the environment is completely isolated.  No dependencies are loaded so you'll need to specify those dependencies with the `needs` array.
 
 
-```
+```js
 describeComponent('component-name', 'description', {
   unit: true,
 

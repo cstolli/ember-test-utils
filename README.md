@@ -1,8 +1,8 @@
-[ci-img]: https://img.shields.io/travis/ciena-frost/ember-test-utils.svg "Travis CI Build Status"
-[ci-url]: https://travis-ci.org/ciena-frost/ember-test-utils
+[ci-img]: https://img.shields.io/travis/ciena-blueplanet/ember-test-utils.svg "Travis CI Build Status"
+[ci-url]: https://travis-ci.org/ciena-blueplanet/ember-test-utils
 
-[cov-img]: https://img.shields.io/coveralls/ciena-frost/ember-test-utils.svg "Coveralls Code Coverage"
-[cov-url]: https://coveralls.io/github/ciena-frost/ember-test-utils
+[cov-img]: https://img.shields.io/coveralls/ciena-blueplanet/ember-test-utils.svg "Coveralls Code Coverage"
+[cov-url]: https://coveralls.io/github/ciena-blueplanet/ember-test-utils
 
 [npm-img]: https://img.shields.io/npm/v/ember-test-utils.svg "NPM Version"
 [npm-url]: https://www.npmjs.com/package/ember-test-utils
@@ -22,11 +22,13 @@ ember install ember-test-utils
 
 ## Getting Started
 
-**ember-test-utils** provides a set of utilities to help you in testing Ember components.  Wether you're adding integration or unit tests, you can use `registryHelper` to stub out factories.  This library requires you use `ember-cli-mocha` and `ember-mocha` as your testing framework.
+**ember-test-utils** provides a set of utilities to help you in testing Ember components. This library requires you use `ember-cli-mocha` and `ember-mocha` as your testing framework.
+
+Wether you're adding integration or unit tests, you can use `registryHelper` to stub out factories. This is achieved by replacing the Ember resolver with a custom resolver that bypasses normal lookups.
 
 ### Using `registryHelper`
 
-`registryHelper` must be properly initialized with `beforeSetup` and destroyed with `teardown`
+`registryHelper` must be properly initialized with `beforeSetup` and destroyed with `teardown`. Calling `setup` on `registryHelper` will set up our custom resolver with `ember-mocha`'s `setResolver`.  `ember-mocha` will take care of the rest by registering the stubs you provided with Ember.
 
 ```js
 import {registryHelper} from 'ember-test-utils'
@@ -88,6 +90,8 @@ describeComponent('component-name', 'description', {
   }
 })
 ```
+
+For a working example, look [here](tests/unit/registry-helper-test.js)
 
 ##Contributing
 

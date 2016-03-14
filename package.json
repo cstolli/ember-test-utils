@@ -12,7 +12,7 @@
     "test": "npm run lint && ember test",
     "lint": "eslint *.js addon app config tests"
   },
-  "repository": "git@github.com:ciena-frost/ember-test-utils.git",
+  "repository": "git@github.com:ciena-blueplanet/ember-test-utils.git",
   "engines": {
     "node": ">= 5.0.0"
   },

@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
-import objectDiff, {ARRAY_PLACEHOLDER} from './object-diff'
+import objectDiff, {ARRAY_PLACEHOLDER} from 'ember-test-utils/object-diff'
 import _ from 'lodash'
 
 const tests = []

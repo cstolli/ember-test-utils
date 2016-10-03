@@ -22,78 +22,180 @@ ember install ember-test-utils
 
 ## Getting Started
 
-**ember-test-utils** provides a set of utilities to help you in testing Ember components. This library requires you use `ember-cli-mocha` and `ember-mocha` as your testing framework.
+**ember-test-utils** provides a set of utilities to help you in testing Ember modules. This library requires you
+use `ember-cli-mocha` and `ember-mocha` as your testing framework. It provides shortcuts for working with:
+`describeComponent`, `describeModel`, and `describeModule`
 
-Wether you're adding integration or unit tests, you can use `registryHelper` to stub out factories. This is achieved by replacing the Ember resolver with a custom resolver that bypasses normal lookups.
 
-### Using `registryHelper`
-
-`registryHelper` must be properly initialized with `beforeSetup` and destroyed with `teardown`. Calling `setup` on `registryHelper` will set up our custom resolver with `ember-mocha`'s `setResolver`.  `ember-mocha` will take care of the rest by registering the stubs you provided with Ember.
+### `describeComponent`
+Two shortcuts (`integration`, and `unit`) are provided to help transform
 
 ```js
-import {registryHelper} from 'ember-test-utils'
-import resolver from 'path/to/resolver'
+import {expect} from 'chai'
+import {describeComponent, it} from 'ember-mocha'
+import hbs from 'htmlbars-inline-precompile'
 
-describeComponent('component-name', 'description', {
-  unit: true,
-
-  beforeSetup () {
-    registryHelper.setup(resolver, {
-      'component:component-name': ComponentClass
-    })
+describeComponent(
+  'my-greeting',
+  'Integration: MyGreetingComponent',
+  {
+    integration: true
   },
-
-  teardown () {
-    registryHelper.teardown()
-  }
-})
-```
-
-`registryHelper.setup` requires some explanation.  It takes a *resolver* as the first argument, since it must restore it when tests are finished.  For a vanilla Ember project, this resolver is usually located at `tests/helpers/resolver`.
-
-The *registry hash* which specifies the factories you want to stub, is an object keyed on the factory name.  The convention for the name is *<type:name>*.
-
-```js
-registryHelper.setup(resolver, {
-  'component:component-name': ComponentClass,
-  'template:components/component-name': hbs`Mr. Fancy Pants`,
-  'helpers:helper-name': HelperFunction,
-  'controller:controller-name': ControllerClass
-})
-```
-
-### Integration vs. Unit tests
-
-`registryHelper` can be used in either integration or unit tests.  Just specify, `unit: true` or `integration: true` in the test module.
-
-If inside an integration tests, all dependencies are loaded/injected.  This environment will allow you to test your components with their dependencies intact.  You can use `registryHelper` to then stub individual dependencies out.
-
-If inside a unit test, the environment is completely isolated.  No dependencies are loaded so you'll need to specify those dependencies with the `needs` array.
-
-
-```js
-describeComponent('component-name', 'description', {
-  unit: true,
-
-  needs: [
-    'component:nested-component-name'
-  ],
-
-  beforeSetup () {
-    registryHelper.setup(resolver, {
-      'component:nested-component-name': NestedComponentClass
+  function () {
+    it('renders', function () {
+      this.set('name', 'John')
+      this.render(hbs`{{my-greeting name=name}}`)
+      expect(this.$()).to.have.length(1)
     })
-  },
-
-  teardown () {
-    registryHelper.teardown()
   }
+)
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describeComponent, it} from 'ember-mocha'
+import hbs from 'htmlbars-inline-precompile'
+import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+
+describeComponent(...integration('my-greeting'), function () {
+  it('renders', function () {
+    this.set('name', 'John')
+    this.render(hbs`{{my-greeting name=name}}`)
+    expect(this.$()).to.have.length(1)
+  })
 })
 ```
 
-For a working example, look [here](tests/unit/registry-helper-test.js)
+and
 
-##Contributing
+```js
+import {expect} from 'chai'
+import {describeComponent, it} from 'ember-mocha'
+
+describeComponent(
+  'my-greeting',
+  'MyGreetingComponent',
+  {
+    needs: ['component:foo', 'helper:bar'],
+    unit: true
+  },
+  function () {
+    it('renders', function () {
+      // creates the component instance
+      let component = this.subject()
+
+      // renders the component on the page
+      this.render()
+      expect(component).not.to.equal(undefined)
+      expect(this.$()).to.have.length(1)
+    })
+  }
+)
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describeComponent, it} from 'ember-mocha'
+import {unit} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+
+describeComponent(...unit('my-greeting', ['component:foo', 'helper:bar']), function () {
+  it('renders', function () {
+    // creates the component instance
+    let component = this.subject()
+
+    // renders the component on the page
+    this.render()
+    expect(component).not.to.equal(undefined)
+    expect(this.$()).to.have.length(1)
+  })
+})
+```
+
+## `describeModel`
+A single `model` shortcut is provided to allow you to turn this:
+
+```js
+import {expect} from 'chai'
+import {describeModel, it} from 'ember-mocha'
+
+describeModel(
+  'person',
+  'Unit | Model | person',
+  {
+    // Specify the other units that are required for this test.
+    needs: ['model:company']
+  },
+  function () {
+    it('exists', function () {
+      let model = this.subject()
+      expect(model).not.to.equal(undefined)
+    })
+  }
+)
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describeModel, it} from 'ember-mocha'
+import {model} from 'dummy/tests/helpers/ember-test-utils/describe-model'
+
+describeModel(...model('person', ['model:company']), function () {
+  it('exists', function () {
+    let model = this.subject()
+    expect(model).not.to.equal(undefined)
+  })
+})
+```
+
+## `describeModule`
+Provides three shortcuts (`route`, `controller`, and `module`) The `route` and `controller` shortcuts are just
+extra shortcuts for `module` which pre-populate the `type` param to be `'route'` or `'controller'`.
+
+They let you transform
+
+```js
+import {expect} from 'chai'
+import {describeModule, it} from 'ember-mocha'
+
+describeModule(
+  'controller:demo',
+  'DemoController',
+  {
+    needs: ['controller:foo']
+  },
+  function () {
+    // Replace this with your real tests.
+    it('exists', function () {
+      let controller = this.subject()
+      expect(controller).not.to.equal(undefined)
+    })
+  }
+)
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describeModule, it} from 'ember-mocha'
+import {controller} from 'dummy/tests/helpers/ember-test-utils/describe-module'
+
+describeModule(...controller('demo', ['controller:foo'], function () {
+  // Replace this with your real tests.
+  it('exists', function () {
+    let controller = this.subject()
+    expect(controller).not.to.equal(undefined)
+  })
+})
+```
+
+## Contributing
 
 This following outlines the details of collaborating on this Ember addon:
 

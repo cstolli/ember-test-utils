@@ -1,3 +1,8 @@
+# 1.1.0
+*  **Added** a `serializer` shortcut to the `describe-model` module which yields a `Unit | Serializer | model-name` description compared to the `Unit | Model | model-name` that the `model` shortcut yields. 
+
+
+
 # 1.0.0
 ## Breaking Changes
  * **Removed** `registryHelper` functionality (it isn't as necessary/useful with the introduction of `ember-hook` to make things less brittle.

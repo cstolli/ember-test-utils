@@ -20,7 +20,7 @@ export function module (type, name, dependencies, options = {}) {
 
   return [
     `${type}:${name}`,
-    Ember.String.classify(name + ' ' + type),
+    `Unit | ${Ember.String.classify(type)} | ${name}`,
     options
   ]
 }

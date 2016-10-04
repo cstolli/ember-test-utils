@@ -125,7 +125,7 @@ import {describeModel, it} from 'ember-mocha'
 
 describeModel(
   'person',
-  'Unit | Model | person',
+  'Unit / Model / person',
   {
     // Specify the other units that are required for this test.
     needs: ['model:company']
@@ -157,13 +157,13 @@ describeModel(...model('person', ['model:company']), function () {
 The only difference between `model` and `serializer` is what the description of the test will end up being:
 
 ```
-Unit | Model | model-name
+Unit / Model / model-name
 ```
 
 vs.
 
 ```
-Unit | Serializer | model-name
+Unit / Serializer / model-name
 ```
 
 ## `describeModule`

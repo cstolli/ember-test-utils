@@ -14,7 +14,7 @@ function component (name, options = {}) {
   const testType = (options.unit) ? 'Unit' : 'Integration'
   return [
     name,
-    `${testType} | Component | ${name}`,
+    `${testType} / Component / ${name}`,
     options
   ]
 }

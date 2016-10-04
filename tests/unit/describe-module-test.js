@@ -18,7 +18,7 @@ describe('describeModule()', function () {
       })
 
       it('should give proper test description', function () {
-        expect(args[1]).to.equal('Unit | Route | thing')
+        expect(args[1]).to.equal('Unit / Route / thing')
       })
 
       it('should give blank options', function () {
@@ -49,7 +49,7 @@ describe('describeModule()', function () {
       })
 
       it('should give proper test description', function () {
-        expect(args[1]).to.equal('Unit | Controller | thing')
+        expect(args[1]).to.equal('Unit / Controller / thing')
       })
 
       it('should give blank options', function () {

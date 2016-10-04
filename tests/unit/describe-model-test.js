@@ -18,7 +18,7 @@ describe('describeModel()', function () {
       })
 
       it('should give proper test description', function () {
-        expect(args[1]).to.equal('Unit | Model | person')
+        expect(args[1]).to.equal('Unit / Model / person')
       })
 
       it('should give blank options', function () {
@@ -49,7 +49,7 @@ describe('describeModel()', function () {
       })
 
       it('should give proper test description', function () {
-        expect(args[1]).to.equal('Unit | Serializer | company')
+        expect(args[1]).to.equal('Unit / Serializer / company')
       })
 
       it('should give blank options', function () {

@@ -1,3 +1,7 @@
+# 1.1.1
+* **Fixed** test descriptions to be consistent in the format of `Unit | Component | my-component` instead of `Unit: MyComponentComponent` so that `grep`-ing for your component name will actually find tests for your component now. 
+ * **Added** unit tests for the helpers themselves to make sure descriptions remain correct.
+
 # 1.1.0
 *  **Added** a `serializer` shortcut to the `describe-model` module which yields a `Unit | Serializer | model-name` description compared to the `Unit | Model | model-name` that the `model` shortcut yields. 
 

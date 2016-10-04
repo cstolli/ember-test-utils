@@ -18,7 +18,7 @@ describe('describeComponent()', function () {
       })
 
       it('should give proper test description', function () {
-        expect(args[1]).to.equal('Unit | Component | my-component')
+        expect(args[1]).to.equal('Unit / Component / my-component')
       })
 
       it('should set unit to true in options', function () {
@@ -48,7 +48,7 @@ describe('describeComponent()', function () {
     })
 
     it('should give proper test description', function () {
-      expect(args[1]).to.equal('Integration | Component | my-component')
+      expect(args[1]).to.equal('Integration / Component / my-component')
     })
 
     it('should set integration to true in options', function () {

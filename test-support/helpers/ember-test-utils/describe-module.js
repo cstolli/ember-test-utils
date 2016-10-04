@@ -20,7 +20,7 @@ export function module (type, name, dependencies, options = {}) {
 
   return [
     `${type}:${name}`,
-    `Unit | ${Ember.String.classify(type)} | ${name}`,
+    `Unit / ${Ember.String.classify(type)} / ${name}`,
     options
   ]
 }

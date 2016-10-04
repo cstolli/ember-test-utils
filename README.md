@@ -16,6 +16,7 @@
  * [Contributing](#Contributing)
 
 ## Installation
+
 ```
 ember install ember-test-utils
 ```
@@ -116,7 +117,7 @@ describeComponent(...unit('my-greeting', ['component:foo', 'helper:bar']), funct
 ```
 
 ## `describeModel`
-A single `model` shortcut is provided to allow you to turn this:
+Two shortcuts are provided (`model` and `serializer`) to allow you to turn this:
 
 ```js
 import {expect} from 'chai'
@@ -151,6 +152,18 @@ describeModel(...model('person', ['model:company']), function () {
     expect(model).not.to.equal(undefined)
   })
 })
+```
+
+The only difference between `model` and `serializer` is what the description of the test will end up being:
+
+```
+Unit | Model | model-name
+```
+
+vs.
+
+```
+Unit | Serializer | model-name
 ```
 
 ## `describeModule`

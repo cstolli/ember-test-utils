@@ -17,7 +17,7 @@ export function model (name, dependencies, options = {}) {
 
   return [
     name,
-    'Unit | Model | ${name}',
+    `Unit | Model | ${name}`,
     options
   ]
 }
@@ -37,7 +37,7 @@ export function serializer (name, dependencies, options = {}) {
 
   return [
     name,
-    'Unit | Serializer | ${name}',
+    `Unit | Serializer | ${name}`,
     options
   ]
 }

@@ -1,3 +1,8 @@
+# 1.1.2
+
+- **Fixed** generated test names to use `/` instead of `|` as the test name separator, grep-ing the interactive web app can link to unique tests.
+
+
 # 1.1.1
 * **Fixed** test descriptions to be consistent in the format of `Unit | Component | my-component` instead of `Unit: MyComponentComponent` so that `grep`-ing for your component name will actually find tests for your component now. 
  * **Added** unit tests for the helpers themselves to make sure descriptions remain correct.

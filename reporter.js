@@ -44,15 +44,7 @@ function getHumanReadableDuration (value) {
  * @returns {Number} number indicating sort order
  */
 function testSorter (a, b) {
-  if (a.runDuration < b.runDuration) {
-    return -1
-  }
-
-  if (a.runDuration > b.runDuration) {
-    return 1
-  }
-
-  return 0
+  return a.runDuration - b.runDuration
 }
 
 /**

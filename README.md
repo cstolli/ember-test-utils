@@ -208,6 +208,29 @@ describeModule(...controller('demo', ['controller:foo'], function () {
 })
 ```
 
+### Custom Mocha Reporter
+
+If you'd like to use the custom Mocha reporter provided by this addon then your `testem.js` file should look something like this:
+
+```js
+var Reporter = require('ember-test-utils/reporter')
+
+module.exports = {
+  disable_watching: true,
+  framework: 'mocha',
+  launch_in_ci: [
+    'Firefox'
+  ],
+  launch_in_dev: [
+    'Chrome'
+  ],
+  reporter: new Reporter(),
+  test_page: 'tests/index.html?hidepassed'
+}
+```
+
+> NOTE: This reporter will group test results into two sections: failed and passed. Each section is sorted from slowest test to fastest test so you can see which tests are causing your CI to come to a crawl.
+
 ## Contributing
 
 This following outlines the details of collaborating on this Ember addon:

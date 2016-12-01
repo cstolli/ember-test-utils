@@ -1,3 +1,17 @@
+# 1.2.1
+
+* **Improved** custom mocha reporter to show failures as they occur and only show passed tests when all pass (now sorting fastest to slowest to reduce a user from having to scroll as much in their terminal).
+
+When there are failures without stack traces it'll look like this:
+<img width="1205" alt="screen shot 2016-12-01 at 3 00 46 pm" src="https://cloud.githubusercontent.com/assets/422902/20816671/639871d8-b7d8-11e6-86e9-e85830e87a37.png">
+
+When there are failures with stack traces it'll look like this:
+<img width="1146" alt="screen shot 2016-12-01 at 3 08 34 pm" src="https://cloud.githubusercontent.com/assets/422902/20816680/6c772c68-b7d8-11e6-814e-92bc9a15b961.png">
+
+When all tests pass it'll look like this:
+<img width="1270" alt="screen shot 2016-12-01 at 2 06 57 pm" src="https://cloud.githubusercontent.com/assets/422902/20814645/71377978-b7cf-11e6-9b6d-01d682e448be.png">
+
+
 # 1.2.0
 
 * **Added** custom mocha reporter which can be used by consumers.

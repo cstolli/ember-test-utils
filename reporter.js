@@ -51,10 +51,29 @@ function testSorter (a, b) {
  * Write out individual test result
  * @param {TestResult} test - test to write out result of
  */
-function testWriter (test) {
+function testWriter (test, verbose) {
   // Other properties that may be useful: logs, error, launcherId, items
   var humanFriendlyDuration = getHumanReadableDuration(test.runDuration)
   this.out.write('[' + humanFriendlyDuration + '] ' + test.name + '\n')
+
+  if (verbose) {
+    if (test.logs && test.logs.length !== 0) {
+      this.out.write('\tLogs:\n')
+
+      test.logs.forEach((log) => {
+        this.out.write('\t\t' + log + '\n')
+      })
+    }
+
+    if (test.error) {
+      var e = test.error
+      this.out.write('\n\tError: ' + e.message + '\n')
+
+      if (e.stack) {
+        this.out.write('\n\t\t' + e.stack.toString().replace(/\n/g, '\n\t\t') + '\n\n')
+      }
+    }
+  }
 }
 
 /**
@@ -137,12 +156,9 @@ Reporter.prototype = {
       this.pass++
       this.passedTests.push(data)
     } else {
-      if (this.failedTests.length === 0) {
-        this.out.write('FAILED TESTS\n\n')
-      }
-
-      testWriter.call(this, data)
+      this.out.write(this.failedTests.length === 0 ? 'FAILED TESTS\n\n' : '\n')
       this.failedTests.push(data)
+      testWriter.call(this, data, true)
     }
 
     this.total++

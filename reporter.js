@@ -50,6 +50,7 @@ function testSorter (a, b) {
 /**
  * Write out individual test result
  * @param {TestResult} test - test to write out result of
+ * @param {Boolean} verbose - whether or not to show additional error information
  */
 function testWriter (test, verbose) {
   // Other properties that may be useful: logs, error, launcherId, items

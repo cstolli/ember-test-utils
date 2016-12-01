@@ -213,7 +213,7 @@ describeModule(...controller('demo', ['controller:foo'], function () {
 If you'd like to use the custom Mocha reporter provided by this addon then your `testem.js` file should look something like this:
 
 ```js
-var Reporter = require('./node_modules/ember-test-utils/reporter')
+var Reporter = require('ember-test-utils/reporter')
 
 module.exports = {
   disable_watching: true,

@@ -50,26 +50,30 @@ function testSorter (a, b) {
 /**
  * Write out individual test result
  * @param {TestResult} test - test to write out result of
+ * @param {Boolean} verbose - whether or not to show additional error information
  */
-function testWriter (test) {
+function testWriter (test, verbose) {
   // Other properties that may be useful: logs, error, launcherId, items
   var humanFriendlyDuration = getHumanReadableDuration(test.runDuration)
   this.out.write('[' + humanFriendlyDuration + '] ' + test.name + '\n')
-}
 
-/**
- * Write failed tests
- */
-function writeFailedTests () {
-  if (this.failedTests.length !== 0) {
-    this.out.write('FAILED TESTS\n\n')
+  if (verbose) {
+    if (test.logs && test.logs.length !== 0) {
+      this.out.write('\tLogs:\n')
 
-    this.failedTests
-      .sort(testSorter)
-      .reverse()
-      .forEach(testWriter.bind(this))
+      test.logs.forEach((log) => {
+        this.out.write('\t\t' + log + '\n')
+      })
+    }
 
-    this.out.write('\n')
+    if (test.error) {
+      var e = test.error
+      this.out.write('\n\tError: ' + e.message + '\n')
+
+      if (e.stack) {
+        this.out.write('\n\t\t' + e.stack.toString().replace(/\n/g, '\n\t\t') + '\n\n')
+      }
+    }
   }
 }
 
@@ -82,7 +86,6 @@ function writePassedTests () {
 
     this.passedTests
       .sort(testSorter)
-      .reverse()
       .forEach(testWriter.bind(this))
 
     this.out.write('\n')
@@ -137,9 +140,13 @@ Reporter.prototype = {
     var duration = Math.round(this.endTime - this.startTime)
     var humanReadableDuration = getHumanReadableDuration(duration)
 
-    writeSummary.call(this, humanReadableDuration)
-    writeFailedTests.call(this)
-    writePassedTests.call(this)
+    if (this.failedTests.length === 0) {
+      writeSummary.call(this, humanReadableDuration)
+      writePassedTests.call(this)
+    } else {
+      this.out.write('\n')
+    }
+
     writeSummary.call(this, humanReadableDuration)
   },
 
@@ -150,7 +157,9 @@ Reporter.prototype = {
       this.pass++
       this.passedTests.push(data)
     } else {
+      this.out.write(this.failedTests.length === 0 ? 'FAILED TESTS\n\n' : '\n')
       this.failedTests.push(data)
+      testWriter.call(this, data, true)
     }
 
     this.total++

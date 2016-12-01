@@ -58,22 +58,6 @@ function testWriter (test) {
 }
 
 /**
- * Write failed tests
- */
-function writeFailedTests () {
-  if (this.failedTests.length !== 0) {
-    this.out.write('FAILED TESTS\n\n')
-
-    this.failedTests
-      .sort(testSorter)
-      .reverse()
-      .forEach(testWriter.bind(this))
-
-    this.out.write('\n')
-  }
-}
-
-/**
  * Write passed tests
  */
 function writePassedTests () {
@@ -82,7 +66,6 @@ function writePassedTests () {
 
     this.passedTests
       .sort(testSorter)
-      .reverse()
       .forEach(testWriter.bind(this))
 
     this.out.write('\n')
@@ -137,9 +120,13 @@ Reporter.prototype = {
     var duration = Math.round(this.endTime - this.startTime)
     var humanReadableDuration = getHumanReadableDuration(duration)
 
-    writeSummary.call(this, humanReadableDuration)
-    writeFailedTests.call(this)
-    writePassedTests.call(this)
+    if (this.failedTests.length === 0) {
+      writeSummary.call(this, humanReadableDuration)
+      writePassedTests.call(this)
+    } else {
+      this.out.write('\n')
+    }
+
     writeSummary.call(this, humanReadableDuration)
   },
 
@@ -150,6 +137,7 @@ Reporter.prototype = {
       this.pass++
       this.passedTests.push(data)
     } else {
+      testWriter.call(this, data)
       this.failedTests.push(data)
     }
 

@@ -1,3 +1,8 @@
+# 1.2.0
+
+* **Added** custom mocha reporter which can be used by consumers.
+
+
 # 1.1.2
 
 - **Fixed** generated test names to use `/` instead of `|` as the test name separator, grep-ing the interactive web app can link to unique tests.

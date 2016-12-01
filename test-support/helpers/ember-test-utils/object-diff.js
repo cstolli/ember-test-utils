@@ -1,3 +1,6 @@
+// TODO: remove below comment and address cmplexity issues (MRD - 2016-12-01)
+/* eslint-disable complexity */
+
 import _ from 'lodash'
 
 export const ARRAY_PLACEHOLDER = '<%ARRAY_PLACEHOLDER%> elements equal'

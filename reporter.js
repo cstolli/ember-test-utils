@@ -137,6 +137,10 @@ Reporter.prototype = {
       this.pass++
       this.passedTests.push(data)
     } else {
+      if (this.failedTests.length === 0) {
+        this.out.write('FAILED TESTS\n\n')
+      }
+
       testWriter.call(this, data)
       this.failedTests.push(data)
     }

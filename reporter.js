@@ -4,7 +4,7 @@
  * @property {String} name - name of test
  * @property {Boolean} passed - whether or not test passed
  * @property {Number} runDuration - run duration in milliseconds
- * @property {Boolean} skipped - whether or not test was skipped
+ * @property {Boolean} pending - whether or not test was pending
  */
 
 /**
@@ -98,13 +98,13 @@ function writePassedTests () {
  */
 function writeSummary (humanReadableDuration) {
   var passed = this.pass
-  var skipped = this.skipped
+  var pending = this.skipped
   var total = this.total
-  var failed = total - skipped - passed
+  var failed = total - pending - passed
 
   this.out.write(
     'ran ' + total + ' tests in ' + humanReadableDuration + ' [' + passed +
-    ' passed / ' + failed + ' failed / ' + skipped + ' skipped]\n\n'
+    ' passed / ' + failed + ' failed / ' + pending + ' pending]\n\n'
   )
 }
 
@@ -151,7 +151,7 @@ Reporter.prototype = {
   },
 
   report: function (prefix, data) {
-    if (data.skipped) {
+    if (data.pending) {
       this.skipped++
     } else if (data.passed) {
       this.pass++

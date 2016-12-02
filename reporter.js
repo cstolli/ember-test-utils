@@ -4,7 +4,7 @@
  * @property {String} name - name of test
  * @property {Boolean} passed - whether or not test passed
  * @property {Number} runDuration - run duration in milliseconds
- * @property {Boolean} pending - whether or not test was pending
+ * @property {Boolean} skipped - whether or not test was skipped
  */
 
 /**

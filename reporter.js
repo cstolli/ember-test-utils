@@ -98,13 +98,13 @@ function writePassedTests () {
  */
 function writeSummary (humanReadableDuration) {
   var passed = this.pass
-  var skipped = this.skipped
+  var pending = this.skipped
   var total = this.total
-  var failed = total - skipped - passed
+  var failed = total - pending - passed
 
   this.out.write(
     'ran ' + total + ' tests in ' + humanReadableDuration + ' [' + passed +
-    ' passed / ' + failed + ' failed / ' + skipped + ' skipped]\n\n'
+    ' passed / ' + failed + ' failed / ' + pending + ' pending]\n\n'
   )
 }
 
@@ -151,7 +151,7 @@ Reporter.prototype = {
   },
 
   report: function (prefix, data) {
-    if (data.skipped) {
+    if (data.pending) {
       this.skipped++
     } else if (data.passed) {
       this.pass++

@@ -1,3 +1,8 @@
+# 1.2.2
+
+* **Fixes** issue where skipped test conditions were being *skipped` since it was actually *pending*
+
+
 # 1.2.1
 
 * **Improved** custom mocha reporter to show failures as they occur and only show passed tests when all pass (now sorting fastest to slowest to reduce a user from having to scroll as much in their terminal).

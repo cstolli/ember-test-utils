@@ -2,15 +2,37 @@
  * Unit tests for the describe-model module
  */
 import {expect} from 'chai'
-import {beforeEach, describe, it} from 'mocha'
-import {model, serializer} from 'dummy/tests/helpers/ember-test-utils/describe-model'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
 
+import {model, serializer} from 'dummy/tests/helpers/ember-test-utils/describe-model'
+import {getDeprecationMessage} from 'dummy/tests/helpers/ember-test-utils/typedefs'
+
+const deprecationMsg = getDeprecationMessage('describeModel')
 describe('describeModel()', function () {
+  let sandbox
+
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+    sandbox.stub(Ember, 'deprecate')
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
   describe('model()', function () {
     let args
     describe('when just name is given', function () {
       beforeEach(function () {
         args = model('person')
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-model.model',
+          until: '2.0.0'
+        })
       })
 
       it('should give proper model name', function () {
@@ -31,6 +53,13 @@ describe('describeModel()', function () {
         args = model('person', ['model:company'])
       })
 
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-model.model',
+          until: '2.0.0'
+        })
+      })
+
       it('should set needs to dependencies in options', function () {
         expect(args[2].needs).to.eql(['model:company'])
       })
@@ -42,6 +71,13 @@ describe('describeModel()', function () {
     describe('when just name is given', function () {
       beforeEach(function () {
         args = serializer('company')
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-model.serializer',
+          until: '2.0.0'
+        })
       })
 
       it('should give proper model name', function () {
@@ -60,6 +96,13 @@ describe('describeModel()', function () {
     describe('when dependencies are given', function () {
       beforeEach(function () {
         args = serializer('company', ['adapter:application', 'serializer:company'])
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-model.serializer',
+          until: '2.0.0'
+        })
       })
 
       it('should set needs to dependencies in options', function () {

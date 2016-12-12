@@ -2,11 +2,14 @@
  * Unit test for dummy app demo route
  */
 import {expect} from 'chai'
-import {describeModule, it} from 'ember-mocha'
-import {beforeEach, describe} from 'mocha'
-import {route} from 'dummy/tests/helpers/ember-test-utils/describe-module'
+import {beforeEach, describe, it} from 'mocha'
 
-describeModule(...route('demo'), function () {
+import {route} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = route('demo')
+describe(test.label, function () {
+  test.setup()
+
   let route
   beforeEach(function () {
     route = this.subject()

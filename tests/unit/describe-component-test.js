@@ -1,16 +1,39 @@
 /**
- * Unit tests for the describe-model module
+ * Unit tests for the describe-component module
  */
-import {expect} from 'chai'
-import {beforeEach, describe, it} from 'mocha'
-import {unit, integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 
+import {expect} from 'chai'
+import Ember from 'ember'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
+
+import {unit, integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import {getDeprecationMessage} from 'dummy/tests/helpers/ember-test-utils/typedefs'
+
+const deprecationMsg = getDeprecationMessage('describeComponent')
 describe('describeComponent()', function () {
+  let sandbox
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+    sandbox.stub(Ember, 'deprecate')
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
   describe('unit()', function () {
     let args
     describe('when just name is given', function () {
       beforeEach(function () {
         args = unit('my-component')
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-component.unit',
+          until: '2.0.0'
+        })
       })
 
       it('should give proper component name', function () {
@@ -31,6 +54,13 @@ describe('describeComponent()', function () {
         args = unit('my-component', ['component:foo-bar', 'helper:baz'])
       })
 
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-component.unit',
+          until: '2.0.0'
+        })
+      })
+
       it('should set needs to dependencies in options', function () {
         expect(args[2].needs).to.eql(['component:foo-bar', 'helper:baz'])
       })
@@ -41,6 +71,13 @@ describe('describeComponent()', function () {
     let args
     beforeEach(function () {
       args = integration('my-component')
+    })
+
+    it('should issue deprecation warning', function () {
+      expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+        id: 'ember-test-utils.describe-component.integration',
+        until: '2.0.0'
+      })
     })
 
     it('should give proper component name', function () {

@@ -2,15 +2,38 @@
  * Unit tests for the describe-model module
  */
 import {expect} from 'chai'
-import {beforeEach, describe, it} from 'mocha'
-import {route, controller} from 'dummy/tests/helpers/ember-test-utils/describe-module'
+import Ember from 'ember'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
 
+import {route, controller} from 'dummy/tests/helpers/ember-test-utils/describe-module'
+import {getDeprecationMessage} from 'dummy/tests/helpers/ember-test-utils/typedefs'
+
+const deprecationMsg = getDeprecationMessage('describeModule')
 describe('describeModule()', function () {
+  let sandbox
+
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+    sandbox.stub(Ember, 'deprecate')
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
   describe('route()', function () {
     let args
     describe('when just name is given', function () {
       beforeEach(function () {
         args = route('thing')
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-module.route',
+          until: '2.0.0'
+        })
       })
 
       it('should give proper route name', function () {
@@ -31,6 +54,13 @@ describe('describeModule()', function () {
         args = route('thing', ['model:thing'])
       })
 
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-module.route',
+          until: '2.0.0'
+        })
+      })
+
       it('should set needs to dependencies in options', function () {
         expect(args[2].needs).to.eql(['model:thing'])
       })
@@ -42,6 +72,13 @@ describe('describeModule()', function () {
     describe('when just name is given', function () {
       beforeEach(function () {
         args = controller('thing')
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-module.controller',
+          until: '2.0.0'
+        })
       })
 
       it('should give proper route name', function () {
@@ -60,6 +97,13 @@ describe('describeModule()', function () {
     describe('when dependencies are given', function () {
       beforeEach(function () {
         args = controller('thing', ['model:thing'])
+      })
+
+      it('should issue deprecation warning', function () {
+        expect(Ember.deprecate).to.have.been.calledWith(deprecationMsg, false, {
+          id: 'ember-test-utils.describe-module.controller',
+          until: '2.0.0'
+        })
       })
 
       it('should set needs to dependencies in options', function () {

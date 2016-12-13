@@ -1,3 +1,9 @@
+# 1.3.0
+* **Updated** - `ember-mocha` dependency
+* **Added** - Helpers to make using `setupTest()`, `setupComponentTest()` and `setupModelTest()` easier.
+* **Deprecated** - the `describeComponent()`, `describeModel()` and `describeModule()` helpers
+* **Deprecated** - the `diffObject()` method (we'll hopefully incorporate it into a chai addon soon, see #12)
+
 # 1.2.2
 
 * **Fixes** issue where skipped test conditions were being *skipped` since it was actually *pending*

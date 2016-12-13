@@ -2,12 +2,14 @@
  * Unit test for the person model
  */
 import {expect} from 'chai'
-import {describe} from 'mocha'
-import {describeModel, it} from 'ember-mocha'
-import {model} from 'dummy/tests/helpers/ember-test-utils/describe-model'
+import {describe, it} from 'mocha'
 
-describeModel(...model('person', ['model:company']), function () {
-  // Replace this with your real tests.
+import {model} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = model('person', ['model:company'])
+describe(test.label, function () {
+  test.setup()
+
   describe('fullName()', function () {
     let model
     it('should combine first and last name', function () {

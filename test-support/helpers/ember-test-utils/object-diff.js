@@ -1,6 +1,7 @@
 // TODO: remove below comment and address cmplexity issues (MRD - 2016-12-01)
 /* eslint-disable complexity */
 
+import Ember from 'ember'
 import _ from 'lodash'
 
 export const ARRAY_PLACEHOLDER = '<%ARRAY_PLACEHOLDER%> elements equal'
@@ -102,6 +103,14 @@ function diffArray (obj1Value, obj2Value) {
 }
 
 export default function diffObject (obj1, obj2) {
+  Ember.deprecate(
+    'diffObject is deprecated, and will soon be removed. Hopefully to be replaced with a chai helper',
+    false,
+    {
+      id: 'ember-test-utils.diffObject',
+      until: '2.0.0'
+    }
+  )
   const obj1Keys = _.keys(obj1)
   const obj2Keys = _.keys(obj2)
 

@@ -25,42 +25,41 @@ ember install ember-test-utils
 
 **ember-test-utils** provides a set of utilities to help you in testing Ember modules. This library requires you
 use `ember-cli-mocha` and `ember-mocha` as your testing framework. It provides shortcuts for working with:
-`describeComponent`, `describeModel`, and `describeModule`
+`setupComponentTest` and `setupComponent`
 
 
-### `describeComponent`
+### `setupComponentTest`
 Two shortcuts (`integration`, and `unit`) are provided to help transform
 
 ```js
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
+import {setupComponentTest} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'my-greeting',
-  'Integration: MyGreetingComponent',
-  {
-    integration: true
-  },
-  function () {
-    it('renders', function () {
-      this.set('name', 'John')
-      this.render(hbs`{{my-greeting name=name}}`)
-      expect(this.$()).to.have.length(1)
-    })
-  }
-)
+describe('Integration: MyGreetingComponent', function () {
+  setupComponentTest('my-greeting', {integration: true})
+  it('renders', function () {
+    this.set('name', 'John')
+    this.render(hbs`{{my-greeting name=name}}`)
+    expect(this.$()).to.have.length(1)
+  })
+})
 ```
 
 into
 
 ```js
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import {describe, it} from 'mocha'
 
-describeComponent(...integration('my-greeting'), function () {
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+
+const test = integration('my-greeting')
+describe(test.label, function () {
+  test.setup()
+
   it('renders', function () {
     this.set('name', 'John')
     this.render(hbs`{{my-greeting name=name}}`)
@@ -73,37 +72,15 @@ and
 
 ```js
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
+import {setupComponentTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'my-greeting',
-  'MyGreetingComponent',
-  {
+describe('Unit: MyGreetingComponent', function () {
+  setupComponentTest('my-greeting', {
     needs: ['component:foo', 'helper:bar'],
     unit: true
-  },
-  function () {
-    it('renders', function () {
-      // creates the component instance
-      let component = this.subject()
+  })
 
-      // renders the component on the page
-      this.render()
-      expect(component).not.to.equal(undefined)
-      expect(this.$()).to.have.length(1)
-    })
-  }
-)
-```
-
-into
-
-```js
-import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
-import {unit} from 'dummy/tests/helpers/ember-test-utils/describe-component'
-
-describeComponent(...unit('my-greeting', ['component:foo', 'helper:bar']), function () {
   it('renders', function () {
     // creates the component instance
     let component = this.subject()
@@ -116,37 +93,45 @@ describeComponent(...unit('my-greeting', ['component:foo', 'helper:bar']), funct
 })
 ```
 
-## `describeModel`
-Two shortcuts are provided (`model` and `serializer`) to allow you to turn this:
-
-```js
-import {expect} from 'chai'
-import {describeModel, it} from 'ember-mocha'
-
-describeModel(
-  'person',
-  'Unit / Model / person',
-  {
-    // Specify the other units that are required for this test.
-    needs: ['model:company']
-  },
-  function () {
-    it('exists', function () {
-      let model = this.subject()
-      expect(model).not.to.equal(undefined)
-    })
-  }
-)
-```
-
 into
 
 ```js
 import {expect} from 'chai'
-import {describeModel, it} from 'ember-mocha'
-import {model} from 'dummy/tests/helpers/ember-test-utils/describe-model'
+import {describe, it} from 'mocha'
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
-describeModel(...model('person', ['model:company']), function () {
+const test = unit('my-greeting', ['component:foo', 'helper:bar'])
+  test.setup()
+
+  it('renders', function () {
+    // creates the component instance
+    let component = this.subject()
+
+    // renders the component on the page
+    this.render()
+    expect(component).not.to.equal(undefined)
+    expect(this.$()).to.have.length(1)
+  })
+})
+```
+
+## `setupTest`
+Five shortcuts are provided (`model`, `serializer`, `route`, `controller`, and `module`).
+
+### `model`
+The `model` helper allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('Unit: PersonModel', function () {
+  setupModelTest('person', {
+    unit: true,
+    needs: ['model:company']
+  })
+
   it('exists', function () {
     let model = this.subject()
     expect(model).not.to.equal(undefined)
@@ -154,6 +139,26 @@ describeModel(...model('person', ['model:company']), function () {
 })
 ```
 
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {model} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = model('person', ['model:company'])
+describe(test.label, function () {
+  test.setup()
+
+  it('exists', function () {
+    let model = this.subject()
+    expect(model).not.to.equal(undefined)
+  })
+})
+```
+
+### `serializer`
 The only difference between `model` and `serializer` is what the description of the test will end up being:
 
 ```
@@ -166,40 +171,60 @@ vs.
 Unit / Serializer / model-name
 ```
 
-## `describeModule`
-Provides three shortcuts (`route`, `controller`, and `module`) The `route` and `controller` shortcuts are just
-extra shortcuts for `module` which pre-populate the `type` param to be `'route'` or `'controller'`.
-
-They let you transform
+### `route`
+The `route` helper allows you to turn this:
 
 ```js
 import {expect} from 'chai'
-import {describeModule, it} from 'ember-mocha'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
 
-describeModule(
-  'controller:demo',
-  'DemoController',
-  {
-    needs: ['controller:foo']
-  },
-  function () {
-    // Replace this with your real tests.
-    it('exists', function () {
-      let controller = this.subject()
-      expect(controller).not.to.equal(undefined)
-    })
-  }
-)
+describe('DemoController', function () {
+  setupTest('route:demo', {
+    needs: ['controller:demo'],
+    unit: true
+  })
+  // Replace this with your real tests.
+  it('exists', function () {
+    let route = this.subject()
+    expect(route).not.to.equal(undefined)
+  })
+})
 ```
 
 into
 
 ```js
 import {expect} from 'chai'
-import {describeModule, it} from 'ember-mocha'
-import {controller} from 'dummy/tests/helpers/ember-test-utils/describe-module'
+import {describe, it} from 'mocha'
 
-describeModule(...controller('demo', ['controller:foo'], function () {
+import {route} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = route('demo', ['controller:demo'])
+describe(test.label, function () {
+  test.setup()
+
+  // Replace this with your real tests.
+  it('exists', function () {
+    let route = this.subject()
+    expect(route).not.to.equal(undefined)
+  })
+})
+```
+
+### `controller`
+The `controller` helper allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('DemoController', function () {
+  setupTest('controller:demo', {
+    needs: ['controller:foo'],
+    unit: true
+  })
   // Replace this with your real tests.
   it('exists', function () {
     let controller = this.subject()
@@ -208,7 +233,68 @@ describeModule(...controller('demo', ['controller:foo'], function () {
 })
 ```
 
-### Custom Mocha Reporter
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {controller} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = controller('demo', ['controller:foo'])
+describe(test.label, function () {
+  test.setup()
+
+  // Replace this with your real tests.
+  it('exists', function () {
+    let controller = this.subject()
+    expect(controller).not.to.equal(undefined)
+  })
+})
+```
+
+### `module`
+The `module` helper is a catch-all to let you unit test any module, it allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('DemoController', function () {
+  setupTest('controller:demo', {
+    needs: ['controller:foo'],
+    unit: true
+  })
+  // Replace this with your real tests.
+  it('exists', function () {
+    let controller = this.subject()
+    expect(controller).not.to.equal(undefined)
+  })
+})
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {module} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = module('controller:demo', ['controller:foo'])
+describe(test.label, function () {
+  test.setup()
+
+  // Replace this with your real tests.
+  it('exists', function () {
+    let controller = this.subject()
+    expect(controller).not.to.equal(undefined)
+  })
+})
+```
+
+## Custom Mocha Reporter
 
 If you'd like to use the custom Mocha reporter provided by this addon then your `testem.js` file should look something like this:
 

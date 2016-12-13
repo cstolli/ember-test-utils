@@ -2,6 +2,12 @@
  * Shortcut for generating the params passed to describeModel from ember-mocha
  */
 
+import Ember from 'ember'
+import {getDeprecationMessage} from './typedefs'
+
+// NOTE not destructuring 'deprecate' for ease of testing
+const deprecationMsg = getDeprecationMessage('describeModel')
+
 /**
  * Generate an Array of the first 3 params to describeModel, so that we can keep the function definition on the
  * same line as the describeModel call itself
@@ -11,6 +17,11 @@
  * @returns {Array} the first three params to describeModel
  */
 export function model (name, dependencies, options = {}) {
+  Ember.deprecate(deprecationMsg, false, {
+    id: 'ember-test-utils.describe-model.model',
+    until: '2.0.0'
+  })
+
   if (dependencies) {
     options.needs = dependencies
   }
@@ -31,6 +42,11 @@ export function model (name, dependencies, options = {}) {
  * @returns {Array} the first three params to describeModel
  */
 export function serializer (name, dependencies, options = {}) {
+  Ember.deprecate(deprecationMsg, false, {
+    id: 'ember-test-utils.describe-model.serializer',
+    until: '2.0.0'
+  })
+
   if (dependencies) {
     options.needs = dependencies
   }

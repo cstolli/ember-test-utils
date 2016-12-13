@@ -2,7 +2,12 @@
  * Shortcuts for generating the params passed to describeComponent from ember-mocha
  */
 
-import _ from 'lodash'
+import Ember from 'ember'
+const {assign} = Ember
+// NOTE not destructuring 'deprecate' for ease of testing
+
+import {getDeprecationMessage} from './typedefs'
+const deprecationMsg = getDeprecationMessage('describeComponent')
 
 /**
  * A shortcut for filling in the first three params in a describeComponent
@@ -27,10 +32,15 @@ function component (name, options = {}) {
  * @returns {Object[]} an array of items that need to be passed in to describeComponent
  */
 export function unit (name, dependencies, options = {}) {
+  Ember.deprecate(deprecationMsg, false, {
+    id: 'ember-test-utils.describe-component.unit',
+    until: '2.0.0'
+  })
+
   if (dependencies) {
     options.needs = dependencies
   }
-  return component(name, _.assign(options, {unit: true}))
+  return component(name, assign(options, {unit: true}))
 }
 
 /**
@@ -40,5 +50,9 @@ export function unit (name, dependencies, options = {}) {
  * @returns {Object[]} an array of items that need to be passed in to describeComponent
  */
 export function integration (name, options = {}) {
-  return component(name, _.assign(options, {integration: true}))
+  Ember.deprecate(deprecationMsg, false, {
+    id: 'ember-test-utils.describe-component.integration',
+    until: '2.0.0'
+  })
+  return component(name, assign(options, {integration: true}))
 }

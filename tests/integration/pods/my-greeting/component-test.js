@@ -2,12 +2,14 @@
  * Integration test of the my-greeting component
  */
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
-import {beforeEach, describe} from 'mocha'
+import {beforeEach, describe, it} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
-describeComponent(...integration('my-greeting'), function () {
+const test = integration('my-greeting')
+describe(test.label, function () {
+  test.setup()
+
   describe('when rendereed', function () {
     beforeEach(function () {
       this.set('name', 'Paul')

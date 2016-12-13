@@ -2,12 +2,14 @@
  * Unit test for the company model
  */
 import {expect} from 'chai'
-import {describe} from 'mocha'
-import {describeModel, it} from 'ember-mocha'
-import {model} from 'dummy/tests/helpers/ember-test-utils/describe-model'
+import {describe, it} from 'mocha'
 
-describeModel(...model('company'), function () {
-  // Replace this with your real tests.
+import {model} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+
+const test = model('company')
+describe(test.label, function () {
+  test.setup()
+
   describe('address()', function () {
     let model
     it('should combine all the address pieces', function () {

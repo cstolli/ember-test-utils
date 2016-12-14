@@ -21,7 +21,7 @@ export const deps = {
 function component (name, options = {}) {
   const testType = (options.unit) ? 'Unit' : 'Integration'
   return {
-    label: `${testType} / Component / ${name}`,
+    label: `${testType} / Component / ${name} /`,
     setup () {
       deps.setupComponentTest(name, options)
     }

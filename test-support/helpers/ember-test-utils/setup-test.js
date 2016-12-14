@@ -26,7 +26,7 @@ export function module (name, options = {}) {
   const testType = (options.unit) ? 'Unit' : 'Integration'
   const [moduleType, moduleName] = name.split(':')
   return {
-    label: `${testType} / ${Ember.String.classify(moduleType)} / ${moduleName}`,
+    label: `${testType} / ${Ember.String.classify(moduleType)} / ${moduleName} /`,
     setup () {
       deps.setupTest(name, options)
     }
@@ -51,7 +51,7 @@ export function model (name, dependencies, options = {}) {
 
   const testType = (options.unit) ? 'Unit' : 'Integration'
   return {
-    label: `${testType} / Model / ${name}`,
+    label: `${testType} / Model / ${name} /`,
     setup () {
       deps.setupModelTest(name, options)
     }
@@ -79,7 +79,7 @@ export function serializer (name, dependencies = [], options = {}) {
 
   const testType = (options.unit) ? 'Unit' : 'Integration'
   return {
-    label: `${testType} / Serializer / ${name}`,
+    label: `${testType} / Serializer / ${name} /`,
     setup () {
       deps.setupModelTest(name, options)
     }

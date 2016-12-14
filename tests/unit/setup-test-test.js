@@ -28,7 +28,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Foo / my-bar')
+        expect(test.label).to.equal('Unit / Foo / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -48,7 +48,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Foo / my-bar')
+        expect(test.label).to.equal('Unit / Foo / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -74,7 +74,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Model / my-bar')
+        expect(test.label).to.equal('Unit / Model / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -94,7 +94,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Model / my-bar')
+        expect(test.label).to.equal('Unit / Model / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -120,7 +120,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Serializer / my-bar')
+        expect(test.label).to.equal('Unit / Serializer / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -140,7 +140,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Serializer / my-bar')
+        expect(test.label).to.equal('Unit / Serializer / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -166,7 +166,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Route / my-bar')
+        expect(test.label).to.equal('Unit / Route / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -186,7 +186,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Route / my-bar')
+        expect(test.label).to.equal('Unit / Route / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -212,7 +212,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Controller / my-bar')
+        expect(test.label).to.equal('Unit / Controller / my-bar /')
       })
 
       describe('when .setup() is called', function () {
@@ -232,7 +232,7 @@ describe('setupTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Controller / my-bar')
+        expect(test.label).to.equal('Unit / Controller / my-bar /')
       })
 
       describe('when .setup() is called', function () {

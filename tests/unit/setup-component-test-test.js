@@ -27,7 +27,7 @@ describe('setupComponentTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Component / my-component')
+        expect(test.label).to.equal('Unit / Component / my-component /')
       })
 
       describe('when .setup() is called', function () {
@@ -47,7 +47,7 @@ describe('setupComponentTest()', function () {
       })
 
       it('should create proper describe label', function () {
-        expect(test.label).to.equal('Unit / Component / my-component')
+        expect(test.label).to.equal('Unit / Component / my-component /')
       })
 
       describe('when .setup() is called', function () {
@@ -72,7 +72,7 @@ describe('setupComponentTest()', function () {
     })
 
     it('should create proper describe label', function () {
-      expect(test.label).to.equal('Integration / Component / my-component')
+      expect(test.label).to.equal('Integration / Component / my-component /')
     })
 
     describe('when .setup() is called', function () {

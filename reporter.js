@@ -49,25 +49,29 @@ function testSorter (a, b) {
 
 /**
  * Write out individual test result
- * @param {TestResult} test - test to write out result of
+ * @param {Object} test - the test params
+ * @param {String} test.launcher - the launcher (browser) for the test
+ * @param {TestResult} test.result - test to write out result of
  * @param {Boolean} verbose - whether or not to show additional error information
  */
 function testWriter (test, verbose) {
+  const {launcher, result} = test
+
   // Other properties that may be useful: logs, error, launcherId, items
-  var humanFriendlyDuration = getHumanReadableDuration(test.runDuration)
-  this.out.write('[' + humanFriendlyDuration + '] ' + test.name + '\n')
+  var humanFriendlyDuration = getHumanReadableDuration(result.runDuration)
+  this.out.write('[' + humanFriendlyDuration + '] ' + launcher + ' ' + result.name + '\n')
 
   if (verbose) {
-    if (test.logs && test.logs.length !== 0) {
+    if (result.logs && result.logs.length !== 0) {
       this.out.write('\tLogs:\n')
 
-      test.logs.forEach((log) => {
+      result.logs.forEach((log) => {
         this.out.write('\t\t' + log + '\n')
       })
     }
 
-    if (test.error) {
-      var e = test.error
+    if (result.error) {
+      var e = result.error
       this.out.write('\n\tError: ' + e.message + '\n')
 
       if (e.stack) {

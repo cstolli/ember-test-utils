@@ -4,8 +4,8 @@
 import './typedefs'
 
 import Ember from 'ember'
-const {assign} = Ember
 import {setupComponentTest} from 'ember-mocha'
+const assign = Ember.assign || Ember.merge // NOTE: only use two params in assign() since merge() doesn't take more
 
 // Workaround to allow stubbing dependencies during testing
 export const deps = {
@@ -21,7 +21,7 @@ export const deps = {
 function component (name, options = {}) {
   const testType = (options.unit) ? 'Unit' : 'Integration'
   return {
-    label: `${testType} / Component / ${name}`,
+    label: `${testType} / Component / ${name} /`,
     setup () {
       deps.setupComponentTest(name, options)
     }

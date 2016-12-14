@@ -44,7 +44,7 @@ function getHumanReadableDuration (value) {
  * @returns {Number} number indicating sort order
  */
 function testSorter (a, b) {
-  return a.runDuration - b.runDuration
+  return a.result.runDuration - b.result.runDuration
 }
 
 /**
@@ -59,7 +59,7 @@ function testWriter (test, verbose) {
 
   // Other properties that may be useful: logs, error, launcherId, items
   var humanFriendlyDuration = getHumanReadableDuration(result.runDuration)
-  this.out.write('[' + humanFriendlyDuration + '] ' + launcher + ' ' + result.name + '\n')
+  this.out.write('[' + humanFriendlyDuration + '] [' + launcher + '] ' + result.name + '\n')
 
   if (verbose) {
     if (result.logs && result.logs.length !== 0) {

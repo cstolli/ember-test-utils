@@ -2,12 +2,11 @@
  * Shortcuts for generating the params passed to describeComponent from ember-mocha
  */
 
-import Ember from 'ember'
-const {assign} = Ember
-// NOTE not destructuring 'deprecate' for ease of testing
+import Ember from 'ember' // NOTE: not destructuring 'deprecate' for ease of testing
 
 import {getDeprecationMessage} from './typedefs'
 const deprecationMsg = getDeprecationMessage('describeComponent')
+const assign = Ember.assign || Ember.merge // NOTE: only use two params in assign() since merge() doesn't take more
 
 /**
  * A shortcut for filling in the first three params in a describeComponent

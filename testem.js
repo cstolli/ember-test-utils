@@ -1,4 +1,4 @@
-// var Reporter = require('./reporter')
+const Reporter = require('./reporter')
 
 module.exports = {
   framework: 'mocha',
@@ -9,6 +9,6 @@ module.exports = {
   ],
   launch_in_dev: [
     'Chrome'
-  ]
-  // reporter: new Reporter()
+  ],
+  reporter: new Reporter()
 }

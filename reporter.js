@@ -155,10 +155,16 @@ Reporter.prototype = {
       this.skipped++
     } else if (data.passed) {
       this.pass++
-      this.passedTests.push(data)
+      this.passedTests.push({
+        launcher: prefix,
+        result: data
+      })
     } else {
       this.out.write(this.failedTests.length === 0 ? 'FAILED TESTS\n\n' : '\n')
-      this.failedTests.push(data)
+      this.failedTests.push({
+        launcher: prefix,
+        result: data
+      })
       testWriter.call(this, data, true)
     }
 

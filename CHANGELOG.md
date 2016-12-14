@@ -1,3 +1,8 @@
+# 1.3.1
+* **Added** tests for use with old versions of ember
+* **Fixed** issue when used with `ember@2.3` (no `Ember.assign` available)
+
+
 # 1.3.0
 * **Updated** - `ember-mocha` dependency
 * **Added** - Helpers to make using `setupTest()`, `setupComponentTest()` and `setupModelTest()` easier.

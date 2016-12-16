@@ -1,3 +1,9 @@
+# 1.3.2
+
+* **Fixed** custom reporter to work for consumers using Node 5.
+
+
+
 # 1.3.1
 * **Added** tests for use with old versions of ember
 * **Fixed** issue when used with `ember@2.3` (no `Ember.assign` available)

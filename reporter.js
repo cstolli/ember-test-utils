@@ -55,7 +55,8 @@ function testSorter (a, b) {
  * @param {Boolean} verbose - whether or not to show additional error information
  */
 function testWriter (test, verbose) {
-  const {launcher, result} = test
+  var launcher = test.launcher
+  var result = test.result
 
   // Other properties that may be useful: logs, error, launcherId, items
   var humanFriendlyDuration = getHumanReadableDuration(result.runDuration)
@@ -155,21 +156,20 @@ Reporter.prototype = {
   },
 
   report: function (prefix, data) {
+    var test = {
+      launcher: prefix,
+      result: data
+    }
+
     if (data.pending) {
       this.skipped++
     } else if (data.passed) {
       this.pass++
-      this.passedTests.push({
-        launcher: prefix,
-        result: data
-      })
+      this.passedTests.push(test)
     } else {
       this.out.write(this.failedTests.length === 0 ? 'FAILED TESTS\n\n' : '\n')
-      this.failedTests.push({
-        launcher: prefix,
-        result: data
-      })
-      testWriter.call(this, data, true)
+      this.failedTests.push(test)
+      testWriter.call(this, test, true)
     }
 
     this.total++

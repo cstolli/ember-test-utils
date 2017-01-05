@@ -1,3 +1,7 @@
+# 1.5.0
+* **Added** a helper to stub out the ember-data store and make it easy to fake responses to calls to the store. 
+* **Updated** the dummy route and unit test for route to utilize the ember-data helper. 
+
 # 1.4.0
 
 * **Added** support to automatically add `ember-intl` dependencies to unit tests that specify `service:intl` in their dependencies

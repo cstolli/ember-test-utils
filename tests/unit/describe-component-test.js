@@ -3,11 +3,14 @@
  */
 
 import {expect} from 'chai'
+// NOTE: not destructuring 'deprecate' for ease of testing
+/* eslint-disable ember-standard/destructure */
 import Ember from 'ember'
+
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
-import {unit, integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import {integration, unit} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import {getDeprecationMessage} from 'dummy/tests/helpers/ember-test-utils/typedefs'
 
 const deprecationMsg = getDeprecationMessage('describeComponent')

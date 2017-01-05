@@ -2,7 +2,9 @@
  * Shortcuts for generating the params passed to describeComponent from ember-mocha
  */
 
-import Ember from 'ember' // NOTE: not destructuring 'deprecate' for ease of testing
+// NOTE: not destructuring 'deprecate' for ease of testing
+/* eslint-disable ember-standard/destructure */
+import Ember from 'ember'
 
 import {getDeprecationMessage} from './typedefs'
 const deprecationMsg = getDeprecationMessage('describeComponent')

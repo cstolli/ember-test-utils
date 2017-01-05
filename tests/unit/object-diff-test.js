@@ -1,8 +1,8 @@
 /**
  * Unit tests for the object-diff module
  */
-import _ from 'lodash'
 import {expect} from 'chai'
+import _ from 'lodash'
 import {describe, it} from 'mocha'
 import objectDiff, {ARRAY_PLACEHOLDER} from 'dummy/tests/helpers/ember-test-utils/object-diff'
 

@@ -1,10 +1,13 @@
 import Ember from 'ember'
-const {Route} = Ember
+const {RSVP, Route, inject} = Ember
 
 export default Route.extend({
+  store: inject.service(),
+
   model () {
-    return {
+    return RSVP.hash({
+      companies: this.get('store').findAll('company'),
       username: 'tony.stark'
-    }
+    })
   }
 })

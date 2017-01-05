@@ -1,7 +1,12 @@
+# 1.4.0
+
+* **Added** support to automatically add `ember-intl` dependencies to unit tests that specify `service:intl` in their dependencies
+* **Updated** lint rules and fixed new warnings
+
+
 # 1.3.2
 
 * **Fixed** custom reporter to work for consumers using Node 5.
-
 
 
 # 1.3.1
@@ -45,11 +50,11 @@ When all tests pass it'll look like this:
 
 
 # 1.1.1
-* **Fixed** test descriptions to be consistent in the format of `Unit | Component | my-component` instead of `Unit: MyComponentComponent` so that `grep`-ing for your component name will actually find tests for your component now. 
+* **Fixed** test descriptions to be consistent in the format of `Unit | Component | my-component` instead of `Unit: MyComponentComponent` so that `grep`-ing for your component name will actually find tests for your component now.
  * **Added** unit tests for the helpers themselves to make sure descriptions remain correct.
 
 # 1.1.0
-*  **Added** a `serializer` shortcut to the `describe-model` module which yields a `Unit | Serializer | model-name` description compared to the `Unit | Model | model-name` that the `model` shortcut yields. 
+*  **Added** a `serializer` shortcut to the `describe-model` module which yields a `Unit | Serializer | model-name` description compared to the `Unit | Model | model-name` that the `model` shortcut yields.
 
 
 
@@ -61,9 +66,8 @@ When all tests pass it'll look like this:
 ## Non-breaking changes
  * **Added** helpers for `describeComponent` to make writing unit and integration tests easier
  * **Added** helpers for `describeModel` to make writing unit tests easier
- * **Added** helpers for `describeModule` to make writing uni tests easier. 
+ * **Added** helpers for `describeModule` to make writing uni tests easier.
 
 # 0.2.0
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
-

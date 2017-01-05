@@ -2,11 +2,14 @@
  * Unit tests for the describe-model module
  */
 import {expect} from 'chai'
+// NOTE: not destructuring 'deprecate' for ease of testing
+/* eslint-disable ember-standard/destructure */
 import Ember from 'ember'
+
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
-import {route, controller} from 'dummy/tests/helpers/ember-test-utils/describe-module'
+import {controller, route} from 'dummy/tests/helpers/ember-test-utils/describe-module'
 import {getDeprecationMessage} from 'dummy/tests/helpers/ember-test-utils/typedefs'
 
 const deprecationMsg = getDeprecationMessage('describeModule')

@@ -1,14 +1,19 @@
 /**
  * Helper for streamlining setting up component tests
  */
-import './typedefs'
 
+/* eslint-disable ember-standard/destructure */
 import Ember from 'ember'
 import {setupComponentTest} from 'ember-mocha'
 const assign = Ember.assign || Ember.merge // NOTE: only use two params in assign() since merge() doesn't take more
 
+import {addEmberIntlDeps, needsEmberIntlDeps} from './ember-intl'
+import './typedefs'
+
 // Workaround to allow stubbing dependencies during testing
 export const deps = {
+  addEmberIntlDeps,
+  needsEmberIntlDeps,
   setupComponentTest
 }
 
@@ -20,6 +25,11 @@ export const deps = {
  */
 function component (name, options = {}) {
   const testType = (options.unit) ? 'Unit' : 'Integration'
+
+  if (deps.needsEmberIntlDeps(options)) {
+    deps.addEmberIntlDeps(options.needs)
+  }
+
   return {
     label: `${testType} / Component / ${name} /`,
     setup () {

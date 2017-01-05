@@ -2,6 +2,9 @@
  * Unit tests for the describe-model module
  */
 import {expect} from 'chai'
+// NOTE: not destructuring 'deprecate' for ease of testing
+/* eslint-disable ember-standard/destructure */
+import Ember from 'ember'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 

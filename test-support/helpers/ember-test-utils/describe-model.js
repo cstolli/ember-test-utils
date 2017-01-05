@@ -2,10 +2,12 @@
  * Shortcut for generating the params passed to describeModel from ember-mocha
  */
 
+// NOTE not destructuring 'deprecate' for ease of testing
+/* eslint-disable ember-standard/destructure */
 import Ember from 'ember'
+
 import {getDeprecationMessage} from './typedefs'
 
-// NOTE not destructuring 'deprecate' for ease of testing
 const deprecationMsg = getDeprecationMessage('describeModel')
 
 /**

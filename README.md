@@ -293,6 +293,59 @@ describe(test.label, function () {
   })
 })
 ```
+## Global Libraries
+
+Use this helper in your unit tests to determine if a component called globally-scoped `Ember.$`, `$` or `jQuery`. This ensures that there is no DOM-reference leakage outside of a component.
+
+```js
+import {expect} from 'chai'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
+
+import globalLibraries from 'dummy/tests/helpers/ember-test-utils/global-libraries'
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+
+const test = unit('my-component')
+describe(test.label, function () {
+  test.setup()
+
+  let component, sandbox
+
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+    component = this.subject({
+      hook: 'myHook'
+    })
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
+  describe('Instances of components do not interfere with other instances', function () {
+    beforeEach(function () {
+      globalLibraries.setupSpies(sandbox)
+      this.render()
+      globalLibraries.triggerEvents(component)
+    })
+
+    it('has no references to Ember.$, $ or jQuery', function () {
+      expect(globalLibraries.called()).to.equal(false)
+    })
+  })
+})
+```
+The `setupSpies()` function takes a `sandbox` as an argument to setup the `sandbox.spy()` methods on the global `Ember.$`, `$` and `jQuery`.
+
+The `resetSpies()` function will reset the `sandbox.spy()` methods on the global `Ember.$`, `$` and `jQuery`.
+
+The `triggerEvents()` function takes a `component` as an argument and triggers the following events on it: `didDestroyElement`, `didInsertElement`, `didRender`, `didUpdate`, `willClearRender`, `willDestroyElement`, `willInsertElement`, `willRender` and `willUpdate`. Triggering of the various events will ensure code that has handlers attached to those events will be exercised, making the helper more effective at detecting global references.
+
+The call to `called()` returns a boolean that is the result of the sinon spies detecting `Ember.$`, `$`, or `jQuery`. Validate `false` to verify that the code within the component does not have global references to `Ember.$`, `$` or `jQuery`.
+
+```js
+<boolean: true if the spy detects a reference to the global scope, false if not>
+```
 
 ## Custom Mocha Reporter
 

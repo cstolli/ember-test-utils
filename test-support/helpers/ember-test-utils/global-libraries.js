@@ -1,5 +1,5 @@
 import Ember from 'ember'
-import sinon from 'sinon'
+const {run} = Ember
 
 export let jqueryAliasSpy
 export let jquerySpy
@@ -12,7 +12,7 @@ export function setupSpies (sandbox) {
 }
 
 export function triggerEvents (component) {
-  Ember.run(() => {
+  run(() => {
     [
       'didDestroyElement',
       'didInsertElement',

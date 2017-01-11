@@ -339,7 +339,7 @@ The `setupSpies()` function takes a `sandbox` as an argument to setup the `sandb
 
 The `resetSpies()` function will reset the `sandbox.spy()` methods on the global `Ember.$`, `$` and `jQuery`.
 
-The `triggerEvents()` function takes a `component` as an argument and triggers the following events on it: 'didDestroyElement', 'didInsertElement', 'didRender', 'didUpdate', 'willClearRender', 'willDestroyElement', 'willInsertElement', 'willRender' and 'willUpdate'. Triggering of the various events will ensure code that has handlers attached to those events will be exercised, making the helper more effective at detecting global references.
+The `triggerEvents()` function takes a `component` as an argument and triggers the following events on it: `didDestroyElement`, `didInsertElement`, `didRender`, `didUpdate`, `willClearRender`, `willDestroyElement`, `willInsertElement`, `willRender` and `willUpdate`. Triggering of the various events will ensure code that has handlers attached to those events will be exercised, making the helper more effective at detecting global references.
 
 The call to `called()` returns a boolean that is the result of the sinon spies detecting `Ember.$`, `$`, or `jQuery`. Validate `false` to verify that the code within the component does not have global references to `Ember.$`, `$` or `jQuery`.
 

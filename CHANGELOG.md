@@ -1,3 +1,6 @@
+# 1.5.1
+* Change CI browser example in *README.md* to match `ember-frost-core` usage
+
 # 1.5.0
 * **Added** a helper to stub out the ember-data store and make it easy to fake responses to calls to the store. 
 * **Updated** the dummy route and unit test for route to utilize the ember-data helper. 

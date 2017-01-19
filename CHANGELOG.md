@@ -1,3 +1,9 @@
+# 1.6.0
+
+* **Removed** files from npm package that aren't necessary (all of the various config files).
+* **Updated** dependencies to latest versions.
+
+
 # 1.5.1
 * Change CI browser example in *README.md* to match `ember-frost-core` usage
 

@@ -1,15 +1,20 @@
-[ci-img]: https://img.shields.io/travis/ciena-blueplanet/ember-test-utils.svg "Travis CI Build Status"
-[ci-url]: https://travis-ci.org/ciena-blueplanet/ember-test-utils
-
-[cov-img]: https://img.shields.io/coveralls/ciena-blueplanet/ember-test-utils.svg "Coveralls Code Coverage"
-[cov-url]: https://coveralls.io/github/ciena-blueplanet/ember-test-utils
-
-[npm-img]: https://img.shields.io/npm/v/ember-test-utils.svg "NPM Version"
-[npm-url]: https://www.npmjs.com/package/ember-test-utils
-
-[![Travis][ci-img]][ci-url] [![Coveralls][cov-img]][cov-url] [![NPM][npm-img]][npm-url]
-
 # ember-test-utils
+
+Ember testing utilities.
+
+###### Dependencies
+
+![Ember][ember-img]
+[![NPM][npm-img]][npm-url]
+
+###### Health
+
+[![Travis][ci-img]][ci-url]
+[![Coveralls][cov-img]][cov-url]
+
+###### Security
+
+[![bitHound][bithound-img]][bithound-url]
 
  * [Installation](#Installation)
  * [Getting Started](#Getting Started)
@@ -338,3 +343,17 @@ This following outlines the details of collaborating on this Ember addon:
 * `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+
+[bithound-img]: https://www.bithound.io/github/ciena-blueplanet/ember-test-utils/badges/score.svg "bitHound"
+[bithound-url]: https://www.bithound.io/github/ciena-blueplanet/ember-test-utils
+
+[ember-img]: https://img.shields.io/badge/ember-1.13.0+-orange.svg "Ember 1.13.0+"
+
+[ci-img]: https://img.shields.io/travis/ciena-blueplanet/ember-test-utils.svg "Travis CI Build Status"
+[ci-url]: https://travis-ci.org/ciena-blueplanet/ember-test-utils
+
+[cov-img]: https://img.shields.io/coveralls/ciena-blueplanet/ember-test-utils.svg "Coveralls Code Coverage"
+[cov-url]: https://coveralls.io/github/ciena-blueplanet/ember-test-utils
+
+[npm-img]: https://img.shields.io/npm/v/ember-test-utils.svg "NPM Version"
+[npm-url]: https://www.npmjs.com/package/ember-test-utils

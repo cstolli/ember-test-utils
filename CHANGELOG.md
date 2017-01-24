@@ -1,3 +1,8 @@
+# 1.6.1
+
+* **Upgraded** to test against Ember 2.11.
+
+
 # 1.6.0
 
 * **Removed** files from npm package that aren't necessary (all of the various config files).

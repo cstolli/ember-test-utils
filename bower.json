@@ -1,16 +1,12 @@
 {
   "name": "ember-test-utils",
   "dependencies": {
-    "ember": "^2.10.2",
+    "ember": "^2.11.0",
     "ember-cli-shims": "0.1.0",
-    "ember-inflector": "1.3.1",
     "ember-mocha": "~0.8.11",
     "Faker": "3.0.1",
     "pretender": "~0.12.0",
     "sinon-chai": "^2.8.0",
     "chai-jquery": "^2.0.1"
-  },
-  "resolutions": {
-    "ember": "^2.10.2"
   }
 }

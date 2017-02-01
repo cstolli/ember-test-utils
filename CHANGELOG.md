@@ -1,3 +1,8 @@
+# 1.7.0
+
+* **Added** dots to test reporter so it is visually obvious tests are executing.
+
+
 # 1.6.1
 
 * **Upgraded** to test against Ember 2.11.

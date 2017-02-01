@@ -76,7 +76,7 @@ function testWriter (test, verbose) {
       this.out.write('\n\tError: ' + e.message + '\n')
 
       if (e.stack) {
-        this.out.write('\n\t\t' + e.stack.toString().replace(/\n/g, '\n\t\t') + '\n\n')
+        this.out.write('\n\t\t' + e.stack.toString().replace(/\n/g, '\n\t\t') + '\n')
       }
     }
   }
@@ -166,8 +166,9 @@ Reporter.prototype = {
     } else if (data.passed) {
       this.pass++
       this.passedTests.push(test)
+      this.out.write('.')
     } else {
-      this.out.write(this.failedTests.length === 0 ? 'FAILED TESTS\n\n' : '\n')
+      this.out.write('\n\n')
       this.failedTests.push(test)
       testWriter.call(this, test, true)
     }

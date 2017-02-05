@@ -59,6 +59,7 @@
     "includes": [
       "cloneDeep",
       "flatten",
+      "includes",
       "isEmpty",
       "isEqual",
       "isObject",

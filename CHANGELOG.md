@@ -1,3 +1,9 @@
+# 1.8.0
+
+* **Added** `ember-lodash-shim` configuration to optimize build to only include necessary `lodash` methods.
+* **Added** `ember-disable-prototype-extensions` to ensure addon isn't depending on Ember's prototype extensions.
+
+
 # 1.7.0
 
 * **Added** dots to test reporter so it is visually obvious tests are executing.

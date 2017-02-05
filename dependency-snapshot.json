@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -464,9 +464,9 @@
       "dev": true
     },
     "basic-auth": {
-      "version": "1.0.4",
-      "from": "basic-auth@>=1.0.3 <1.1.0",
-      "resolved": "https://registry.npmjs.org/basic-auth/-/basic-auth-1.0.4.tgz",
+      "version": "1.1.0",
+      "from": "basic-auth@>=1.1.0 <1.2.0",
+      "resolved": "https://registry.npmjs.org/basic-auth/-/basic-auth-1.1.0.tgz",
       "dev": true
     },
     "better-assert": {
@@ -567,9 +567,9 @@
       "dev": true
     },
     "broccoli-builder": {
-      "version": "0.18.3",
+      "version": "0.18.4",
       "from": "broccoli-builder@>=0.18.0 <0.19.0",
-      "resolved": "https://registry.npmjs.org/broccoli-builder/-/broccoli-builder-0.18.3.tgz",
+      "resolved": "https://registry.npmjs.org/broccoli-builder/-/broccoli-builder-0.18.4.tgz",
       "dev": true
     },
     "broccoli-clean-css": {
@@ -1342,9 +1342,9 @@
       "dev": true
     },
     "ember-cli-babel": {
-      "version": "5.2.1",
+      "version": "5.2.2",
       "from": "ember-cli-babel@>=5.1.5 <6.0.0",
-      "resolved": "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-5.2.1.tgz",
+      "resolved": "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-5.2.2.tgz",
       "dependencies": {
         "clone": {
           "version": "2.1.0",
@@ -1603,9 +1603,9 @@
       "dev": true
     },
     "ember-data": {
-      "version": "2.11.0",
+      "version": "2.11.1",
       "from": "ember-data@>=2.11.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/ember-data/-/ember-data-2.11.0.tgz",
+      "resolved": "https://registry.npmjs.org/ember-data/-/ember-data-2.11.1.tgz",
       "dev": true,
       "dependencies": {
         "amd-name-resolver": {
@@ -1634,6 +1634,12 @@
         }
       }
     },
+    "ember-disable-prototype-extensions": {
+      "version": "1.1.0",
+      "from": "ember-disable-prototype-extensions@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/ember-disable-prototype-extensions/-/ember-disable-prototype-extensions-1.1.0.tgz",
+      "dev": true
+    },
     "ember-disable-proxy-controllers": {
       "version": "1.0.1",
       "from": "ember-disable-proxy-controllers@>=1.0.1 <2.0.0",
@@ -1659,9 +1665,9 @@
       "dev": true
     },
     "ember-lodash-shim": {
-      "version": "1.1.1",
+      "version": "1.2.0",
       "from": "ember-lodash-shim@>=1.1.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-lodash-shim/-/ember-lodash-shim-1.1.1.tgz",
+      "resolved": "https://registry.npmjs.org/ember-lodash-shim/-/ember-lodash-shim-1.2.0.tgz",
       "dev": true
     },
     "ember-macro-helpers": {
@@ -1683,9 +1689,9 @@
       "dev": true
     },
     "ember-router-generator": {
-      "version": "1.2.2",
+      "version": "1.2.3",
       "from": "ember-router-generator@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-router-generator/-/ember-router-generator-1.2.2.tgz",
+      "resolved": "https://registry.npmjs.org/ember-router-generator/-/ember-router-generator-1.2.3.tgz",
       "dev": true,
       "dependencies": {
         "esprima": {
@@ -1883,9 +1889,9 @@
       "dev": true
     },
     "eslint": {
-      "version": "3.14.1",
+      "version": "3.15.0",
       "from": "eslint@>=3.14.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/eslint/-/eslint-3.14.1.tgz",
+      "resolved": "https://registry.npmjs.org/eslint/-/eslint-3.15.0.tgz",
       "dev": true,
       "dependencies": {
         "globals": {
@@ -1963,14 +1969,14 @@
       "dev": true
     },
     "espree": {
-      "version": "3.3.2",
-      "from": "espree@>=3.3.1 <4.0.0",
-      "resolved": "https://registry.npmjs.org/espree/-/espree-3.3.2.tgz",
+      "version": "3.4.0",
+      "from": "espree@>=3.4.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/espree/-/espree-3.4.0.tgz",
       "dev": true,
       "dependencies": {
         "acorn": {
           "version": "4.0.4",
-          "from": "acorn@^4.0.1",
+          "from": "acorn@4.0.4",
           "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.4.tgz",
           "dev": true
         }
@@ -3456,24 +3462,10 @@
       }
     },
     "morgan": {
-      "version": "1.7.0",
+      "version": "1.8.0",
       "from": "morgan@>=1.5.2 <2.0.0",
-      "resolved": "https://registry.npmjs.org/morgan/-/morgan-1.7.0.tgz",
-      "dev": true,
-      "dependencies": {
-        "debug": {
-          "version": "2.2.0",
-          "from": "debug@~2.2.0",
-          "resolved": "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz",
-          "dev": true
-        },
-        "ms": {
-          "version": "0.7.1",
-          "from": "ms@0.7.1",
-          "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz",
-          "dev": true
-        }
-      }
+      "resolved": "https://registry.npmjs.org/morgan/-/morgan-1.8.0.tgz",
+      "dev": true
     },
     "mout": {
       "version": "1.0.0",
@@ -5567,9 +5559,9 @@
       "dev": true
     },
     "private": {
-      "version": "0.1.6",
+      "version": "0.1.7",
       "from": "private@>=0.1.6 <0.2.0",
-      "resolved": "https://registry.npmjs.org/private/-/private-0.1.6.tgz"
+      "resolved": "https://registry.npmjs.org/private/-/private-0.1.7.tgz"
     },
     "process-nextick-args": {
       "version": "1.0.7",
@@ -5834,9 +5826,9 @@
       "dev": true,
       "dependencies": {
         "acorn": {
-          "version": "4.0.4",
+          "version": "4.0.8",
           "from": "acorn@>=4.0.1 <5.0.0",
-          "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.4.tgz",
+          "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.8.tgz",
           "dev": true
         }
       }

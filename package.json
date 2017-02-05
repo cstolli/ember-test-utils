@@ -33,6 +33,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-computed-decorators": "0.3.0",
     "ember-data": "^2.11.0",
+    "ember-disable-prototype-extensions": "^1.1.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.1.1",
     "ember-inflector": "^1.11.0",
@@ -53,5 +54,18 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "ember-lodash-shim": {
+    "includes": [
+      "cloneDeep",
+      "flatten",
+      "isEmpty",
+      "isEqual",
+      "isObject",
+      "partial",
+      "reject"
+    ],
+    "includeLodash3Exports": false,
+    "whitelist": true
   }
 }

@@ -199,5 +199,5 @@ function runTest (unitUnderTest, {expectedResult, description, input}, testNumbe
 }
 
 describe('object diff', function () {
-  _.each(tests, _.partial(runTest, objectDiff))
+  tests.forEach(_.partial(runTest, objectDiff))
 })

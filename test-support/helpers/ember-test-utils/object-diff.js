@@ -8,8 +8,11 @@ import _ from 'lodash'
 
 export const ARRAY_PLACEHOLDER = '<%ARRAY_PLACEHOLDER%> elements equal'
 
+const {isArray} = Array
+const {keys} = Object
+
 function diffValue (obj1Value, obj2Value) {
-  if (_.isArray(obj1Value) && _.isArray(obj2Value)) {
+  if (isArray(obj1Value) && isArray(obj2Value)) {
     return diffArray(obj1Value, obj2Value)
   } else if (_.isObject(obj1Value) && _.isObject(obj2Value)) {
     return diffObject(obj1Value, obj2Value)
@@ -50,7 +53,7 @@ function diffArray (obj1Value, obj2Value) {
     let hasRightDiff = false
 
     if (result.leftOnlyKeys.length > 0) {
-      leftOnlyKeys.push.apply(leftOnlyKeys, _.map(result.leftOnlyKeys, completeIndexPath))
+      leftOnlyKeys.push.apply(leftOnlyKeys, result.leftOnlyKeys.map(completeIndexPath))
       if (!_.isEmpty(result.leftDiff)) {
         leftDiff.push(result.leftDiff)
         hasMinusDiff = true
@@ -58,14 +61,14 @@ function diffArray (obj1Value, obj2Value) {
     }
 
     if (result.rightOnlyKeys.length > 0) {
-      rightOnlyKeys.push.apply(rightOnlyKeys, _.map(result.rightOnlyKeys, completeIndexPath))
+      rightOnlyKeys.push.apply(rightOnlyKeys, result.rightOnlyKeys.map(completeIndexPath))
       if (!_.isEmpty(result.rightDiff)) {
         rightDiff.push(result.rightDiff)
         hasRightDiff = true
       }
     }
     if (result.differentKeys.length > 0) {
-      differentKeys.push.apply(differentKeys, _.map(result.differentKeys, completeIndexPath))
+      differentKeys.push.apply(differentKeys, result.differentKeys.map(completeIndexPath))
       leftDiff.push(result.leftDiff)
       rightDiff.push(result.rightDiff)
       hasMinusDiff = true
@@ -113,8 +116,8 @@ export default function diffObject (obj1, obj2) {
       until: '2.0.0'
     }
   )
-  const obj1Keys = _.keys(obj1)
-  const obj2Keys = _.keys(obj2)
+  const obj1Keys = keys(obj1)
+  const obj2Keys = keys(obj2)
 
   const rightOnlyKeys = _.reject(obj2Keys, _.partial(_.includes, obj1Keys))
   const leftOnlyKeys = _.reject(obj1Keys, _.partial(_.includes, obj2Keys))
@@ -122,40 +125,40 @@ export default function diffObject (obj1, obj2) {
 
   const leftDiff = {}
 
-  _.each(leftOnlyKeys, function (key) {
+  leftOnlyKeys.forEach(function (key) {
     leftDiff[key] = _.cloneDeep(obj1[key])
   })
 
   const rightDiff = {}
 
-  _.each(rightOnlyKeys, function (key) {
+  rightOnlyKeys.forEach(function (key) {
     rightDiff[key] = _.cloneDeep(obj2[key])
   })
 
   const differentKeyList = []
 
-  _.each(commonKeys, function (key) {
+  commonKeys.forEach(function (key) {
     const obj1Value = obj1[key]
     const obj2Value = obj2[key]
     const completeKeyPath = _.partial(completePath, key)
 
-    if (_.isArray(obj1Value) && _.isArray(obj2Value)) {
+    if (isArray(obj1Value) && isArray(obj2Value)) {
       const result = diffArray(obj1Value, obj2Value)
       if (result.differentKeys.length > 0) {
-        differentKeyList.push(_.map(result.differentKeys, completeKeyPath))
+        differentKeyList.push(result.differentKeys.map(completeKeyPath))
         leftDiff[key] = result.leftDiff
         rightDiff[key] = result.rightDiff
       }
 
       if (result.leftOnlyKeys.length > 0) {
-        leftOnlyKeys.push.apply(leftOnlyKeys, _.map(result.leftOnlyKeys, completeKeyPath))
+        leftOnlyKeys.push.apply(leftOnlyKeys, result.leftOnlyKeys.map(completeKeyPath))
         if (!_.isEmpty(result.leftDiff)) {
           leftDiff[key] = result.leftDiff
         }
       }
 
       if (result.rightOnlyKeys.length > 0) {
-        rightOnlyKeys.push.apply(rightOnlyKeys, _.map(result.rightOnlyKeys, completeKeyPath))
+        rightOnlyKeys.push.apply(rightOnlyKeys, result.rightOnlyKeys.map(completeKeyPath))
         if (!_.isEmpty(result.rightDiff)) {
           rightDiff[key] = result.rightDiff
         }
@@ -163,20 +166,20 @@ export default function diffObject (obj1, obj2) {
     } else if (_.isObject(obj1Value) && _.isObject(obj2Value)) {
       const result = diffObject(obj1Value, obj2Value)
       if (result.differentKeys.length > 0) {
-        differentKeyList.push(_.map(result.differentKeys, completeKeyPath))
+        differentKeyList.push(result.differentKeys.map(completeKeyPath))
         leftDiff[key] = result.leftDiff
         rightDiff[key] = result.rightDiff
       }
 
       if (result.leftOnlyKeys.length > 0) {
-        leftOnlyKeys.push.apply(leftOnlyKeys, _.map(result.leftOnlyKeys, completeKeyPath))
+        leftOnlyKeys.push.apply(leftOnlyKeys, result.leftOnlyKeys.map(completeKeyPath))
         if (!_.isEmpty(result.leftDiff)) {
           leftDiff[key] = result.leftDiff
         }
       }
 
       if (result.rightOnlyKeys.length > 0) {
-        rightOnlyKeys.push.apply(rightOnlyKeys, _.map(result.rightOnlyKeys, completeKeyPath))
+        rightOnlyKeys.push.apply(rightOnlyKeys, result.rightOnlyKeys.map(completeKeyPath))
         if (!_.isEmpty(result.rightDiff)) {
           rightDiff[key] = result.rightDiff
         }

@@ -8,6 +8,7 @@ addons:
     packages:
     - google-chrome-stable
     - g++-4.8
+  firefox: 'latest-esr'
 language: node_js
 node_js:
 - '6.9'

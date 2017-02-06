@@ -6,6 +6,9 @@
     "doc": "doc",
     "test": "tests"
   },
+  "bin": {
+    "template-lint": "./cli/template-lint.js"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",

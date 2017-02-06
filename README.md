@@ -322,6 +322,30 @@ module.exports = {
 
 > NOTE: This reporter will group test results into two sections: failed and passed. Each section is sorted from slowest test to fastest test so you can see which tests are causing your CI to come to a crawl.
 
+## Template Linting
+
+If you want to lint your template files you can simply run:
+
+```bash
+./node_modules/.bin/template-lint
+```
+
+or even better add the following script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint-hbs": "template-lint"
+  }
+}
+```
+
+and run
+
+```bash
+npm run lint-hbs
+```
+
 ## Contributing
 
 This following outlines the details of collaborating on this Ember addon:

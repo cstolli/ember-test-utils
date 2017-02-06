@@ -7,6 +7,7 @@ const TemplateLinter = require('ember-template-lint')
 const linter = new TemplateLinter()
 
 const errors = glob.sync([
+  'addon/**/*.hbs',
   'app/**/*.hbs',
   'tests/**/*.hbs'
 ])

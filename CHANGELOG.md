@@ -1,3 +1,8 @@
+# 1.9.0
+
+* **Added** new `template-lint` executable for linting HTMLBars templates.
+
+
 # 1.8.0
 
 * **Added** `ember-lodash-shim` configuration to optimize build to only include necessary `lodash` methods.

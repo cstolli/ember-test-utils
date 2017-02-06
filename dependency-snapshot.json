@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -719,9 +719,9 @@
       "dev": true
     },
     "broccoli-rollup": {
-      "version": "1.0.3",
+      "version": "1.1.0",
       "from": "broccoli-rollup@>=1.0.3 <2.0.0",
-      "resolved": "https://registry.npmjs.org/broccoli-rollup/-/broccoli-rollup-1.0.3.tgz",
+      "resolved": "https://registry.npmjs.org/broccoli-rollup/-/broccoli-rollup-1.1.0.tgz",
       "dev": true,
       "dependencies": {
         "fs-extra": {
@@ -1342,9 +1342,9 @@
       "dev": true
     },
     "ember-cli-babel": {
-      "version": "5.2.2",
+      "version": "5.2.3",
       "from": "ember-cli-babel@>=5.1.5 <6.0.0",
-      "resolved": "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-5.2.2.tgz",
+      "resolved": "https://registry.npmjs.org/ember-cli-babel/-/ember-cli-babel-5.2.3.tgz",
       "dependencies": {
         "clone": {
           "version": "2.1.0",
@@ -2563,9 +2563,9 @@
       "dev": true
     },
     "hosted-git-info": {
-      "version": "2.1.5",
+      "version": "2.2.0",
       "from": "hosted-git-info@>=2.1.4 <3.0.0",
-      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.1.5.tgz",
+      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.2.0.tgz",
       "dev": true
     },
     "http-errors": {
@@ -5806,9 +5806,9 @@
       "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.5.4.tgz"
     },
     "rollup": {
-      "version": "0.34.13",
-      "from": "rollup@>=0.34.11 <0.35.0",
-      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.34.13.tgz",
+      "version": "0.41.4",
+      "from": "rollup@>=0.41.4 <0.42.0",
+      "resolved": "https://registry.npmjs.org/rollup/-/rollup-0.41.4.tgz",
       "dev": true,
       "dependencies": {
         "source-map-support": {
@@ -5826,9 +5826,9 @@
       "dev": true,
       "dependencies": {
         "acorn": {
-          "version": "4.0.8",
+          "version": "4.0.9",
           "from": "acorn@>=4.0.1 <5.0.0",
-          "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.8.tgz",
+          "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.9.tgz",
           "dev": true
         }
       }

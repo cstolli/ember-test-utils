@@ -243,7 +243,7 @@ rules:
   nesting-depth:
     - 2
     -
-      max-depth: 5
+      max-depth: 3
 
   # enforce the order in which declarations are written (default alphabetical)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/property-sort-order.md

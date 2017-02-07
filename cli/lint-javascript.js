@@ -141,7 +141,7 @@ function lint () {
     process.exit(1)
   }
 
-  return report.errorCount
+  return report.errorCount !== 0
 }
 
 // If file was called via CLI

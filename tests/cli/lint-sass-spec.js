@@ -24,19 +24,19 @@ const rootProjectFiles = [
   'testem.js'
 ]
 
-const errorSassFiles = [
+const errorFiles = [
   'error-1.scss',
   'error-2.scss'
 ]
   .map((fileName) => path.join(__dirname, 'fixtures', fileName))
 
-const validSassFiles = [
+const validFiles = [
   'valid-1.scss',
-  'valid=2.scss'
+  'valid-2.scss'
 ]
   .map((fileName) => path.join(__dirname, 'fixtures', fileName))
 
-const warnSassFiles = [
+const warnFiles = [
   'warn-1.scss',
   'warn-2.scss'
 ]
@@ -123,7 +123,7 @@ describe('lint-sass', function () {
         let result
 
         beforeEach(function () {
-          sandbox.stub(glob, 'sync').returns(validSassFiles)
+          sandbox.stub(glob, 'sync').returns(validFiles)
           result = lintSass()
         })
 
@@ -142,7 +142,7 @@ describe('lint-sass', function () {
         let result
 
         beforeEach(function () {
-          sandbox.stub(glob, 'sync').returns(warnSassFiles)
+          sandbox.stub(glob, 'sync').returns(warnFiles)
           result = lintSass()
         })
 
@@ -169,7 +169,7 @@ describe('lint-sass', function () {
         let result
 
         beforeEach(function () {
-          sandbox.stub(glob, 'sync').returns(errorSassFiles)
+          sandbox.stub(glob, 'sync').returns(errorFiles)
           result = lintSass()
         })
 
@@ -265,7 +265,7 @@ describe('lint-sass', function () {
         let result
 
         beforeEach(function () {
-          sandbox.stub(glob, 'sync').returns(validSassFiles)
+          sandbox.stub(glob, 'sync').returns(validFiles)
           result = lintSass()
         })
 
@@ -284,7 +284,7 @@ describe('lint-sass', function () {
         let result
 
         beforeEach(function () {
-          sandbox.stub(glob, 'sync').returns(warnSassFiles)
+          sandbox.stub(glob, 'sync').returns(warnFiles)
           result = lintSass()
         })
 
@@ -311,7 +311,7 @@ describe('lint-sass', function () {
         let result
 
         beforeEach(function () {
-          sandbox.stub(glob, 'sync').returns(errorSassFiles)
+          sandbox.stub(glob, 'sync').returns(errorFiles)
           result = lintSass()
         })
 

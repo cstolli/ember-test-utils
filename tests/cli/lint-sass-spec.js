@@ -85,7 +85,7 @@ describe('lint-sass', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.sass-lint.json') !== -1) {
+          if (filePath.indexOf('.sass-lint.yml') !== -1) {
             return JSON.stringify({
               files: {
                 include: '+(addon|app|tests)/styles/**/*.s+(a|c)ss'
@@ -202,7 +202,7 @@ describe('lint-sass', function () {
   describe('when config file found', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
-      files.push('.sass-lint.json')
+      files.push('.sass-lint.yml')
 
       sandbox.stub(fs, 'readdirSync', function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
@@ -227,7 +227,7 @@ describe('lint-sass', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.sass-lint.json') !== -1) {
+          if (filePath.indexOf('.sass-lint.yml') !== -1) {
             return JSON.stringify({
               files: {
                 include: '+(addon|app|tests)/styles/**/*.s+(a|c)ss'

@@ -56,7 +56,7 @@ function resultReducer (options, summary, filePath) {
 const SassLinter = function () {
   Linter.call(this, {
     configFileNames: CONFIG_FILE_NAMES,
-    defaultConfig: '.sass-lint.json',
+    defaultConfig: '.sass-lint.yml',
     fileLocations: FILE_LOCATIONS
   })
 }

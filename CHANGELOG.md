@@ -1,3 +1,8 @@
+# 1.10.0
+
+* **Added** new Node executables for linting: `lint-all-the-things`, `lint-docker`, `lint-htmlbars` (previously `template-lint`), `lint-javascript`, `lint-markdown`, and `lint-sass`.
+
+
 # 1.9.0
 
 * **Added** new `template-lint` executable for linting HTMLBars templates.

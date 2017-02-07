@@ -108,7 +108,6 @@ Linter.prototype = {
     const position = chalk.dim(`${line}:${column}`)
     const severityColor = severity === 'error' ? 'red' : 'yellow'
 
-    message = chalk.black(message)
     rule = chalk.dim(rule)
     severity = chalk[severityColor](severity)
 

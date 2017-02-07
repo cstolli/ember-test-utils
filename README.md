@@ -322,12 +322,15 @@ module.exports = {
 
 > NOTE: This reporter will group test results into two sections: failed and passed. Each section is sorted from slowest test to fastest test so you can see which tests are causing your CI to come to a crawl.
 
-## Template Linting
+## Linting
 
-If you want to lint your template files you can simply run:
+### All File Types
+
+If you want to lint your Dockerfile's, templates, Javascript, Markdown, and SASS
+files you can simply run:
 
 ```bash
-./node_modules/.bin/template-lint
+./node_modules/.bin/lint-all-the-things
 ```
 
 or even better add the following script to your `package.json`:
@@ -335,7 +338,127 @@ or even better add the following script to your `package.json`:
 ```json
 {
   "scripts": {
-    "lint-hbs": "template-lint"
+    "lint": "lint-all-the-things"
+  }
+}
+```
+
+and run
+
+```bash
+npm run lint-all-the-things
+```
+
+### Dockerfile
+
+If you want to lint your template files you can simply run:
+
+```bash
+./node_modules/.bin/lint-docker
+```
+
+or even better add the following script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint-docker": "lint-docker"
+  }
+}
+```
+
+and run
+
+```bash
+npm run lint-docker
+```
+
+### Javascript
+
+If you want to lint your Javascript files you can simply run:
+
+```bash
+./node_modules/.bin/lint-javascript
+```
+
+or even better add the following script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint-js": "lint-javascript"
+  }
+}
+```
+
+and run
+
+```bash
+npm run lint-js
+```
+
+### Markdown
+
+If you want to lint your Markdown files you can simply run:
+
+```bash
+./node_modules/.bin/lint-markdown
+```
+
+or even better add the following script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint-md": "lint-markdown"
+  }
+}
+```
+
+and run
+
+```bash
+npm run lint-md
+```
+
+### Stylesheets (SASS)
+
+If you want to lint your SASS files you can simply run:
+
+```bash
+./node_modules/.bin/lint-sass
+```
+
+or even better add the following script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint-sass": "lint-sass"
+  }
+}
+```
+
+and run
+
+```bash
+npm run lint-hbs
+```
+
+### Templates (HTMLBars)
+
+If you want to lint your template files you can simply run:
+
+```bash
+./node_modules/.bin/lint-htmlbars
+```
+
+or even better add the following script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "lint-hbs": "lint-htmlbars"
   }
 }
 ```

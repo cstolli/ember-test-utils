@@ -7,14 +7,20 @@
     "test": "tests"
   },
   "bin": {
-    "template-lint": "./cli/template-lint.js"
+    "lint-all-the-things": "./cli/lint-all-the-things.js",
+    "lint-docker": "./cli/lint-docker.js",
+    "lint-htmlbars": "./cli/lint-htmlbars.js",
+    "lint-javascript": "./cli/lint-javascript.js",
+    "lint-markdown": "./cli/lint-markdown.js",
+    "lint-sass": "./cli/lint-sass.js",
+    "template-lint": "./cli/lint-htmlbars.js"
   },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
     "test": "npm run lint && ember test",
     "ci-test": "ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test",
-    "lint": "eslint *.js addon app config test-support tests"
+    "lint": "./cli/lint-all-the-things.js"
   },
   "repository": "git@github.com:ciena-blueplanet/ember-test-utils.git",
   "engines": {
@@ -44,8 +50,6 @@
     "ember-lodash-shim": "^1.1.1",
     "ember-resolver": "^2.1.1",
     "ember-sinon": "0.6.0",
-    "eslint": "^3.14.0",
-    "eslint-config-frost-standard": "^5.3.2",
     "loader.js": "^4.1.0",
     "lodash-es": "^4.17.4"
   },
@@ -53,7 +57,15 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.5"
+    "dockerfile_lint": "^0.2.6",
+    "ember-cli-babel": "^5.1.5",
+    "ember-template-lint": "^0.6.3",
+    "eslint": "^3.14.0",
+    "eslint-config-frost-standard": "^5.3.2",
+    "glob-all": "^3.1.0",
+    "remark": "^6.2.0",
+    "remark-lint": "^5.4.0",
+    "sass-lint": "^1.10.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

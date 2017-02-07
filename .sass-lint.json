@@ -53,7 +53,7 @@
     "hex-notation": 2,
     "indentation": 2,
     "leading-zero": 2,
-    "nesting-depth": 0,
+    "nesting-depth": 3,
     "property-sort-order": [
       2,
       {

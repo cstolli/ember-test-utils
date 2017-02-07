@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk')
 const CLIEngine = require('eslint').CLIEngine
-const fs = require('fs')
-const path = require('path')
+
+const Linter = require('./linter')
 
 /**
  * List of glob directories for where to find Javascript source files
  * @type {Array.<string>}
  */
-const SOURCE_FILE_LOCATIONS = [
+const FILE_LOCATIONS = [
   'addon/**/*.js',
   'app/**/*.js',
   'config/**/*.js',
@@ -29,34 +28,17 @@ const CONFIG_FILE_NAMES = [
   '.eslintrc.json'
 ]
 
-/**
- * Get configuration options for eslint
- * @returns {ESLintConfig} ESLint lint configuration options
- */
-function getConfig () {
-  // Look for configuration file in current working directory
-  const files = fs.readdirSync(process.cwd())
-  const configFile = files.find((filePath) => {
-    return CONFIG_FILE_NAMES.find((configFileName) => filePath.indexOf(configFileName) !== -1)
+const JavascriptLinter = function () {
+  Linter.call(this, {
+    configFileNames: CONFIG_FILE_NAMES,
+    defaultConfig: '.eslintrc',
+    fileLocations: FILE_LOCATIONS
   })
-
-  // If no configuration file was found use configuration from this addon
-  if (!configFile) {
-    return JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '.eslintrc'), {encoding: 'utf8'})
-    )
-  }
-
-  // If configuration file is a Javascript module, require it
-  if (configFile === '.eslintrc.js') {
-    return require(path.join(process.cwd(), configFile))
-  }
-
-  // If configuration file is JSON, parse it
-  return JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), configFile), {encoding: 'utf8'})
-  )
 }
+
+// Inherit from Linter class
+JavascriptLinter.prototype = Object.create(Linter.prototype)
+JavascriptLinter.prototype.constructor = JavascriptLinter
 
 /**
  * Get text color for severity
@@ -98,43 +80,29 @@ function getSeverityLabel (severity) {
  * Lint Javascript files
  * @returns {Boolean} returns true if there are linting errors
  */
-function lint () {
-  const config = getConfig()
+JavascriptLinter.prototype.lint = function () {
+  const config = this.getConfig()
   const cli = new CLIEngine(config)
 
-  const report = cli.executeOnFiles(SOURCE_FILE_LOCATIONS)
+  const report = cli.executeOnFiles(this.fileLocations)
 
   report.results.forEach((result) => {
     if (result.messages.length === 0) {
       return
     }
 
-    const underlinedFilePath = chalk.underline(`\n${result.filePath}`)
-
-    console.log(underlinedFilePath)
+    this.printFilePath(result.filePath)
 
     result.messages.forEach((message) => {
       const msg = message.message.replace(/\.$/, '')
-      const messageText = chalk.black(msg)
-      const positionText = chalk.dim(`${message.line}:${message.column}`)
-      const ruleText = chalk.dim(message.ruleId)
-      const severityColor = getSeverityColor(message.severity)
-      const severityText = getSeverityLabel(message.severity)
-      const coloredSeverityText = chalk[severityColor](severityText)
-
-      console.log(
-        `  ${positionText}  ${coloredSeverityText}  ${messageText}  ${ruleText}`
-      )
+      const severity = getSeverityLabel(message.severity)
+      this.printLintItem(message.line, message.column, severity, msg, message.ruleId)
     })
+
+    console.log('') // logging empty line
   })
 
-  const errors = report.errorCount
-  const warnings = report.warningCount
-  const color = errors ? 'red' : (warnings ? 'yellow' : 'black')
-  const coloredText = chalk[color](`\nJavascript: ${errors} errors, ${warnings} warnings`)
-  const boldColoredText = chalk.bold(coloredText)
-
-  console.log(boldColoredText)
+  this.printLintSummary('Javascript', report.errorCount, report.warningCount)
 
   // If file was called via CLI and there are errors exit process with failed status
   if (require.main === module && report.errorCount !== 0) {
@@ -146,9 +114,10 @@ function lint () {
 
 // If file was called via CLI
 if (require.main === module) {
-  lint()
+  const linter = new JavascriptLinter()
+  linter.lint()
 
 // If file was required by another Node module
 } else {
-  module.exports = lint
+  module.exports = JavascriptLinter
 }

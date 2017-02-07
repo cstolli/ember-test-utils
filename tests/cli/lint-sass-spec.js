@@ -4,7 +4,7 @@ const glob = require('glob-all')
 const path = require('path')
 const sinon = require('sinon')
 
-const lintSass = require('../../cli/lint-sass')
+const SassLinter = require('../../cli/lint-sass')
 
 const rootProjectFiles = [
   '.bowerrc',
@@ -43,9 +43,10 @@ const warnFiles = [
   .map((fileName) => path.join(__dirname, 'fixtures', fileName))
 
 describe('lint-sass', function () {
-  let logOutput, sandbox
+  let linter, logOutput, sandbox
 
   beforeEach(function () {
+    linter = new SassLinter()
     logOutput = []
     sandbox = sinon.sandbox.create()
     sandbox.stub(console, 'log', function (text) {
@@ -74,7 +75,7 @@ describe('lint-sass', function () {
 
       it('throws an error', function () {
         expect(function () {
-          lintSass()
+          linter.lint()
         }).to.throw()
       })
     })
@@ -115,7 +116,7 @@ describe('lint-sass', function () {
         })
 
         it('returns false', function () {
-          expect(lintSass()).to.equal(false)
+          expect(linter.lint()).to.equal(false)
         })
       })
 
@@ -124,12 +125,12 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(validFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[1m\u001b[30mSASS: 0 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[42m SASS: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -143,7 +144,7 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(warnFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
@@ -156,7 +157,7 @@ describe('lint-sass', function () {
             '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  \u001b[30m!important not allowed\u001b[39m' +
               '  \u001b[2mno-important\u001b[22m',
             '',
-            '\u001b[1m\u001b[33mSASS: 0 errors, 2 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[43m SASS: 0 errors, 2 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -170,7 +171,7 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(errorFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
@@ -187,7 +188,7 @@ describe('lint-sass', function () {
             '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `flex-basis`,' +
               ' found `display`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
             '',
-            '\u001b[1m\u001b[31mSASS: 4 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[37m\u001b[41m SASS: 4 errors, 0 warnings \u001b[49m\u001b[39m\u001b[22m\n'
           ])
         })
 
@@ -216,7 +217,7 @@ describe('lint-sass', function () {
 
       it('throws an error', function () {
         expect(function () {
-          lintSass()
+          linter.lint()
         }).to.throw()
       })
     })
@@ -257,7 +258,7 @@ describe('lint-sass', function () {
         })
 
         it('returns false', function () {
-          expect(lintSass()).to.equal(false)
+          expect(linter.lint()).to.equal(false)
         })
       })
 
@@ -266,12 +267,12 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(validFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[1m\u001b[30mSASS: 0 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[42m SASS: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -285,7 +286,7 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(warnFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
@@ -298,7 +299,7 @@ describe('lint-sass', function () {
             '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  \u001b[30m!important not allowed\u001b[39m' +
               '  \u001b[2mno-important\u001b[22m',
             '',
-            '\u001b[1m\u001b[33mSASS: 0 errors, 2 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[43m SASS: 0 errors, 2 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -312,7 +313,7 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(errorFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
@@ -329,7 +330,7 @@ describe('lint-sass', function () {
             '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `flex-basis`,' +
               ' found `display`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
             '',
-            '\u001b[1m\u001b[31mSASS: 4 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[37m\u001b[41m SASS: 4 errors, 0 warnings \u001b[49m\u001b[39m\u001b[22m\n'
           ])
         })
 

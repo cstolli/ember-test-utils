@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk')
 const fs = require('fs')
 const glob = require('glob-all')
-const path = require('path')
 const remark = require('remark')
 const remarkLint = require('remark-lint')
+
+const Linter = require('./linter')
 
 /**
  * List of configuration files to look for
@@ -19,36 +19,24 @@ const CONFIG_FILE_NAMES = [
  * List of glob directories for where to find markdown files
  * @type {Array.<string>}
  */
-const TEMPLATE_FILE_LOCATIONS = [
+const FILE_LOCATIONS = [
   'addon/**/*.md',
   'app/**/*.md',
   'tests/**/*.md',
   '*.md'
 ]
 
-/**
- * Get configuration options for eslint
- * @returns {RemarkLintConfig} ESLint lint configuration options
- */
-function getConfig () {
-  // Look for configuration file in current working directory
-  const files = fs.readdirSync(process.cwd())
-  const configFile = files.find((filePath) => {
-    return CONFIG_FILE_NAMES.find((configFileName) => filePath.indexOf(configFileName) !== -1)
+const MarkdownLinter = function () {
+  Linter.call(this, {
+    configFileNames: CONFIG_FILE_NAMES,
+    defaultConfig: '.remarkc',
+    fileLocations: FILE_LOCATIONS
   })
-
-  // If no configuration file was found use configuration from this addon
-  if (!configFile) {
-    return JSON.parse(
-      fs.readFileSync(path.join(__dirname, '..', '.remarkrc'), {encoding: 'utf8'})
-    )
-  }
-
-  // Use found configuration
-  return JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), configFile), {encoding: 'utf8'})
-  )
 }
+
+// Inherit from Linter class
+MarkdownLinter.prototype = Object.create(Linter.prototype)
+MarkdownLinter.prototype.constructor = MarkdownLinter
 
 /**
  * Merge report results into a summary
@@ -62,20 +50,11 @@ function reportReducer (linter, summary, filePath) {
   const file = linter.process(fileContents)
 
   if (file.messages.length !== 0) {
-    const underlinedText = chalk.underline(`\n${filePath}`)
-    console.log(underlinedText)
+    this.printFilePath(filePath)
 
     file.messages.forEach((message) => {
-      const messageText = chalk.black(message.message)
-      const positionText = chalk.dim(`${message.line}:${message.column}`)
-      const ruleText = chalk.dim(message.ruleId)
-      const severityColor = message.fatal ? 'red' : 'yellow'
-      const severityText = message.fatal ? 'error' : 'warning'
-      const coloredSeverityText = chalk[severityColor](severityText)
-
-      console.log(
-        `  ${positionText}  ${coloredSeverityText}  ${messageText}  ${ruleText}`
-      )
+      const severity = message.fatal ? 'error' : 'warning'
+      this.printLintItem(message.line, message.column, severity, message.message, message.ruleId)
 
       if (message.fatal) {
         summary.errors += 1
@@ -95,22 +74,18 @@ function reportReducer (linter, summary, filePath) {
  * Lint Markdown files
  * @returns {Boolean} returns true if there are linting errors
  */
-function lint () {
-  const config = getConfig()
+MarkdownLinter.prototype.lint = function () {
+  const config = this.getConfig()
   const lintConfig = (config.plugins || {}).lint || {}
   const linter = remark().use(remarkLint, lintConfig)
 
-  const result = glob.sync(TEMPLATE_FILE_LOCATIONS)
-    .reduce(reportReducer.bind(null, linter), {
+  const result = glob.sync(this.fileLocations)
+    .reduce(reportReducer.bind(this, linter), {
       errors: 0,
       warnings: 0
     })
 
-  const color = result.errors === 0 ? (result.warnings === 0 ? 'black' : 'yellow') : 'red'
-  const coloredText = chalk[color](`Markdown: ${result.errors} errors, ${result.warnings} warnings\n`)
-  const boldColoredText = chalk.bold(coloredText)
-
-  console.log(boldColoredText)
+  this.printLintSummary('Markdown', result.errors, result.warnings)
 
   // If file was called via CLI and there are errors exit process with failed status
   if (require.main === module && result.errors !== 0) {
@@ -123,9 +98,10 @@ function lint () {
 
 // If file was called via CLI
 if (require.main === module) {
-  lint()
+  const linter = new MarkdownLinter()
+  linter.lint()
 
 // If file was required by another Node module
 } else {
-  module.exports = lint
+  module.exports = MarkdownLinter
 }

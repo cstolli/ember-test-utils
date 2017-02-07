@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk')
 const DockerFileValidator = require('dockerfile_lint')
 const fs = require('fs')
 const path = require('path')
+
+const Linter = require('./linter')
 
 /**
  * List of configuration files to look for
@@ -12,6 +13,17 @@ const path = require('path')
 const CONFIG_FILE_NAMES = [
   '.dockerfile-lint.json'
 ]
+
+const DockerLinter = function () {
+  Linter.call(this, {
+    configFileNames: CONFIG_FILE_NAMES,
+    defaultConfig: '.dockerfile-lint.json'
+  })
+}
+
+// Inherit from Linter class
+DockerLinter.prototype = Object.create(Linter.prototype)
+DockerLinter.prototype.constructor = DockerLinter
 
 /**
  * Get configuration options for dockerfile_lint
@@ -26,7 +38,7 @@ function getConfigFilePath () {
 
   // If no configuration file was found use recommend configuration
   if (!configFile) {
-    return path.join(__dirname, '..', '.dockerfile-lint.json')
+    return path.join(__dirname, '..', this.defaultConfig)
   }
 
   // Use configuration from current working directory
@@ -47,13 +59,7 @@ function isDockerfile (fileName) {
  * @param {Object} item - item
  */
 function logItem (item) {
-  const level = item.level
-  const levelColor = level === 'error' ? 'red' : (level === 'warn' ? 'yellow' : 'blac')
-  const levelText = chalk[levelColor](level)
-  const lineText = chalk.dim(item.line)
-  const messageText = chalk.black(item.message)
-
-  console.log(`  ${lineText}  ${levelText}  ${messageText}`)
+  this.printLintItem(item.line, null, item.level, item.message, null)
 }
 
 /**
@@ -69,11 +75,10 @@ function lintFile (linter, fileName) {
   const warnings = report.warn.count
 
   if (errors || warnings) {
-    const underlinedText = chalk.underline(fileName)
-    console.log(underlinedText)
+    this.printFilePath(fileName)
 
-    report.error.data.forEach(logItem)
-    report.warn.data.forEach(logItem)
+    report.error.data.forEach(logItem.bind(this))
+    report.warn.data.forEach(logItem.bind(this))
 
     console.log('') // logging empty line
   }
@@ -97,23 +102,19 @@ function reportReducer (summary, report) {
  * Lint Docker files
  * @returns {Boolean} returns true if there are linting errors
  */
-function lint () {
-  const configFilePath = getConfigFilePath()
+DockerLinter.prototype.lint = function () {
+  const configFilePath = getConfigFilePath.call(this)
   const linter = new DockerFileValidator(configFilePath)
 
   const result = fs.readdirSync(process.cwd())
     .filter(isDockerfile)
-    .map(lintFile.bind(null, linter))
+    .map(lintFile.bind(this, linter))
     .reduce(reportReducer, {
       errors: 0,
       warnings: 0
     })
 
-  const color = result.errors === 0 ? (result.warnings === 0 ? 'black' : 'yellow') : 'red'
-  const coloredText = chalk[color](`Dockerfile: ${result.errors} errors, ${result.warnings} warnings\n`)
-  const boldColoredText = chalk.bold(coloredText)
-
-  console.log(boldColoredText)
+  this.printLintSummary('Dockerfile', result.errors, result.warnings)
 
   // If file was called via CLI and there are errors exit process with failed status
   if (require.main === module && result.errors !== 0) {
@@ -125,9 +126,10 @@ function lint () {
 
 // If file was called via CLI
 if (require.main === module) {
-  lint()
+  const linter = DockerLinter()
+  linter.lint()
 
 // If file was required by another Node module
 } else {
-  module.exports = lint
+  module.exports = DockerLinter
 }

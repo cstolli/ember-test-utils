@@ -18,7 +18,8 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "npm run lint && ember test",
+    "test": "npm run lint && ember test && npm run test-cli",
+    "test-cli": "istanbul cover _mocha -- --recursive tests/cli/",
     "ci-test": "ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test",
     "lint": "./cli/lint-all-the-things.js"
   },
@@ -50,6 +51,7 @@
     "ember-lodash-shim": "^1.1.1",
     "ember-resolver": "^2.1.1",
     "ember-sinon": "0.6.0",
+    "istanbul": "^0.4.5",
     "loader.js": "^4.1.0",
     "lodash-es": "^4.17.4"
   },

@@ -4,7 +4,8 @@
     "merge-default-rules": false
   },
   "files": {
-    "include": "+(addon|app|tests)/styles/**/*.s+(a|c)ss"
+    "include": "+(addon|app|tests)/styles/**/*.s+(a|c)ss",
+    "ignore": "tests/cli/fixtures/**/*.s+(a|c)ss"
   },
   "rules": {
     "extends-before-mixins": 2,

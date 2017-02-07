@@ -11,7 +11,7 @@ const sassLint = require('sass-lint')
  * @type {Array.<string>}
  */
 const CONFIG_FILE_NAMES = [
-  '.sasslint.json'
+  '.sass-lint.json'
 ]
 
 /**
@@ -34,7 +34,9 @@ const TEMPLATE_FILE_LOCATIONS = [
 function getConfig () {
   // Look for configuration file in current working directory
   const files = fs.readdirSync(process.cwd())
-  const configFile = files.find((fileName) => CONFIG_FILE_NAMES.indexOf(fileName) !== -1)
+  const configFile = files.find((filePath) => {
+    return CONFIG_FILE_NAMES.find((configFileName) => filePath.indexOf(configFileName) !== -1)
+  })
 
   // If no configuration file was found use configuration from this addon
   if (!configFile) {
@@ -59,7 +61,7 @@ function getConfig () {
 function resultReducer (options, summary, filePath) {
   sassLint.lintFiles(filePath, options).forEach((report) => {
     if (report.messages.length !== 0) {
-      const underlinedText = chalk.underline(`\n${filePath}`)
+      const underlinedText = chalk.underline(`${filePath}`)
       console.log(underlinedText)
 
       report.messages.forEach((message) => {

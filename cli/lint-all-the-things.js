@@ -25,7 +25,10 @@ function lint () {
     markdownLinter,
     sassLinter
   ]
-    .map((method) => method())
+    .map((Linter) => {
+      const linter = new Linter()
+      return linter.lint()
+    })
 
   console.log(
     chalk.gray('\nlinting complete!')

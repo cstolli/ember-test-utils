@@ -4,7 +4,7 @@ const glob = require('glob-all')
 const path = require('path')
 const sinon = require('sinon')
 
-const lintSass = require('../../cli/lint-sass')
+const SassLinter = require('../../cli/lint-sass')
 
 const rootProjectFiles = [
   '.bowerrc',
@@ -43,9 +43,10 @@ const warnFiles = [
   .map((fileName) => path.join(__dirname, 'fixtures', fileName))
 
 describe('lint-sass', function () {
-  let logOutput, sandbox
+  let linter, logOutput, sandbox
 
   beforeEach(function () {
+    linter = new SassLinter()
     logOutput = []
     sandbox = sinon.sandbox.create()
     sandbox.stub(console, 'log', function (text) {
@@ -74,7 +75,7 @@ describe('lint-sass', function () {
 
       it('throws an error', function () {
         expect(function () {
-          lintSass()
+          linter.lint()
         }).to.throw()
       })
     })
@@ -84,7 +85,7 @@ describe('lint-sass', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.sass-lint.json') !== -1) {
+          if (filePath.indexOf('.sass-lint.yml') !== -1) {
             return JSON.stringify({
               files: {
                 include: '+(addon|app|tests)/styles/**/*.s+(a|c)ss'
@@ -115,7 +116,7 @@ describe('lint-sass', function () {
         })
 
         it('returns false', function () {
-          expect(lintSass()).to.equal(false)
+          expect(linter.lint()).to.equal(false)
         })
       })
 
@@ -124,12 +125,12 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(validFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[1m\u001b[30mSASS: 0 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[42m SASS: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -143,20 +144,20 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(warnFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-1.scss\u001b[24m',
-            '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  \u001b[30m!important not allowed\u001b[39m' +
+            '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-2.scss\u001b[24m',
-            '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  \u001b[30m!important not allowed\u001b[39m' +
+            '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
-            '\u001b[1m\u001b[33mSASS: 0 errors, 2 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[43m SASS: 0 errors, 2 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -170,24 +171,24 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(errorFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-1.scss\u001b[24m',
-            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `width`, found' +
-              ' `height`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
-            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `height`, found' +
-              ' `width`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `width`, found' +
+              ' `height`  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `height`, found' +
+              ' `width`  \u001b[2mproperty-sort-order\u001b[22m',
             '',
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-2.scss\u001b[24m',
-            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `display`,' +
-              ' found `flex-basis`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
-            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `flex-basis`,' +
-              ' found `display`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `display`,' +
+              ' found `flex-basis`  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `flex-basis`,' +
+              ' found `display`  \u001b[2mproperty-sort-order\u001b[22m',
             '',
-            '\u001b[1m\u001b[31mSASS: 4 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[37m\u001b[41m SASS: 4 errors, 0 warnings \u001b[49m\u001b[39m\u001b[22m\n'
           ])
         })
 
@@ -201,7 +202,7 @@ describe('lint-sass', function () {
   describe('when config file found', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
-      files.push('.sass-lint.json')
+      files.push('.sass-lint.yml')
 
       sandbox.stub(fs, 'readdirSync', function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
@@ -216,7 +217,7 @@ describe('lint-sass', function () {
 
       it('throws an error', function () {
         expect(function () {
-          lintSass()
+          linter.lint()
         }).to.throw()
       })
     })
@@ -226,7 +227,7 @@ describe('lint-sass', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.sass-lint.json') !== -1) {
+          if (filePath.indexOf('.sass-lint.yml') !== -1) {
             return JSON.stringify({
               files: {
                 include: '+(addon|app|tests)/styles/**/*.s+(a|c)ss'
@@ -257,7 +258,7 @@ describe('lint-sass', function () {
         })
 
         it('returns false', function () {
-          expect(lintSass()).to.equal(false)
+          expect(linter.lint()).to.equal(false)
         })
       })
 
@@ -266,12 +267,12 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(validFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[1m\u001b[30mSASS: 0 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[42m SASS: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -285,20 +286,20 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(warnFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-1.scss\u001b[24m',
-            '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  \u001b[30m!important not allowed\u001b[39m' +
+            '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-2.scss\u001b[24m',
-            '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  \u001b[30m!important not allowed\u001b[39m' +
+            '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
-            '\u001b[1m\u001b[33mSASS: 0 errors, 2 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[43m SASS: 0 errors, 2 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
@@ -312,24 +313,24 @@ describe('lint-sass', function () {
 
         beforeEach(function () {
           sandbox.stub(glob, 'sync').returns(errorFiles)
-          result = lintSass()
+          result = linter.lint()
         })
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-1.scss\u001b[24m',
-            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `width`, found' +
-              ' `height`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
-            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `height`, found' +
-              ' `width`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `width`, found' +
+              ' `height`  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `height`, found' +
+              ' `width`  \u001b[2mproperty-sort-order\u001b[22m',
             '',
             '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-2.scss\u001b[24m',
-            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `display`,' +
-              ' found `flex-basis`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
-            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  \u001b[30mExpected `flex-basis`,' +
-              ' found `display`\u001b[39m  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `display`,' +
+              ' found `flex-basis`  \u001b[2mproperty-sort-order\u001b[22m',
+            '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `flex-basis`,' +
+              ' found `display`  \u001b[2mproperty-sort-order\u001b[22m',
             '',
-            '\u001b[1m\u001b[31mSASS: 4 errors, 0 warnings\n\u001b[39m\u001b[22m'
+            '\u001b[1m\u001b[37m\u001b[41m SASS: 4 errors, 0 warnings \u001b[49m\u001b[39m\u001b[22m\n'
           ])
         })
 

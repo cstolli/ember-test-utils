@@ -1,3 +1,8 @@
+# 1.10.1
+
+* **Fixed** `lint-sass` to use `.sass-lint.yml` instead of `.sass-lint.json` as that is what in editor linting expects to be present.
+
+
 # 1.10.0
 
 * **Added** new Node executables for linting: `lint-all-the-things`, `lint-docker`, `lint-htmlbars` (previously `template-lint`), `lint-javascript`, `lint-markdown`, and `lint-sass`.

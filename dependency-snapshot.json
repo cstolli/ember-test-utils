@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -119,9 +119,9 @@
       }
     },
     "aproba": {
-      "version": "1.0.4",
+      "version": "1.1.0",
       "from": "aproba@>=1.0.3 <2.0.0",
-      "resolved": "https://registry.npmjs.org/aproba/-/aproba-1.0.4.tgz",
+      "resolved": "https://registry.npmjs.org/aproba/-/aproba-1.1.0.tgz",
       "dev": true
     },
     "are-we-there-yet": {
@@ -1294,6 +1294,21 @@
       "version": "3.1.0",
       "from": "co@>=3.0.6 <4.0.0",
       "resolved": "https://registry.npmjs.org/co/-/co-3.1.0.tgz"
+    },
+    "co-from-stream": {
+      "version": "0.0.0",
+      "from": "co-from-stream@0.0.0",
+      "resolved": "https://registry.npmjs.org/co-from-stream/-/co-from-stream-0.0.0.tgz"
+    },
+    "co-fs": {
+      "version": "1.2.0",
+      "from": "co-fs@1.2.0",
+      "resolved": "https://registry.npmjs.org/co-fs/-/co-fs-1.2.0.tgz"
+    },
+    "co-read": {
+      "version": "0.0.1",
+      "from": "co-read@0.0.1",
+      "resolved": "https://registry.npmjs.org/co-read/-/co-read-0.0.1.tgz"
     },
     "code-point-at": {
       "version": "1.1.0",
@@ -4550,6 +4565,28 @@
         }
       }
     },
+    "node-yaml": {
+      "version": "3.0.3",
+      "from": "node-yaml@>=3.0.3 <4.0.0",
+      "resolved": "https://registry.npmjs.org/node-yaml/-/node-yaml-3.0.3.tgz",
+      "dependencies": {
+        "co": {
+          "version": "4.6.0",
+          "from": "co@4.6.0",
+          "resolved": "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
+        },
+        "esprima": {
+          "version": "2.7.3",
+          "from": "esprima@>=2.6.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/esprima/-/esprima-2.7.3.tgz"
+        },
+        "js-yaml": {
+          "version": "3.6.1",
+          "from": "js-yaml@3.6.1",
+          "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.6.1.tgz"
+        }
+      }
+    },
     "nomnom": {
       "version": "1.8.1",
       "from": "nomnom@>=1.5.0",
@@ -7582,6 +7619,11 @@
       "version": "2.3.8",
       "from": "through@>=2.3.8 <2.4.0",
       "resolved": "https://registry.npmjs.org/through/-/through-2.3.8.tgz"
+    },
+    "thunkify": {
+      "version": "0.0.1",
+      "from": "thunkify@0.0.1",
+      "resolved": "https://registry.npmjs.org/thunkify/-/thunkify-0.0.1.tgz"
     },
     "tiny-lr": {
       "version": "1.0.3",

@@ -1,3 +1,8 @@
+# 1.10.3
+
+* **Fixed** bug in Javascript linter around ESLint inconsistency with `globals` key. In a `.eslintrc` config it expects `globals` to be an object but when using the `CLIEngine` it expects an array.
+
+
 # 1.10.2
 
 * **Fixed** markdown linter to use correct default config file.

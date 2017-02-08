@@ -1,3 +1,8 @@
+# 1.10.2
+
+* **Fixed** markdown linter to use correct default config file.
+
+
 # 1.10.1
 
 * **Fixed** `lint-sass` to use `.sass-lint.yml` instead of `.sass-lint.json` as that is what in editor linting expects to be present.

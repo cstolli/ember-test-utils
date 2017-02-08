@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -3014,18 +3014,10 @@
       "resolved": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.0.tgz"
     },
     "gauge": {
-      "version": "2.7.2",
+      "version": "2.7.3",
       "from": "gauge@>=2.7.1 <2.8.0",
-      "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.2.tgz",
-      "dev": true,
-      "dependencies": {
-        "supports-color": {
-          "version": "0.2.0",
-          "from": "supports-color@>=0.2.0 <0.3.0",
-          "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-0.2.0.tgz",
-          "dev": true
-        }
-      }
+      "resolved": "https://registry.npmjs.org/gauge/-/gauge-2.7.3.tgz",
+      "dev": true
     },
     "generate-function": {
       "version": "2.0.0",

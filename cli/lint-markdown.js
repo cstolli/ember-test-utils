@@ -29,7 +29,7 @@ const FILE_LOCATIONS = [
 const MarkdownLinter = function () {
   Linter.call(this, {
     configFileNames: CONFIG_FILE_NAMES,
-    defaultConfig: '.remarkc',
+    defaultConfig: '.remarkrc',
     fileLocations: FILE_LOCATIONS
   })
 }

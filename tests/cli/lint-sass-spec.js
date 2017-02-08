@@ -149,11 +149,11 @@ describe('lint-sass', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-1.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-1.scss\u001b[24m',
             '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-2.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-2.scss\u001b[24m',
             '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
@@ -176,13 +176,13 @@ describe('lint-sass', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-1.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-1.scss\u001b[24m',
             '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `width`, found' +
               ' `height`  \u001b[2mproperty-sort-order\u001b[22m',
             '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `height`, found' +
               ' `width`  \u001b[2mproperty-sort-order\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-2.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-2.scss\u001b[24m',
             '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `display`,' +
               ' found `flex-basis`  \u001b[2mproperty-sort-order\u001b[22m',
             '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `flex-basis`,' +
@@ -291,11 +291,11 @@ describe('lint-sass', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-1.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-1.scss\u001b[24m',
             '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-2.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-2.scss\u001b[24m',
             '  \u001b[2m2:15\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
               '  \u001b[2mno-important\u001b[22m',
             '',
@@ -318,13 +318,13 @@ describe('lint-sass', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-1.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-1.scss\u001b[24m',
             '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `width`, found' +
               ' `height`  \u001b[2mproperty-sort-order\u001b[22m',
             '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `height`, found' +
               ' `width`  \u001b[2mproperty-sort-order\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-2.scss\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-2.scss\u001b[24m',
             '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `display`,' +
               ' found `flex-basis`  \u001b[2mproperty-sort-order\u001b[22m',
             '  \u001b[2m3:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `flex-basis`,' +

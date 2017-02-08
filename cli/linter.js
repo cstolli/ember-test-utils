@@ -92,7 +92,8 @@ Linter.prototype = {
    * @param {String} filePath - path to file
    */
   printFilePath (filePath) {
-    const underlinedText = chalk.underline(`${filePath}`)
+    const relativeFilePath = filePath.replace(process.cwd(), '').replace(/^\//, '')
+    const underlinedText = chalk.underline(relativeFilePath)
     console.log(underlinedText)
   },
 

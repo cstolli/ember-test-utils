@@ -1,0 +1,253 @@
+const expect = require('chai').expect
+const fs = require('fs')
+const glob = require('glob-all')
+const path = require('path')
+const sinon = require('sinon')
+
+const MarkdownLinter = require('../../cli/lint-markdown')
+
+const rootProjectFiles = [
+  '.bowerrc',
+  '.editorconfig',
+  '.ember-cli',
+  '.gitignore',
+  '.npmignore',
+  '.travis.yml',
+  '.watchmanconfig',
+  'bower.json',
+  'CHANGELOG.md',
+  'dependency-snapshot.json',
+  'ember-cli-build.js',
+  'LICENSE.md',
+  'package.json',
+  'README.md',
+  'testem.js'
+]
+
+const validFiles = [
+  'valid-1.md',
+  'valid-2.md'
+]
+  .map((fileName) => path.join(__dirname, 'fixtures', fileName))
+
+const warnFiles = [
+  'warn-1.md',
+  'warn-2.md'
+]
+  .map((fileName) => path.join(__dirname, 'fixtures', fileName))
+
+describe('lint-markdown', function () {
+  let linter, logOutput, sandbox
+
+  beforeEach(function () {
+    linter = new MarkdownLinter()
+    logOutput = []
+    sandbox = sinon.sandbox.create()
+    sandbox.stub(console, 'log', function (text) {
+      logOutput.push(text)
+    })
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
+  describe('when no config file found', function () {
+    beforeEach(function () {
+      const files = Array.from(rootProjectFiles)
+
+      sandbox.stub(fs, 'readdirSync', function (directory) {
+        fs.readdirSync.restore() // Restore original method so sass-lint can use it
+        return files
+      })
+    })
+
+    describe('when default config file is not valid JSON', function () {
+      beforeEach(function () {
+        sandbox.stub(fs, 'readFileSync').returns('not-json')
+      })
+
+      it('throws an error', function () {
+        expect(function () {
+          linter.lint()
+        }).to.throw()
+      })
+    })
+
+    describe('when default config file is valid JSON', function () {
+      beforeEach(function () {
+        const originalFn = fs.readFileSync
+
+        sandbox.stub(fs, 'readFileSync', function (filePath) {
+          if (filePath.indexOf('.remarkrc') !== -1) {
+            return JSON.stringify({
+              plugins: {
+                lint: {
+                  'first-heading-level': 1
+                }
+              }
+            })
+          }
+
+          return originalFn(...arguments)
+        })
+      })
+
+      describe('when no files to lint', function () {
+        beforeEach(function () {
+          sandbox.stub(glob, 'sync').returns([])
+        })
+
+        it('returns false', function () {
+          expect(linter.lint()).to.equal(false)
+        })
+      })
+
+      describe('when files to lint without errors or warnings', function () {
+        let result
+
+        beforeEach(function () {
+          sandbox.stub(glob, 'sync').returns(validFiles)
+          result = linter.lint()
+        })
+
+        it('logs expected output', function () {
+          expect(logOutput).to.eql([
+            '\u001b[1m\u001b[42m Markdown: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
+          ])
+        })
+
+        it('returns false', function () {
+          expect(result).to.equal(false)
+        })
+      })
+
+      describe('when files to lint with warnings', function () {
+        let result
+
+        beforeEach(function () {
+          sandbox.stub(glob, 'sync').returns(warnFiles)
+          result = linter.lint()
+        })
+
+        it('logs expected output', function () {
+          expect(logOutput).to.eql([
+            '\u001b[4mtests/cli/fixtures/warn-1.md\u001b[24m',
+            '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  First heading ' +
+              'level should be `1`  \u001b[2mfirst-heading-level\u001b[22m',
+            '',
+            '\u001b[4mtests/cli/fixtures/warn-2.md\u001b[24m',
+            '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  First heading ' +
+              'level should be `1`  \u001b[2mfirst-heading-level\u001b[22m',
+            '',
+            '\u001b[1m\u001b[43m Markdown: 0 errors, 2 warnings \u001b[49m\u001b[22m\n'
+          ])
+        })
+
+        it('returns false', function () {
+          expect(result).to.equal(false)
+        })
+      })
+    })
+  })
+
+  describe('when config file found', function () {
+    beforeEach(function () {
+      const files = Array.from(rootProjectFiles)
+      files.push('.remarkrc')
+
+      sandbox.stub(fs, 'readdirSync', function (directory) {
+        fs.readdirSync.restore() // Restore original method so sass-lint can use it
+        return files
+      })
+    })
+
+    describe('when config file is not valid JSON', function () {
+      beforeEach(function () {
+        sandbox.stub(fs, 'readFileSync').returns('not-json')
+      })
+
+      it('throws an error', function () {
+        expect(function () {
+          linter.lint()
+        }).to.throw()
+      })
+    })
+
+    describe('when config file is valid JSON', function () {
+      beforeEach(function () {
+        const originalFn = fs.readFileSync
+
+        sandbox.stub(fs, 'readFileSync', function (filePath) {
+          if (filePath.indexOf('.remarkrc') !== -1) {
+            return JSON.stringify({
+              plugins: {
+                lint: {
+                  'first-heading-level': 1
+                }
+              }
+            })
+          }
+
+          return originalFn(...arguments)
+        })
+      })
+
+      describe('when no files to lint', function () {
+        beforeEach(function () {
+          sandbox.stub(glob, 'sync').returns([])
+        })
+
+        it('returns false', function () {
+          expect(linter.lint()).to.equal(false)
+        })
+      })
+
+      describe('when files to lint without errors or warnings', function () {
+        let result
+
+        beforeEach(function () {
+          sandbox.stub(glob, 'sync').returns(validFiles)
+          result = linter.lint()
+        })
+
+        it('logs expected output', function () {
+          expect(logOutput).to.eql([
+            '\u001b[1m\u001b[42m Markdown: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
+          ])
+        })
+
+        it('returns false', function () {
+          expect(result).to.equal(false)
+        })
+      })
+
+      describe('when files to lint with warnings', function () {
+        let result
+
+        beforeEach(function () {
+          sandbox.stub(glob, 'sync').returns(warnFiles)
+          result = linter.lint()
+        })
+
+        it('logs expected output', function () {
+          expect(logOutput).to.eql([
+            '\u001b[4mtests/cli/fixtures/warn-1.md\u001b[24m',
+            '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  First heading ' +
+              'level should be `1`  \u001b[2mfirst-heading-level\u001b[22m',
+            '',
+            '\u001b[4mtests/cli/fixtures/warn-2.md\u001b[24m',
+            '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  First heading ' +
+              'level should be `1`  \u001b[2mfirst-heading-level\u001b[22m',
+            '',
+            '\u001b[1m\u001b[43m Markdown: 0 errors, 2 warnings \u001b[49m\u001b[22m\n'
+          ])
+        })
+
+        it('returns false', function () {
+          expect(result).to.equal(false)
+        })
+      })
+    })
+  })
+})

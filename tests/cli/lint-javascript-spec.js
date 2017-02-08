@@ -137,11 +137,11 @@ describe('lint-javascript', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-1.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-1.js\u001b[24m',
             '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  Unexpected console ' +
               'statement  \u001b[2mno-console\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-2.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-2.js\u001b[24m',
             '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  Unexpected console ' +
               'statement  \u001b[2mno-console\u001b[22m',
             '',
@@ -170,11 +170,11 @@ describe('lint-javascript', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-1.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-1.js\u001b[24m',
             '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
               'has a complexity of 3  \u001b[2mcomplexity\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-2.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-2.js\u001b[24m',
             '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
               'has a complexity of 4  \u001b[2mcomplexity\u001b[22m',
             '',
@@ -287,11 +287,11 @@ describe('lint-javascript', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-1.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-1.js\u001b[24m',
             '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  Unexpected console ' +
               'statement  \u001b[2mno-console\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/warn-2.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/warn-2.js\u001b[24m',
             '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  Unexpected console ' +
               'statement  \u001b[2mno-console\u001b[22m',
             '',
@@ -320,11 +320,11 @@ describe('lint-javascript', function () {
 
         it('logs expected output', function () {
           expect(logOutput).to.eql([
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-1.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-1.js\u001b[24m',
             '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
               'has a complexity of 3  \u001b[2mcomplexity\u001b[22m',
             '',
-            '\u001b[4m/Repositories/github/ember-test-utils/tests/cli/fixtures/error-2.js\u001b[24m',
+            '\u001b[4mtests/cli/fixtures/error-2.js\u001b[24m',
             '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
               'has a complexity of 4  \u001b[2mcomplexity\u001b[22m',
             '',

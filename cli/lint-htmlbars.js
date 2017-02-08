@@ -8,6 +8,7 @@
 
 const TemplateLinter = require('ember-template-lint')
 const fs = require('fs')
+const path = require('path')
 const glob = require('glob-all')
 
 const Linter = require('./linter')
@@ -33,7 +34,9 @@ const FILE_LOCATIONS = [
 const HtmlbarsLinter = function () {
   Linter.call(this, {
     configFileNames: CONFIG_FILE_NAMES,
-    defaultConfig: 'node_modules/ember-template-lint/lib/config/recommended.js',
+    defaultConfig: path.join(
+      process.cwd(), 'node_modules', 'ember-template-lint', 'lib', 'config', 'recommended.js'
+    ),
     fileLocations: FILE_LOCATIONS
   })
 }

@@ -337,5 +337,43 @@ describe('lint-javascript', function () {
         })
       })
     })
+
+    describe('when config file is valid JSON and contains globals object', function () {
+      beforeEach(function () {
+        const originalFn = fs.readFileSync
+
+        sandbox.stub(fs, 'readFileSync', function (filePath) {
+          if (filePath.indexOf('.eslintrc') !== -1) {
+            return JSON.stringify({
+              globals: {
+                andThen: false
+              },
+              rules: {
+                'complexity': ['error', 2],
+                'no-console': ['warn']
+              }
+            })
+          }
+
+          return originalFn(...arguments)
+        })
+      })
+
+      describe('when no files to lint', function () {
+        beforeEach(function () {
+          const originalFn = CLIEngine.prototype.executeOnFiles
+
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+            return originalFn.call(this, [])
+          })
+        })
+
+        it('does not throw error', function () {
+          expect(function () {
+            linter.lint()
+          }).not.to.throw()
+        })
+      })
+    })
   })
 })

@@ -301,7 +301,8 @@ describe(test.label, function () {
 
 ## Custom Mocha Reporter
 
-If you'd like to use the custom Mocha reporter provided by this addon then your `testem.js` file should look something like this:
+If you'd like to use the custom Mocha reporter provided by this addon then your `testem.js` file should look something
+like this:
 
 ```js
 var Reporter = require('ember-test-utils/reporter')
@@ -320,7 +321,8 @@ module.exports = {
 }
 ```
 
-> NOTE: This reporter will group test results into two sections: failed and passed. Each section is sorted from slowest test to fastest test so you can see which tests are causing your CI to come to a crawl.
+> NOTE: This reporter will group test results into two sections: failed and passed. Each section is sorted from slowest
+test to fastest test so you can see which tests are causing your CI to come to a crawl.
 
 ## Linting
 

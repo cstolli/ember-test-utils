@@ -28,6 +28,10 @@ Linter.prototype = {
 
     // If no configuration file was found use configuration from this addon
     if (!configFile) {
+      if (this.defaultConfig[0] === '/') {
+        return this.loadFile(this.defaultConfig)
+      }
+
       return this.loadFile(path.join(__dirname, '..', this.defaultConfig))
     }
 

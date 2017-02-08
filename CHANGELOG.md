@@ -5,12 +5,14 @@
 
 # 1.10.1
 
-* **Fixed** `lint-sass` to use `.sass-lint.yml` instead of `.sass-lint.json` as that is what in editor linting expects to be present.
+* **Fixed** `lint-sass` to use `.sass-lint.yml` instead of `.sass-lint.json` as that is what in editor linting expects
+to be present.
 
 
 # 1.10.0
 
-* **Added** new Node executables for linting: `lint-all-the-things`, `lint-docker`, `lint-htmlbars` (previously `template-lint`), `lint-javascript`, `lint-markdown`, and `lint-sass`.
+* **Added** new Node executables for linting: `lint-all-the-things`, `lint-docker`, `lint-htmlbars` (previously
+  `template-lint`), `lint-javascript`, `lint-markdown`, and `lint-sass`.
 
 
 # 1.9.0
@@ -44,12 +46,13 @@
 * Change CI browser example in *README.md* to match `ember-frost-core` usage
 
 # 1.5.0
-* **Added** a helper to stub out the ember-data store and make it easy to fake responses to calls to the store. 
-* **Updated** the dummy route and unit test for route to utilize the ember-data helper. 
+* **Added** a helper to stub out the ember-data store and make it easy to fake responses to calls to the store.
+* **Updated** the dummy route and unit test for route to utilize the ember-data helper.
 
 # 1.4.0
 
-* **Added** support to automatically add `ember-intl` dependencies to unit tests that specify `service:intl` in their dependencies
+* **Added** support to automatically add `ember-intl` dependencies to unit tests that specify `service:intl` in their
+dependencies
 * **Updated** lint rules and fixed new warnings
 
 
@@ -76,7 +79,10 @@
 
 # 1.2.1
 
-* **Improved** custom mocha reporter to show failures as they occur and only show passed tests when all pass (now sorting fastest to slowest to reduce a user from having to scroll as much in their terminal).
+* **Improved** custom mocha reporter to show failures as they occur and only show passed tests when all pass (now
+  sorting fastest to slowest to reduce a user from having to scroll as much in their terminal).
+
+<!--lint disable maximum-line-length-->
 
 When there are failures without stack traces it'll look like this:
 <img width="1205" alt="screen shot 2016-12-01 at 3 00 46 pm" src="https://cloud.githubusercontent.com/assets/422902/20816671/639871d8-b7d8-11e6-86e9-e85830e87a37.png">
@@ -87,6 +93,7 @@ When there are failures with stack traces it'll look like this:
 When all tests pass it'll look like this:
 <img width="1270" alt="screen shot 2016-12-01 at 2 06 57 pm" src="https://cloud.githubusercontent.com/assets/422902/20814645/71377978-b7cf-11e6-9b6d-01d682e448be.png">
 
+<!--lint enable maximum-line-length-->
 
 # 1.2.0
 
@@ -95,22 +102,29 @@ When all tests pass it'll look like this:
 
 # 1.1.2
 
-- **Fixed** generated test names to use `/` instead of `|` as the test name separator, grep-ing the interactive web app can link to unique tests.
+- **Fixed** generated test names to use `/` instead of `|` as the test name separator, grep-ing the interactive web
+app can link to unique tests.
 
 
 # 1.1.1
-* **Fixed** test descriptions to be consistent in the format of `Unit | Component | my-component` instead of `Unit: MyComponentComponent` so that `grep`-ing for your component name will actually find tests for your component now.
+* **Fixed** test descriptions to be consistent in the format of `Unit | Component | my-component` instead of
+`Unit: MyComponentComponent` so that `grep`-ing for your component name will actually find tests for your component
+now.
  * **Added** unit tests for the helpers themselves to make sure descriptions remain correct.
 
 # 1.1.0
-*  **Added** a `serializer` shortcut to the `describe-model` module which yields a `Unit | Serializer | model-name` description compared to the `Unit | Model | model-name` that the `model` shortcut yields.
+*  **Added** a `serializer` shortcut to the `describe-model` module which yields a
+`Unit | Serializer | model-name` description compared to the `Unit | Model | model-name` that the `model` shortcut
+yields.
 
 
 
 # 1.0.0
 ## Breaking Changes
- * **Removed** `registryHelper` functionality (it isn't as necessary/useful with the introduction of `ember-hook` to make things less brittle.
- * **Moved** remaining code to `test-support/helpers/ember-test-utils` so consumers can have it injected into `tests/helpers` instead of treating it like a normal addon which will have code injected into the main app code tree.
+ * **Removed** `registryHelper` functionality (it isn't as necessary/useful with the introduction of `ember-hook`
+ to make things less brittle.
+ * **Moved** remaining code to `test-support/helpers/ember-test-utils` so consumers can have it injected into
+ `tests/helpers` instead of treating it like a normal addon which will have code injected into the main app code tree.
 
 ## Non-breaking changes
  * **Added** helpers for `describeComponent` to make writing unit and integration tests easier

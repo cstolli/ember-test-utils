@@ -41,24 +41,6 @@ JavascriptLinter.prototype = Object.create(Linter.prototype)
 JavascriptLinter.prototype.constructor = JavascriptLinter
 
 /**
- * Get text color for severity
- * @param {Number} severity - sevrity
- * @returns {String} sevrity color
- */
-function getSeverityColor (severity) {
-  switch (severity) {
-    case 1:
-      return 'yellow'
-
-    case 2:
-      return 'red'
-
-    default:
-      return 'black'
-  }
-}
-
-/**
  * Get human friendly label for severity
  * @param {Number} severity - sevrity
  * @returns {String} sevrity label
@@ -82,6 +64,13 @@ function getSeverityLabel (severity) {
  */
 JavascriptLinter.prototype.lint = function () {
   const config = this.getConfig()
+
+  // .eslintrc expects globals to be an object but CLIEngine expects an array
+  // @see https://github.com/eslint/eslint/issues/7967
+  if (typeof config.globals === 'object' && !Array.isArray(config.globals)) {
+    config.globals = Object.keys(config.globals)
+  }
+
   const cli = new CLIEngine(config)
 
   const report = cli.executeOnFiles(this.fileLocations)

@@ -17,11 +17,11 @@
   },
   "scripts": {
     "build": "ember build",
+    "lint": "./cli/lint-all-the-things.js",
     "start": "ember server",
-    "test": "npm run lint && ember test && npm run test-cli",
-    "test-cli": "istanbul cover _mocha -- --recursive tests/cli/",
-    "ci-test": "ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test",
-    "lint": "./cli/lint-all-the-things.js"
+    "test": "npm run lint && npm run test-addon && npm run test-cli",
+    "test-addon": "EMBER_TRY_SCENARIO=${EMBER_TRY_SCENARIO:=default} && ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test",
+    "test-cli": "istanbul cover _mocha -- --recursive tests/cli/"
   },
   "repository": "git@github.com:ciena-blueplanet/ember-test-utils.git",
   "engines": {

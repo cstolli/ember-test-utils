@@ -1,3 +1,8 @@
+# 1.10.5
+
+* **Fixed** build to only bump on default Ember.
+
+
 # 1.10.4
 
 * **Fixed** build so it'll publish.

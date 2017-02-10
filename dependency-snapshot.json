@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "1.10.4",
+  "version": "1.10.5",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",

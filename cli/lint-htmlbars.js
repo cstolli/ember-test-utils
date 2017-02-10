@@ -60,7 +60,7 @@ HtmlbarsLinter.prototype.lint = function () {
         source: fs.readFileSync(filePath, {encoding: 'utf8'})
       })
     })
-    .reduce((a, b) => a.concat(b))
+    .reduce((a, b) => a.concat(b), [])
 
   errors.forEach((error) => {
     console.log(`${error.rule}: ${error.message}`)

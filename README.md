@@ -299,6 +299,18 @@ describe(test.label, function () {
 })
 ```
 
+## Build Optimization
+
+Out of box having `ember-test-utils` in your project will make your vendor.js asset slightly larger, as of 2017-02-15 this increase in size is approximately 0.08 KB. If you want to keep this out of your build for certain environments you can add the following configuration to your `package.json`:
+
+```json
+{
+  "ember-test-utils": {
+    "excludeFromEnvironments": ["production"]
+  }
+}
+```
+
 ## Custom Mocha Reporter
 
 If you'd like to use the custom Mocha reporter provided by this addon then your `testem.js` file should look something

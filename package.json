@@ -88,6 +88,6 @@
     "whitelist": true
   },
   "ember-test-utils": {
-    "excludeFromEnvironments": ["development", "production"]
+    "excludeFromEnvironments": ["production"]
   }
 }

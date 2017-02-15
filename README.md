@@ -306,10 +306,7 @@ Out of box having `ember-test-utils` in your project will make your vendor.js as
 ```json
 {
   "ember-test-utils": {
-    "excludeFromEnvironments": [
-      "development",
-      "production"
-    ]
+    "excludeFromEnvironments": ["production"]
   }
 }
 ```

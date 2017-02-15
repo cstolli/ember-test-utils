@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "1.10.5",
+  "version": "1.10.6",
   "description": "Utilities to assist with testing ember apps/addons",
   "directories": {
     "doc": "doc",
@@ -88,6 +88,8 @@
     "whitelist": true
   },
   "ember-test-utils": {
-    "excludeFromEnvironments": ["production"]
+    "excludeFromEnvironments": [
+      "production"
+    ]
   }
 }

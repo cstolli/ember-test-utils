@@ -1,3 +1,8 @@
+# 1.10.6
+
+* Attempt to fix build by disable dependency snapshot which is causing build to fail and not publish.
+
+
 # 1.10.5
 
 * **Fixed** build to only bump on default Ember.

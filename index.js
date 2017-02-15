@@ -10,11 +10,14 @@ module.exports = {
   },
 
   treeForAddon (tree) {
-    // Only include code in build for test environment
-    if (this.app.env === 'test') {
-      return this._super.treeForAddon.call(this, tree)
+    const environment = this.app.env
+    const config = this.pkg['ember-test-utils'] || {}
+    const excludeFromEnvironments = config.excludeFromEnvironments || []
+
+    if (excludeFromEnvironments.indexOf(environment) !== -1) {
+      return null
     }
 
-    return null
+    return this._super.treeForAddon.call(this, tree)
   }
 }

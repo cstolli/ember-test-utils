@@ -1,3 +1,7 @@
+# 1.10.7
+**Added** `chalk` to dependencies
+
+
 # 1.10.6
 
 * Attempt to fix build by disable dependency snapshot which is causing build to fail and not publish.

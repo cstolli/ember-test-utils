@@ -2,9 +2,8 @@
  * Unit test for the company model
  */
 import {expect} from 'chai'
+import {model} from 'ember-test-utils/test-support/setup-test'
 import {describe, it} from 'mocha'
-
-import {model} from 'dummy/tests/helpers/ember-test-utils/setup-test'
 
 const test = model('company')
 describe(test.label, function () {

@@ -3,10 +3,9 @@
  */
 
 import {expect} from 'chai'
+import {deps, integration, unit} from 'ember-test-utils/test-support/setup-component-test'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {deps, integration, unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
 describe('setupComponentTest()', function () {
   let sandbox

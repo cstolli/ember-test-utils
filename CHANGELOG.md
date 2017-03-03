@@ -1,3 +1,10 @@
+# 2.0.0
+## Breaking Changes
+ * **Moved** helpers from `test-support` to `addon-test-support` so the way they are consumed has changed. See [#40](https://github.com/ciena-blueplanet/ember-test-utils/issues/40) for details. 
+ * **Removed** deprecated `describeComponent` style helpers (See [#11](https://github.com/ciena-blueplanet/ember-test-utils/issues/11) for details)
+* **Fixed** an issue where the `serializer` helper was adding a `model:foo` to the `dependencies` automatically instead of a `serializer:foo`. Since we use `setupModelTest` it should be the `serializer` that gets added as a dependency, not the `model`, since that will already be loaded via the `setupModelTest` method. 
+
+
 # 1.11.0
 
 * **Replaced** bower dependencies with node dependencies.

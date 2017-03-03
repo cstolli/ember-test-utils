@@ -2,8 +2,8 @@
  * Unit test of the my-greeting component
  */
 import {expect} from 'chai'
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
-import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
 const test = unit('my-greeting')
 describe(test.label, function () {

@@ -3,10 +3,9 @@
  */
 
 import {expect} from 'chai'
+import {controller, deps, model, module, route, serializer} from 'ember-test-utils/test-support/setup-test'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {controller, deps, model, module, route, serializer} from 'dummy/tests/helpers/ember-test-utils/setup-test'
 
 describe('setupTest()', function () {
   let sandbox
@@ -194,7 +193,7 @@ describe('setupTest()', function () {
       })
 
       it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs: ['model:my-bar']})
+        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs: ['serializer:my-bar']})
       })
 
       describe('when .setup() is called', function () {
@@ -203,7 +202,7 @@ describe('setupTest()', function () {
         })
 
         it('should call setupModelTest() with proper args', function () {
-          expect(deps.setupModelTest).to.have.been.calledWith('my-bar', {needs: ['model:my-bar'], unit: true})
+          expect(deps.setupModelTest).to.have.been.calledWith('my-bar', {needs: ['serializer:my-bar'], unit: true})
         })
       })
     })
@@ -220,7 +219,10 @@ describe('setupTest()', function () {
       })
 
       it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs: needs.concat(['model:my-bar'])})
+        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({
+          unit: true,
+          needs: needs.concat(['serializer:my-bar'])
+        })
       })
 
       describe('when .setup() is called', function () {
@@ -230,7 +232,7 @@ describe('setupTest()', function () {
 
         it('should call setupModelTest() with proper args', function () {
           expect(deps.setupModelTest).to.have.been.calledWith('my-bar', {
-            needs: ['component:foo-bar', 'helper:baz', 'model:my-bar'],
+            needs: ['component:foo-bar', 'helper:baz', 'serializer:my-bar'],
             unit: true
           })
         })

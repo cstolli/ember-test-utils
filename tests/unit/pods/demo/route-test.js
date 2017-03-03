@@ -2,11 +2,10 @@
  * Unit test for dummy app demo route
  */
 import {expect} from 'chai'
+import {returnPromiseWithArgs, stubStore} from 'ember-test-utils/test-support/ember-data'
+import {route} from 'ember-test-utils/test-support/setup-test'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {returnPromiseWithArgs, stubStore} from 'dummy/tests/helpers/ember-test-utils/ember-data'
-import {route} from 'dummy/tests/helpers/ember-test-utils/setup-test'
 
 const test = route('demo', ['model:company'])
 describe(test.label, function () {

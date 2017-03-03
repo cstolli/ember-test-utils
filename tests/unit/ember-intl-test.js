@@ -3,9 +3,8 @@
  */
 
 import {expect} from 'chai'
+import {addEmberIntlDeps, emberIntlDeps, needsEmberIntlDeps} from 'ember-test-utils/test-support/ember-intl'
 import {beforeEach, describe, it} from 'mocha'
-
-import {addEmberIntlDeps, emberIntlDeps, needsEmberIntlDeps} from 'dummy/tests/helpers/ember-test-utils/ember-intl'
 
 describe('ember-intl', function () {
   describe('addEmberIntlDeps()', function () {

@@ -80,9 +80,10 @@ export function model (name, dependencies, options = {}) {
 export function serializer (name, dependencies = [], options = {}) {
   options.needs = dependencies
 
-  // if the model for this serializer isn't a dependency, add it
-  if (!options.needs.includes(`model:${name}`)) {
-    options.needs.push(`model:${name}`)
+  // if the serializer isn't a dependency, add it, this is b/c we're using setupModelTest() so the model is already
+  // going to be loaded as the primary element under test, not the serializer, so we need to add the serializer
+  if (!options.needs.includes(`serializer:${name}`)) {
+    options.needs.push(`serializer:${name}`)
   }
 
   if (!options.unit && !options.integration) {

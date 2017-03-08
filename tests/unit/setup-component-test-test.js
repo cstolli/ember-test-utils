@@ -11,8 +11,6 @@ describe('setupComponentTest()', function () {
   let sandbox
   beforeEach(function () {
     sandbox = sinon.sandbox.create()
-    sandbox.stub(deps, 'addEmberIntlDeps')
-    sandbox.stub(deps, 'needsEmberIntlDeps')
     sandbox.stub(deps, 'setupComponentTest')
   })
 
@@ -29,10 +27,6 @@ describe('setupComponentTest()', function () {
 
       it('should create proper describe label', function () {
         expect(test.label).to.equal('Unit / Component / my-component /')
-      })
-
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true})
       })
 
       describe('when .setup() is called', function () {
@@ -57,10 +51,6 @@ describe('setupComponentTest()', function () {
         expect(test.label).to.equal('Unit / Component / my-component /')
       })
 
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs})
-      })
-
       describe('when .setup() is called', function () {
         beforeEach(function () {
           test.setup()
@@ -72,30 +62,6 @@ describe('setupComponentTest()', function () {
             unit: true
           })
         })
-      })
-    })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = unit('my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
-      })
-    })
-
-    describe('when it does need ember-intl deps', function () {
-      let needs
-      beforeEach(function () {
-        needs = ['foo:bar']
-        deps.needsEmberIntlDeps.returns(true)
-        test = unit('my-bar', needs)
-      })
-
-      it('should add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.been.calledWith(needs)
       })
     })
   })
@@ -117,17 +83,6 @@ describe('setupComponentTest()', function () {
 
       it('should call setupComponentTest() with proper args', function () {
         expect(deps.setupComponentTest).to.have.been.calledWith('my-component', {integration: true})
-      })
-    })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = integration('my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
       })
     })
   })

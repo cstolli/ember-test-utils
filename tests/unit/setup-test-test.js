@@ -11,8 +11,6 @@ describe('setupTest()', function () {
   let sandbox
   beforeEach(function () {
     sandbox = sinon.sandbox.create()
-    sandbox.stub(deps, 'addEmberIntlDeps')
-    sandbox.stub(deps, 'needsEmberIntlDeps')
     sandbox.stub(deps, 'setupModelTest')
     sandbox.stub(deps, 'setupTest')
   })
@@ -30,10 +28,6 @@ describe('setupTest()', function () {
 
       it('should create proper describe label', function () {
         expect(test.label).to.equal('Unit / Foo / my-bar /')
-      })
-
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true})
       })
 
       describe('when .setup() is called', function () {
@@ -58,10 +52,6 @@ describe('setupTest()', function () {
         expect(test.label).to.equal('Unit / Foo / my-bar /')
       })
 
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith(options)
-      })
-
       describe('when .setup() is called', function () {
         beforeEach(function () {
           test.setup()
@@ -75,30 +65,6 @@ describe('setupTest()', function () {
         })
       })
     })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = module('foo:my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
-      })
-    })
-
-    describe('when it does need ember-intl deps', function () {
-      let needs
-      beforeEach(function () {
-        needs = ['foo:bar']
-        deps.needsEmberIntlDeps.returns(true)
-        test = module('foo:my-bar', {needs})
-      })
-
-      it('should add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.been.calledWith(needs)
-      })
-    })
   })
 
   describe('model()', function () {
@@ -110,10 +76,6 @@ describe('setupTest()', function () {
 
       it('should create proper describe label', function () {
         expect(test.label).to.equal('Unit / Model / my-bar /')
-      })
-
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true})
       })
 
       describe('when .setup() is called', function () {
@@ -138,10 +100,6 @@ describe('setupTest()', function () {
         expect(test.label).to.equal('Unit / Model / my-bar /')
       })
 
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs})
-      })
-
       describe('when .setup() is called', function () {
         beforeEach(function () {
           test.setup()
@@ -153,30 +111,6 @@ describe('setupTest()', function () {
             unit: true
           })
         })
-      })
-    })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = model('my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
-      })
-    })
-
-    describe('when it does need ember-intl deps', function () {
-      let needs
-      beforeEach(function () {
-        needs = ['foo:bar']
-        deps.needsEmberIntlDeps.returns(true)
-        test = model('my-bar', needs)
-      })
-
-      it('should add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.been.calledWith(needs)
       })
     })
   })
@@ -192,10 +126,6 @@ describe('setupTest()', function () {
         expect(test.label).to.equal('Unit / Serializer / my-bar /')
       })
 
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs: ['serializer:my-bar']})
-      })
-
       describe('when .setup() is called', function () {
         beforeEach(function () {
           test.setup()
@@ -208,21 +138,12 @@ describe('setupTest()', function () {
     })
 
     describe('when dependencies are given', function () {
-      let needs
       beforeEach(function () {
-        needs = ['component:foo-bar', 'helper:baz']
         test = serializer('my-bar', ['component:foo-bar', 'helper:baz'])
       })
 
       it('should create proper describe label', function () {
         expect(test.label).to.equal('Unit / Serializer / my-bar /')
-      })
-
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({
-          unit: true,
-          needs: needs.concat(['serializer:my-bar'])
-        })
       })
 
       describe('when .setup() is called', function () {
@@ -238,30 +159,6 @@ describe('setupTest()', function () {
         })
       })
     })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = serializer('my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
-      })
-    })
-
-    describe('when it does need ember-intl deps', function () {
-      let needs
-      beforeEach(function () {
-        needs = ['foo:bar']
-        deps.needsEmberIntlDeps.returns(true)
-        test = serializer('my-bar', needs)
-      })
-
-      it('should add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.been.calledWith(needs)
-      })
-    })
   })
 
   describe('route()', function () {
@@ -273,10 +170,6 @@ describe('setupTest()', function () {
 
       it('should create proper describe label', function () {
         expect(test.label).to.equal('Unit / Route / my-bar /')
-      })
-
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true})
       })
 
       describe('when .setup() is called', function () {
@@ -301,10 +194,6 @@ describe('setupTest()', function () {
         expect(test.label).to.equal('Unit / Route / my-bar /')
       })
 
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs})
-      })
-
       describe('when .setup() is called', function () {
         beforeEach(function () {
           test.setup()
@@ -318,30 +207,6 @@ describe('setupTest()', function () {
         })
       })
     })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = route('my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
-      })
-    })
-
-    describe('when it does need ember-intl deps', function () {
-      let needs
-      beforeEach(function () {
-        needs = ['foo:bar']
-        deps.needsEmberIntlDeps.returns(true)
-        test = route('my-bar', needs)
-      })
-
-      it('should add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.been.calledWith(needs)
-      })
-    })
   })
 
   describe('controller()', function () {
@@ -353,10 +218,6 @@ describe('setupTest()', function () {
 
       it('should create proper describe label', function () {
         expect(test.label).to.equal('Unit / Controller / my-bar /')
-      })
-
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true})
       })
 
       describe('when .setup() is called', function () {
@@ -381,10 +242,6 @@ describe('setupTest()', function () {
         expect(test.label).to.equal('Unit / Controller / my-bar /')
       })
 
-      it('should check if ember-intl deps are needed', function () {
-        expect(deps.needsEmberIntlDeps).to.have.been.calledWith({unit: true, needs})
-      })
-
       describe('when .setup() is called', function () {
         beforeEach(function () {
           test.setup()
@@ -396,30 +253,6 @@ describe('setupTest()', function () {
             unit: true
           })
         })
-      })
-    })
-
-    describe('when it does not need ember-intl deps', function () {
-      beforeEach(function () {
-        deps.needsEmberIntlDeps.returns(false)
-        test = controller('my-bar')
-      })
-
-      it('should not add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.callCount(0)
-      })
-    })
-
-    describe('when it does need ember-intl deps', function () {
-      let needs
-      beforeEach(function () {
-        needs = ['foo:bar']
-        deps.needsEmberIntlDeps.returns(true)
-        test = controller('my-bar', needs)
-      })
-
-      it('should add ember-intl deps', function () {
-        expect(deps.addEmberIntlDeps).to.have.been.calledWith(needs)
       })
     })
   })

@@ -1,7 +1,5 @@
 /**
- * Helpers to make it very easy to stub-out the ember data store in integration tests, regardless of
- * how deep the reference to them happens to be. If it's the component under test, this might be a little
- * overkill, since you could have just initialized with the stub store, but it will work for that use-case too.
+ * Module to provide helpers for stubbing things, specifically services
  */
 
 import Ember from 'ember'
@@ -18,7 +16,7 @@ const {RSVP, Service} = Ember
  * The methods in DS.Store we want to stub
  * Taken from http://emberjs.com/api/data/classes/DS.Store.html
  */
-const storeMethodsToStub = [
+export const storeMethods = [
   'adapterFor',
   'buildRecord',
   'createRecord',
@@ -62,28 +60,35 @@ const storeMethodsToStub = [
 ]
 
 /**
- * Stub the ember data store
+ * Stub a service
  * @param {Object} context - the test context ('this' from within beforeEach)
  * @param {Object} sandbox - the sinon sandbox to use for generating stubs
- * @returns {Store} the store with stubs for all methods (consumer must still provide return values)
+ * @param {String} name - the name of the service to stub
+ * @param {String[]} methodsToStub - the name of methods to stub on the service
+ * @returns {Service} the service with stubs for all methods provided
  */
-export function stubStore (context, sandbox) {
+export function stubService (context, sandbox, name, methodsToStub) {
+  if (name === 'store' && !methodsToStub) {
+    methodsToStub = storeMethods
+  }
+
   const stubs = {}
-  storeMethodsToStub.forEach((method) => {
+  methodsToStub.forEach((method) => {
     stubs[method] = sandbox.stub()
   })
 
-  context.register('service:store', Service.extend(stubs))
-  return context.container.lookup('service:store')
+  const service = Service.extend(stubs)
+  context.register(`service:${name}`, service)
+  return context.container.lookup(`service:${name}`)
 }
 
 /**
  * Stub out a particular method with specific arguments to return a promise
  * @param {Stub} stub - the stubbed method
- * @param {Object[]} args - the arguments to stub for
+ * @param {Object[]} [args] - the arguments to limit the stub to
  * @returns {Resolver} the resolver for the promise that will be returned
  */
-export function returnPromiseWithArgs (stub, args) {
+export function returnPromiseFromStub (stub, args) {
   const resolver = {}
   const promise = new RSVP.Promise((resolve, reject) => {
     resolver.resolve = resolve

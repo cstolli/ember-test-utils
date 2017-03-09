@@ -2,8 +2,8 @@
  * Unit test for dummy app demo route
  */
 import {expect} from 'chai'
-import {returnPromiseWithArgs, stubStore} from 'ember-test-utils/test-support/ember-data'
 import {route} from 'ember-test-utils/test-support/setup-test'
+import {returnPromiseFromStub, stubService} from 'ember-test-utils/test-support/stub'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
@@ -14,14 +14,14 @@ describe(test.label, function () {
   let route, sandbox, store, resolver
   beforeEach(function () {
     sandbox = sinon.sandbox.create()
-    store = stubStore(this, sandbox)
+    store = stubService(this, sandbox, 'store')
     route = this.subject()
   })
 
   describe('.model()', function () {
     let model
     beforeEach(function () {
-      resolver = returnPromiseWithArgs(store.findAll)
+      resolver = returnPromiseFromStub(store.findAll)
       route.model().then((value) => {
         model = value
       })

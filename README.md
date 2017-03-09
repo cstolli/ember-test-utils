@@ -59,7 +59,7 @@ import {expect} from 'chai'
 import hbs from 'htmlbars-inline-precompile'
 import {describe, it} from 'mocha'
 
-import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
 
 const test = integration('my-greeting')
 describe(test.label, function () {
@@ -103,7 +103,7 @@ into
 ```js
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
-import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
 
 const test = unit('my-greeting', ['component:foo', 'helper:bar'])
   test.setup()
@@ -150,7 +150,7 @@ into
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
 
-import {model} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+import {model} from 'ember-test-utils/test-support/setup-test'
 
 const test = model('person', ['model:company'])
 describe(test.label, function () {
@@ -203,7 +203,7 @@ into
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
 
-import {route} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+import {route} from 'ember-test-utils/test-support/setup-test'
 
 const test = route('demo', ['controller:demo'])
 describe(test.label, function () {
@@ -244,7 +244,7 @@ into
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
 
-import {controller} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+import {controller} from 'ember-test-utils/test-support/setup-test'
 
 const test = controller('demo', ['controller:foo'])
 describe(test.label, function () {
@@ -285,7 +285,7 @@ into
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
 
-import {module} from 'dummy/tests/helpers/ember-test-utils/setup-test'
+import {module} from 'ember-test-utils/test-support/setup-test'
 
 const test = module('controller:demo', ['controller:foo'])
 describe(test.label, function () {

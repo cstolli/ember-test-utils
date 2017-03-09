@@ -5,13 +5,10 @@
 import Ember from 'ember'
 import {setupModelTest, setupTest} from 'ember-mocha'
 
-import {addEmberIntlDeps, needsEmberIntlDeps} from './ember-intl'
 import './typedefs'
 
 // Workaround to allow stubbing dependencies during testing
 export const deps = {
-  addEmberIntlDeps,
-  needsEmberIntlDeps,
   setupModelTest,
   setupTest
 }
@@ -25,10 +22,6 @@ export const deps = {
 export function module (name, options = {}) {
   if (!options.unit && !options.integration) {
     options.unit = true
-  }
-
-  if (deps.needsEmberIntlDeps(options)) {
-    deps.addEmberIntlDeps(options.needs)
   }
 
   const testType = (options.unit) ? 'Unit' : 'Integration'
@@ -55,10 +48,6 @@ export function model (name, dependencies, options = {}) {
 
   if (!options.unit && !options.integration) {
     options.unit = true
-  }
-
-  if (deps.needsEmberIntlDeps(options)) {
-    deps.addEmberIntlDeps(options.needs)
   }
 
   const testType = (options.unit) ? 'Unit' : 'Integration'
@@ -88,10 +77,6 @@ export function serializer (name, dependencies = [], options = {}) {
 
   if (!options.unit && !options.integration) {
     options.unit = true
-  }
-
-  if (deps.needsEmberIntlDeps(options)) {
-    deps.addEmberIntlDeps(options.needs)
   }
 
   const testType = (options.unit) ? 'Unit' : 'Integration'

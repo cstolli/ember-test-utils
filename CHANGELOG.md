@@ -1,3 +1,13 @@
+# 3.0.0
+* **Removed** `ember-intl` helpers since they didn't seem to be working anymore anyway, and we're not sure we want to encourage `ember-intl` over `ember-i18n` yet
+* **Removed** `ember-data` helpers `stubStore` and `returnPromiseWithArgs` they have been replaced with `stubService` and `returnPromiseFromStub` out of the `stub` module now.
+* **Added** `stub` helper module that contains `stubService` and `returnPromiseFromStub` methods: 
+  ```js
+  import {returnPromiseFromStub, stubService} from 'ember-test-utils/test-support/stub'
+  ```
+* **Added** `actions` helpers that currently just has `callAction` helper method for calling an action in tests.
+
+
 # 2.0.0
 ## Breaking Changes
  * **Moved** helpers from `test-support` to `addon-test-support` so the way they are consumed has changed. See [#40](https://github.com/ciena-blueplanet/ember-test-utils/issues/40) for details. 

@@ -1,3 +1,8 @@
+# 4.0.0 (2017-03-23)
+
+* **Upgraded** to eslint-config-frost-standard 6.x
+
+
 # 3.0.0
 * **Removed** `ember-intl` helpers since they didn't seem to be working anymore anyway, and we're not sure we want to encourage `ember-intl` over `ember-i18n` yet
 * **Removed** `ember-data` helpers `stubStore` and `returnPromiseWithArgs` they have been replaced with `stubService` and `returnPromiseFromStub` out of the `stub` module now.

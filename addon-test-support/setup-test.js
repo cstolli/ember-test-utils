@@ -115,3 +115,49 @@ export function controller (name, dependencies, options = {}) {
   }
   return module(`controller:${name}`, options)
 }
+
+/**
+ * A helper for formatting the describe text and calling setupTest with proper parameters for a service unit test
+ * @param {String} name - the name of the service
+ * @param {String[]} dependencies - the list of "needs" for this service
+ * @param {Object} options - any additional options to set (alongside unit: true)
+ * @returns {Test} a test config object
+ */
+export function service (name, dependencies, options = {}) {
+  if (dependencies) {
+    options.needs = dependencies
+  }
+  return module(`service:${name}`, options)
+}
+
+/**
+ * A helper for formatting the describe text and calling setupTest with proper parameters for an adapter unit test
+ * @param {String} name - the name of the adapter
+ * @param {String[]} dependencies - the list of "needs" for this adapter
+ * @param {Object} options - any additional options to set (alongside unit: true)
+ * @returns {Test} a test config object
+ */
+export function adapter (name, dependencies, options = {}) {
+  if (dependencies) {
+    options.needs = dependencies
+  }
+  return module(`adapter:${name}`, options)
+}
+
+/**
+ * A helper for formatting the describe text and calling setupTest with proper parameters for a helper unit test
+ * @param {String} name - the name of the helper
+ * @param {String[]} dependencies - the list of "needs" for this helper
+ * @param {Object} options - any additional options to set (alongside unit: true)
+ * @returns {Test} a test config object
+ */
+export function helper (name, dependencies, options = {}) {
+  if (dependencies) {
+    options.needs = dependencies
+  }
+  // defaultSubject assumes this is a instantiable object but helpers are not
+  options.subject = function (options, factory) {
+    return factory.compute
+  }
+  return module(`helper:${name}`, options)
+}

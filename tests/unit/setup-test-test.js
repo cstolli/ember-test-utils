@@ -3,7 +3,17 @@
  */
 
 import {expect} from 'chai'
-import {controller, deps, model, module, route, serializer} from 'ember-test-utils/test-support/setup-test'
+import {
+  adapter,
+  controller,
+  deps,
+  helper,
+  model,
+  module,
+  route,
+  serializer,
+  service
+} from 'ember-test-utils/test-support/setup-test'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
@@ -251,6 +261,180 @@ describe('setupTest()', function () {
           expect(deps.setupTest).to.have.been.calledWith('controller:my-bar', {
             needs: ['component:foo-bar', 'helper:baz'],
             unit: true
+          })
+        })
+      })
+    })
+  })
+
+  describe('service()', function () {
+    let test
+    describe('when just name is given', function () {
+      beforeEach(function () {
+        test = service('my-bar')
+      })
+
+      it('should create proper describe label', function () {
+        expect(test.label).to.equal('Unit / Service / my-bar /')
+      })
+
+      describe('when .setup() is called', function () {
+        beforeEach(function () {
+          test.setup()
+        })
+
+        it('should call setupTest() with proper args', function () {
+          expect(deps.setupTest).to.have.been.calledWith('service:my-bar', {unit: true})
+        })
+      })
+    })
+
+    describe('when dependencies are given', function () {
+      let needs
+      beforeEach(function () {
+        needs = ['component:foo-bar', 'helper:baz']
+        test = service('my-bar', needs)
+      })
+
+      it('should create proper describe label', function () {
+        expect(test.label).to.equal('Unit / Service / my-bar /')
+      })
+
+      describe('when .setup() is called', function () {
+        beforeEach(function () {
+          test.setup()
+        })
+
+        it('should call setupTest() with proper args', function () {
+          expect(deps.setupTest).to.have.been.calledWith('service:my-bar', {
+            needs: ['component:foo-bar', 'helper:baz'],
+            unit: true
+          })
+        })
+      })
+    })
+  })
+
+  describe('adapter()', function () {
+    let test
+    describe('when just name is given', function () {
+      beforeEach(function () {
+        test = adapter('my-bar')
+      })
+
+      it('should create proper describe label', function () {
+        expect(test.label).to.equal('Unit / Adapter / my-bar /')
+      })
+
+      describe('when .setup() is called', function () {
+        beforeEach(function () {
+          test.setup()
+        })
+
+        it('should call setupTest() with proper args', function () {
+          expect(deps.setupTest).to.have.been.calledWith('adapter:my-bar', {unit: true})
+        })
+      })
+    })
+
+    describe('when dependencies are given', function () {
+      let needs
+      beforeEach(function () {
+        needs = ['component:foo-bar', 'helper:baz']
+        test = adapter('my-bar', needs)
+      })
+
+      it('should create proper describe label', function () {
+        expect(test.label).to.equal('Unit / Adapter / my-bar /')
+      })
+
+      describe('when .setup() is called', function () {
+        beforeEach(function () {
+          test.setup()
+        })
+
+        it('should call setupTest() with proper args', function () {
+          expect(deps.setupTest).to.have.been.calledWith('adapter:my-bar', {
+            needs: ['component:foo-bar', 'helper:baz'],
+            unit: true
+          })
+        })
+      })
+    })
+  })
+
+  describe('helper()', function () {
+    let test
+    describe('when just name is given', function () {
+      beforeEach(function () {
+        test = helper('my-bar')
+      })
+
+      it('should create proper describe label', function () {
+        expect(test.label).to.equal('Unit / Helper / my-bar /')
+      })
+      describe('when .setup() is called', function () {
+        beforeEach(function () {
+          test.setup()
+        })
+
+        describe('should call setupTest with proper args', function () {
+          it('should pass the proper module name', function () {
+            expect(deps.setupTest.getCall(0).args[0]).to.equal('helper:my-bar')
+          })
+
+          it('should specify unit as true', function () {
+            expect(deps.setupTest.getCall(0).args[1].unit).to.equal(true)
+          })
+
+          it('should override subject to return the helper', function () {
+            const factory = {
+              compute: sandbox.spy()
+            }
+            expect(deps.setupTest.getCall(0).args[1].subject({}, factory)).to.equal(factory.compute)
+          })
+        })
+      })
+    })
+
+    describe('when dependencies are given', function () {
+      let needs
+      beforeEach(function () {
+        needs = ['component:foo-bar', 'helper:baz']
+        test = helper('my-bar', needs)
+      })
+
+      it('should create proper describe label', function () {
+        expect(test.label).to.equal('Unit / Helper / my-bar /')
+      })
+
+      describe('when .setup() is called', function () {
+        beforeEach(function () {
+          test.setup()
+        })
+
+        describe('should call setupTest with proper args', function () {
+          it('should pass the proper module name', function () {
+            expect(deps.setupTest.getCall(0).args[0]).to.equal('helper:my-bar')
+          })
+
+          it('should pass in dependencies', function () {
+            expect(deps.setupTest.getCall(0).args[1].needs).to.eql(['component:foo-bar', 'helper:baz'])
+          })
+
+          it('should specify unit as true', function () {
+            expect(deps.setupTest.getCall(0).args[1].unit).to.equal(true)
+          })
+
+          it('should specify subject', function () {
+            expect(deps.setupTest.getCall(0).args[1].subject).not.to.equal(undefined)
+          })
+
+          it('should override subject to return the helper', function () {
+            const factory = {
+              compute: sandbox.spy()
+            }
+            expect(deps.setupTest.getCall(0).args[1].subject({}, factory)).to.equal(factory.compute)
           })
         })
       })

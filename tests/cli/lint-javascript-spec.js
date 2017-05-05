@@ -171,11 +171,11 @@ describe('lint-javascript', function () {
         it('logs expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/error-1.js\u001b[24m',
-            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
+            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function ' +
               'has a complexity of 3  \u001b[2mcomplexity\u001b[22m',
             '',
             '\u001b[4mtests/cli/fixtures/error-2.js\u001b[24m',
-            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
+            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function ' +
               'has a complexity of 4  \u001b[2mcomplexity\u001b[22m',
             '',
             '\u001b[1m\u001b[37m\u001b[41m Javascript: 2 errors, 0 warnings \u001b[49m\u001b[39m\u001b[22m\n'
@@ -321,11 +321,11 @@ describe('lint-javascript', function () {
         it('logs expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/error-1.js\u001b[24m',
-            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
+            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function ' +
               'has a complexity of 3  \u001b[2mcomplexity\u001b[22m',
             '',
             '\u001b[4mtests/cli/fixtures/error-2.js\u001b[24m',
-            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function \'anonymous\' ' +
+            '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function ' +
               'has a complexity of 4  \u001b[2mcomplexity\u001b[22m',
             '',
             '\u001b[1m\u001b[37m\u001b[41m Javascript: 2 errors, 0 warnings \u001b[49m\u001b[39m\u001b[22m\n'

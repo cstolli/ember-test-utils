@@ -1,3 +1,9 @@
+# 4.1.1 (2017-05-05)
+* **Updated** bower packages to npm packages
+* **Updated** ember-try config to work with npm ember-source
+* **Updated** path to resolver
+* **Removed** unneeded files and config from `ember-cli-mirage` which is no longer installed
+
 # 4.1.0 (2017-05-05)
 
 * **Added** more test setup helpers to support other common modules that utilizes the factory (services, adapters, helpers)

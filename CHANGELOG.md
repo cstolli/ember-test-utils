@@ -1,3 +1,8 @@
+# 4.1.0 (2017-05-05)
+
+* **Added** more test setup helpers to support other common modules that utilizes the factory (services, adapters, helpers)
+
+
 # 4.0.0 (2017-03-23)
 
 * **Upgraded** to eslint-config-frost-standard 6.x

@@ -30,10 +30,16 @@ ember install ember-test-utils
 
 **ember-test-utils** provides a set of utilities to help you in testing Ember modules. This library requires you
 use `ember-cli-mocha` and `ember-mocha` as your testing framework. It provides shortcuts for working with:
-`setupComponentTest` and `setupComponent`
 
+ * [`setupComponentTest`](#setupcomponenttest)
+ * [`setupComponent`](#setupcomponent)
 
-### `setupComponentTest`
+Provided test helpers:
+
+ * [`mockComponent`](#mockcomponent) - creates a mock component to easily test the component dependency injection pattern
+ * [`stubService`](#stubservice) - allows you to stub a service
+
+## `setupComponentTest`
 Two shortcuts (`integration`, and `unit`) are provided to help transform
 
 ```js
@@ -121,78 +127,34 @@ const test = unit('my-greeting', ['component:foo', 'helper:bar'])
 ```
 
 ## `setupTest`
-Five shortcuts are provided (`model`, `serializer`, `route`, `controller`, and `module`).
+The following shortcuts are provided:
 
-### `model`
-The `model` helper allows you to turn this:
+* [`adapter`](#adapter)
+* [`controller`](#controller)
+* [`helper`](#helper)
+* [`model`](#model)
+* [`module`](#module)
+* [`route`](#route)
+* [`serializer`](#serializer)
+* [`service`](#service)
 
-```js
-import {expect} from 'chai'
-import {setupTest} from 'ember-mocha'
-import {describe, it} from 'mocha'
-
-describe('Unit: PersonModel', function () {
-  setupModelTest('person', {
-    unit: true,
-    needs: ['model:company']
-  })
-
-  it('exists', function () {
-    let model = this.subject()
-    expect(model).not.to.equal(undefined)
-  })
-})
-```
-
-into
-
-```js
-import {expect} from 'chai'
-import {describe, it} from 'mocha'
-
-import {model} from 'ember-test-utils/test-support/setup-test'
-
-const test = model('person', ['model:company'])
-describe(test.label, function () {
-  test.setup()
-
-  it('exists', function () {
-    let model = this.subject()
-    expect(model).not.to.equal(undefined)
-  })
-})
-```
-
-### `serializer`
-The only difference between `model` and `serializer` is what the description of the test will end up being:
-
-```
-Unit / Model / model-name
-```
-
-vs.
-
-```
-Unit / Serializer / model-name
-```
-
-### `route`
-The `route` helper allows you to turn this:
+### `adapter`
+The `adapter` helper allows you to turn this:
 
 ```js
 import {expect} from 'chai'
 import {setupTest} from 'ember-mocha'
 import {describe, it} from 'mocha'
 
-describe('DemoController', function () {
-  setupTest('route:demo', {
-    needs: ['controller:demo'],
+describe('DemoAdapter', function () {
+  setupTest('adapter:demo', {
+    needs: ['adapter:foo'],
     unit: true
   })
   // Replace this with your real tests.
   it('exists', function () {
-    let route = this.subject()
-    expect(route).not.to.equal(undefined)
+    let adapter = this.subject()
+    expect(adapter).not.to.equal(undefined)
   })
 })
 ```
@@ -203,16 +165,16 @@ into
 import {expect} from 'chai'
 import {describe, it} from 'mocha'
 
-import {route} from 'ember-test-utils/test-support/setup-test'
+import {adapter} from 'ember-test-utils/test-support/setup-test'
 
-const test = route('demo', ['controller:demo'])
+const test = adapter('demo', ['adapter:foo'])
 describe(test.label, function () {
   test.setup()
 
   // Replace this with your real tests.
   it('exists', function () {
-    let route = this.subject()
-    expect(route).not.to.equal(undefined)
+    let adapter = this.subject()
+    expect(adapter).not.to.equal(undefined)
   })
 })
 ```
@@ -258,6 +220,86 @@ describe(test.label, function () {
 })
 ```
 
+### `helper`
+The `helper` helper allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('DemoHelper', function () {
+  setupTest('helper:demo', {
+    unit: true
+  })
+  // Replace this with your real tests.
+  it('exists', function () {
+    let helper = this.subject()
+    expect(helper).not.to.equal(undefined)
+  })
+})
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {helper} from 'ember-test-utils/test-support/setup-test'
+
+const test = helper('demo')
+describe(test.label, function () {
+  test.setup()
+
+  // Replace this with your real tests.
+  it('exists', function () {
+    let helper = this.subject()
+    expect(helper).not.to.equal(undefined)
+  })
+})
+```
+
+### `model`
+The `model` helper allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('Unit: PersonModel', function () {
+  setupModelTest('person', {
+    unit: true,
+    needs: ['model:company']
+  })
+
+  it('exists', function () {
+    let model = this.subject()
+    expect(model).not.to.equal(undefined)
+  })
+})
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {model} from 'ember-test-utils/test-support/setup-test'
+
+const test = model('person', ['model:company'])
+describe(test.label, function () {
+  test.setup()
+
+  it('exists', function () {
+    let model = this.subject()
+    expect(model).not.to.equal(undefined)
+  })
+})
+```
+
 ### `module`
 The `module` helper is a catch-all to let you unit test any module, it allows you to turn this:
 
@@ -295,6 +337,232 @@ describe(test.label, function () {
   it('exists', function () {
     let controller = this.subject()
     expect(controller).not.to.equal(undefined)
+  })
+})
+```
+
+### `route`
+The `route` helper allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('DemoController', function () {
+  setupTest('route:demo', {
+    needs: ['controller:demo'],
+    unit: true
+  })
+  // Replace this with your real tests.
+  it('exists', function () {
+    let route = this.subject()
+    expect(route).not.to.equal(undefined)
+  })
+})
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {route} from 'ember-test-utils/test-support/setup-test'
+
+const test = route('demo', ['controller:demo'])
+describe(test.label, function () {
+  test.setup()
+
+  // Replace this with your real tests.
+  it('exists', function () {
+    let route = this.subject()
+    expect(route).not.to.equal(undefined)
+  })
+})
+```
+
+### `serializer`
+The only difference between `model` and `serializer` is what the description of the test will end up being:
+
+```
+Unit / Model / model-name
+```
+
+vs.
+
+```
+Unit / Serializer / model-name
+```
+
+### `service`
+The `service` helper allows you to turn this:
+
+```js
+import {expect} from 'chai'
+import {setupTest} from 'ember-mocha'
+import {describe, it} from 'mocha'
+
+describe('DemoService', function () {
+  setupTest('service:demo', {
+    needs: ['service:foo'],
+    unit: true
+  })
+  // Replace this with your real tests.
+  it('exists', function () {
+    let service = this.subject()
+    expect(service).not.to.equal(undefined)
+  })
+})
+```
+
+into
+
+```js
+import {expect} from 'chai'
+import {describe, it} from 'mocha'
+
+import {service} from 'ember-test-utils/test-support/setup-test'
+
+const test = service('demo', ['service:foo'])
+describe(test.label, function () {
+  test.setup()
+
+  // Replace this with your real tests.
+  it('exists', function () {
+    let service = this.subject()
+    expect(service).not.to.equal(undefined)
+  })
+})
+```
+## `mockComponent`
+A helper to allow easy testing of the component dependency injection pattern. This helper will create a mock component
+with the default name `mock-component`. The name can be set by passing a String `<name>` as the second parameter.
+The third parameter allows you to pass any properties into the component as an Object `{classNames: 'my-classname'}`.
+Credit goes to [poteto](https://twitter.com/sugarpirate_) for the initial implementation of this idea.
+
+```handlebars
+<h2>A component to demonstrate the mock component helper</h2>
+
+{{#if injectComponent}}
+  {{component injectComponent}}
+{{/if}}
+
+```
+
+```js
+import {expect} from 'chai'
+import {registerMockComponent, unregisterMockComponent} from 'ember-test-utils/test-support/mock-component'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
+import hbs from 'htmlbars-inline-precompile'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+
+const test = integration('demo-component')
+describe(test.label, function () {
+  test.setup()
+
+  beforeEach(function () {
+    registerMockComponent(this)
+
+    this.render(hbs`
+      {{demo-component
+        injectComponent=(component 'mock-component')
+      }}
+    `)
+  })
+
+  afterEach(function () {
+    unregisterMockComponent(this)
+  })
+
+  it('should render the injectComponent with default name', function () {
+    expect(this.$('dummy')).to.have.length(1)
+  })
+})
+```
+
+or with a user provided `name` and `options: {}`
+
+```js
+import {expect} from 'chai'
+import {registerMockComponent, unregisterMockComponent} from 'ember-test-utils/test-support/mock-component'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
+import hbs from 'htmlbars-inline-precompile'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+
+const test = integration('demo-component')
+describe(test.label, function () {
+  test.setup()
+
+  beforeEach(function () {
+    registerMockComponent(this, 'mock-inject', {
+      classNames: 'mock-inject',
+      title: 'My Title',
+      layout: hbs`
+        <h1>{{title}}</h1>
+      `
+    })
+
+    this.render(hbs`
+      {{demo-component
+        injectComponent=(component 'mock-inject')
+      }}
+    `)
+  })
+
+  afterEach(function () {
+    unregisterMockComponent(this, 'mock-inject')
+  })
+
+  it('should render the injectComponent with provided layout', function () {
+    expect(this.$('.mock-inject').text().trim()).to.equal('My Title')
+  })
+})
+```
+
+## `stubService`
+This helper will allow the easy creation of stubs for services. If a user wishes to stub the `store` the following [methods are setup by default](https://github.com/ciena-blueplanet/ember-test-utils/blob/master/addon-test-support/stub.js#L20-L59)
+
+
+```js
+import {expect} from 'chai'
+import Ember from 'ember'
+import {route} from 'ember-test-utils/test-support/setup-test'
+import {stubService} from 'ember-test-utils/test-support/stub'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
+
+const test = route('demo', ['model:demo-user'])
+describe(test.label, function () {
+  test.setup()
+  let route, sandbox, store
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+    store = stubService(this, sandbox, 'store')
+    route = this.subject()
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
+  describe('model()', function () {
+    let params
+    describe('when you set some properties', function () {
+      beforeEach(function () {
+        params = {
+          filter: '[name]=',
+          'page[limit]': 20,
+          'page[offset]': 0,
+          sort: '-last-modified-time'
+        }
+        route.model(params)
+      })
+
+      it('should query for user record with username', function () {
+        expect(store.queryRecord).to.have.been.calledWith('demo-user', {username: 'username@someuser.com'})
+      })
+    })
   })
 })
 ```

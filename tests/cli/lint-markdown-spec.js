@@ -250,4 +250,32 @@ describe('lint-markdown', function () {
       })
     })
   })
+
+  describe('.remarkignore file is respected', function () {
+    let result
+
+    beforeEach(function () {
+      const files = Array.from(rootProjectFiles)
+      files.push('.remarkignore')
+
+      sandbox.stub(fs, 'readdirSync', function (directory) {
+        fs.readdirSync.restore() // Restore original method so sass-lint can use it
+        return files
+      })
+
+      sandbox.stub(glob, 'sync').returns(warnFiles)
+
+      result = linter.lint()
+    })
+
+    it('logs expected output', function () {
+      expect(logOutput).to.eql([
+        '\u001b[1m\u001b[42m Markdown: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
+      ])
+    })
+
+    it('returns false', function () {
+      expect(result).to.equal(false)
+    })
+  })
 })

@@ -69,10 +69,6 @@ describe(test.label, function () {
     })
 
     it('should render the injectComponent with provided name', function () {
-      expect(this.$('dummy')).to.have.class('mock-inject')
-    })
-
-    it('should render the injectComponent with provided name', function () {
       expect(this.$('.mock-inject')).to.have.length(1)
     })
   })

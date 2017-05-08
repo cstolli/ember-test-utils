@@ -37,7 +37,7 @@ use `ember-cli-mocha` and `ember-mocha` as your testing framework. It provides s
 Provided test helpers:
 
  * [`mockComponent`](#mockcomponent) - creates a mock component to easily test the component dependency injection pattern
- * [`stubService`](#stubservice) - allows you to stub
+ * [`stubService`](#stubservice) - allows you to stub a service
 
 ## `setupComponentTest`
 Two shortcuts (`integration`, and `unit`) are provided to help transform

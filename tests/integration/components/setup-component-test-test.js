@@ -1,12 +1,12 @@
 /**
- * Integration test of the my-greeting component
+ * Integration test of setup-component-test helper using the my-greeting component
  */
 import {expect} from 'chai'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
 
-const test = integration('my-greeting')
+const test = integration('setup-component-test')
 describe(test.label, function () {
   test.setup()
 

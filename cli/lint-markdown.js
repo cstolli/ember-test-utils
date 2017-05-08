@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const glob = require('glob-all')
+const path = require('path')
 const remark = require('remark')
 const remarkLint = require('remark-lint')
 
@@ -69,6 +70,23 @@ function reportReducer (linter, summary, filePath) {
   return summary
 }
 
+/**
+ * The entries in the consumer's `.remarkignore` file
+ *
+ * @returns {Array} entries
+ */
+function getIgnoredFiles () {
+  const filePath = path.join(process.cwd(), '.remarkignore')
+  const ignoredFilesSource = fs.existsSync(filePath) ? fs.readFileSync(filePath, {encoding: 'utf8'}) : ''
+  let ignoredFiles = ignoredFilesSource.split('\n')
+
+  ignoredFiles = ignoredFiles.filter(function (item) {
+    return item !== ''
+  })
+
+  return ignoredFiles
+}
+
 /* eslint-disable complexity */
 /**
  * Lint Markdown files
@@ -76,8 +94,16 @@ function reportReducer (linter, summary, filePath) {
  */
 MarkdownLinter.prototype.lint = function () {
   const config = this.getConfig()
+  const ignoredFiles = getIgnoredFiles()
   const lintConfig = (config.plugins || {}).lint || {}
   const linter = remark().use(remarkLint, lintConfig)
+
+  // respect consumer's `.remarkignore` file
+  if (ignoredFiles) {
+    ignoredFiles.forEach((file) => {
+      this.fileLocations.push(`!${file}`)
+    })
+  }
 
   const result = glob.sync(this.fileLocations)
     .reduce(reportReducer.bind(this, linter), {

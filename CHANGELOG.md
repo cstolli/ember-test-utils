@@ -1,3 +1,10 @@
+# 4.2.0 (2017-05-08)
+* **Added** mock-component helper that is being used to test component dependency injection patterns in frost repos
+* **Added** tests for mock-component helper
+* **Updated** README to document `mock-component` helper
+* **Updated** README to document `adapter`, `helper` and `service` module test helpers
+* **Updated** README to document `stubService` helper
+
 # 4.1.1 (2017-05-05)
 * **Updated** bower packages to npm packages
 * **Updated** ember-try config to work with npm ember-source

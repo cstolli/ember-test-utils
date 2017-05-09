@@ -679,6 +679,10 @@ and run
 npm run lint-js
 ```
 
+If you would like any Javascript files to be ignored during linting simply create a `.eslintignore` file in the root of your application and populate it with one
+[glob pattern](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) per line.
+
+
 ### Markdown
 
 If you want to lint your Markdown files you can simply run:

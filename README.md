@@ -679,7 +679,7 @@ and run
 npm run lint-js
 ```
 
-If you would like any Javascript files to be ignored during linting simply create a `.eslintignore` file in the root of your application and populate it with one
+If you would like any Javascript files to be ignored during linting simply create a `.eslintignore` file in the root of your project and populate it with one
 [glob pattern](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) per line.
 
 
@@ -707,7 +707,7 @@ and run
 npm run lint-md
 ```
 
-If you would like any Markdown files to be ignored during linting simply create a `.remarkignore` file in the root of your application and populate it with one
+If you would like any Markdown files to be ignored during linting simply create a `.remarkignore` file in the root of your project and populate it with one
 [glob pattern](https://github.com/unifiedjs/unified-engine/blob/master/doc/ignore.md) per line.
 
 
@@ -759,6 +759,13 @@ and run
 ```bash
 npm run lint-hbs
 ```
+
+By default the
+[recommended ember-template-lint](https://github.com/rwjblue/ember-template-lint/blob/master/lib/config/recommended.js)
+rules are enforced.  If you would like to enable/disable other rules, you can do so by creating a
+`.template-lintrc.js` file in the root of your project per
+[these instructions](https://github.com/rwjblue/ember-template-lint).
+
 
 ## Contributing
 

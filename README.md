@@ -32,7 +32,7 @@ ember install ember-test-utils
 use `ember-cli-mocha` and `ember-mocha` as your testing framework. It provides shortcuts for working with:
 
  * [`setupComponentTest`](#setupcomponenttest)
- * [`setupComponent`](#setupcomponent)
+ * [`setupTest`](#setuptest)
 
 Provided test helpers:
 

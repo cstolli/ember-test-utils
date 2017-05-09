@@ -50,7 +50,9 @@ HtmlbarsLinter.prototype.constructor = HtmlbarsLinter
  * @returns {Boolean} returns true if there are linting errors
  */
 HtmlbarsLinter.prototype.lint = function () {
-  const options = this.getConfig()
+  const options = {
+    config: this.getConfig()
+  }
   const linter = new TemplateLinter(options)
 
   const errors = glob.sync(this.fileLocations)

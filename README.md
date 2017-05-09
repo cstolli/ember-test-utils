@@ -435,7 +435,8 @@ and run
 npm run lint-md
 ```
 
-If you would like any Markdown files to be ignored during linting simply create a `.remarkignore` file in the root of your application and populate it with one glob pattern per line.
+If you would like any Markdown files to be ignored during linting simply create a `.remarkignore` file in the root of your application and populate it with one
+[glob pattern](https://github.com/unifiedjs/unified-engine/blob/master/doc/ignore.md) per line.
 
 
 

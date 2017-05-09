@@ -2,7 +2,7 @@
   "plugins": {
     "lint": {
       "list-item-indent": false,
-      "maximum-line-length": 119
+      "maximum-line-length": 120
     }
   },
   "settings": {

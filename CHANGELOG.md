@@ -1,3 +1,7 @@
+# 4.3.1 (2017-05-10)
+* Closes #73 
+
+
 # 4.3.0 (2017-05-10)
 * Respect `.remarkignore` file for `lint-markdown`
 * **Changed** `maximum-line-length` for Markdown linter to 120

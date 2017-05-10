@@ -1,3 +1,12 @@
+# 4.3.0 (2017-05-10)
+* Respect `.remarkignore` file for `lint-markdown`
+* **Changed** `maximum-line-length` for Markdown linter to 120
+* Document ability to use `.eslintignore` file with Javascript linter
+* **Fixed** link in documentation
+* **Fixed** [#67](https://github.com/ciena-blueplanet/ember-test-utils/issues/67)
+* **Fixed** [#65](https://github.com/ciena-blueplanet/ember-test-utils/issues/65)
+
+
 # 4.2.0 (2017-05-08)
 * **Added** mock-component helper that is being used to test component dependency injection patterns in frost repos
 * **Added** tests for mock-component helper

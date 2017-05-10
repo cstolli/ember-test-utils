@@ -126,7 +126,7 @@ DockerLinter.prototype.lint = function () {
 
 // If file was called via CLI
 if (require.main === module) {
-  const linter = DockerLinter()
+  const linter = new DockerLinter()
   linter.lint()
 
 // If file was required by another Node module

@@ -1,6 +1,6 @@
 {
   "name": "ember-test-utils",
-  "version": "4.3.2",
+  "version": "5.0.0",
   "description": "Utilities to assist with testing ember apps/addons",
   "directories": {
     "doc": "doc",

@@ -52,6 +52,26 @@ describe('lint-markdown', function () {
     sandbox.restore()
   })
 
+  it('should default to include top-level markdown files', function () {
+    expect(linter.fileLocations).to.include('*.md')
+  })
+
+  it('should default to include doc markdown files', function () {
+    expect(linter.fileLocations).to.include('docs/**/*.md')
+  })
+
+  it('should default to include addon markdown files', function () {
+    expect(linter.fileLocations).to.include('addon/**/*.md')
+  })
+
+  it('should default to include app markdown files', function () {
+    expect(linter.fileLocations).to.include('app/**/*.md')
+  })
+
+  it('should default to include test markdown files', function () {
+    expect(linter.fileLocations).to.include('tests/**/*.md')
+  })
+
   describe('when no config file found', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)

@@ -23,6 +23,7 @@ const CONFIG_FILE_NAMES = [
 const FILE_LOCATIONS = [
   'addon/**/*.md',
   'app/**/*.md',
+  'docs/**/*.md',
   'tests/**/*.md',
   '*.md'
 ]

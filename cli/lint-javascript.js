@@ -10,6 +10,7 @@ const Linter = require('./linter')
  */
 const FILE_LOCATIONS = [
   'addon/**/*.js',
+  'addon-test-support/**/*.js',
   'app/**/*.js',
   'config/**/*.js',
   'mirage/**/*.js',
@@ -60,9 +61,10 @@ function getSeverityLabel (severity) {
 
 /**
  * Lint Javascript files
+ * @param {String} [filePath] - single path to a file to lint (if given)
  * @returns {Boolean} returns true if there are linting errors
  */
-JavascriptLinter.prototype.lint = function () {
+JavascriptLinter.prototype.lint = function (filePath) {
   const config = this.getConfig()
 
   // .eslintrc expects globals to be an object but CLIEngine expects an array
@@ -73,7 +75,8 @@ JavascriptLinter.prototype.lint = function () {
 
   const cli = new CLIEngine(config)
 
-  const report = cli.executeOnFiles(this.fileLocations)
+  const locations = filePath ? [filePath] : this.fileLocations
+  const report = cli.executeOnFiles(locations)
 
   report.results.forEach((result) => {
     if (result.messages.length === 0) {
@@ -103,8 +106,12 @@ JavascriptLinter.prototype.lint = function () {
 
 // If file was called via CLI
 if (require.main === module) {
+  let filePath
+  if (process.argv.length === 3) {
+    filePath = process.argv[2]
+  }
   const linter = new JavascriptLinter()
-  linter.lint()
+  linter.lint(filePath)
 
 // If file was required by another Node module
 } else {

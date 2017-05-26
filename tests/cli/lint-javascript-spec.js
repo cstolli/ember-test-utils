@@ -376,4 +376,68 @@ describe('lint-javascript', function () {
       })
     })
   })
+
+  describe('when linting a whole project', function () {
+    let fileLocations
+    beforeEach(function () {
+      const originalFn = CLIEngine.prototype.executeOnFiles
+
+      sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+        return originalFn.call(this, [])
+      })
+
+      linter.lint()
+      fileLocations = CLIEngine.prototype.executeOnFiles.lastCall.args[0]
+    })
+
+    it('should lint files in addon directory', function () {
+      expect(fileLocations).to.include('addon/**/*.js')
+    })
+
+    it('should lint files in addon-test-support/ directory', function () {
+      expect(fileLocations).to.include('addon-test-support/**/*.js')
+    })
+
+    it('should lint files in app/ directory', function () {
+      expect(fileLocations).to.include('app/**/*.js')
+    })
+
+    it('should lint files in config/ directory', function () {
+      expect(fileLocations).to.include('config/**/*.js')
+    })
+
+    it('should lint files in mirage/ directory', function () {
+      expect(fileLocations).to.include('mirage/**/*.js')
+    })
+
+    it('should lint files in test-support/ directory', function () {
+      expect(fileLocations).to.include('test-support/**/*.js')
+    })
+
+    it('should lint files in tests/ directory', function () {
+      expect(fileLocations).to.include('tests/**/*.js')
+    })
+
+    it('should lint files at the root of the repo', function () {
+      expect(fileLocations).to.include('*.js')
+    })
+  })
+
+  describe('when linting a single file', function () {
+    let fileLocations
+    beforeEach(function () {
+      const originalFn = CLIEngine.prototype.executeOnFiles
+
+      sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+        return originalFn.call(this, [])
+      })
+
+      linter.lint('foo/bar/baz.js')
+      fileLocations = CLIEngine.prototype.executeOnFiles.lastCall.args[0]
+    })
+
+    it('should only lint that one file', function () {
+      expect(fileLocations).to.eql(['foo/bar/baz.js'])
+    })
+  })
 })

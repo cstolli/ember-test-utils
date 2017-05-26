@@ -1,3 +1,7 @@
+# 5.1.0 (2017-05-26)
+ * **Added** `docs/**/*.md` to the default file locations covered by `lint-markdown`
+
+
 # 5.0.0 (2017-05-26)
  * **Update** `engine` in `package.json` to `>=6.9.1`. We've only been testing on `6.9.1` and `stable` anyway, but this makes it official that we don't suport `node@5` anymore. 
 * **Addedd** the ability for `lint-javascript` and `lint-htmlbars` to accept a single file to lint on the command line. This is to enable the new `ember-cli-frost-blueprints` to lint the files it generates one at a time and get specific errors for only the file in question. 

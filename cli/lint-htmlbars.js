@@ -47,15 +47,17 @@ HtmlbarsLinter.prototype.constructor = HtmlbarsLinter
 
 /**
  * Lint template files
+ * @param {String} [filePath] - single path to a file to lint (if given)
  * @returns {Boolean} returns true if there are linting errors
  */
-HtmlbarsLinter.prototype.lint = function () {
+HtmlbarsLinter.prototype.lint = function (filePath) {
   const options = {
     config: this.getConfig()
   }
   const linter = new TemplateLinter(options)
 
-  const errors = glob.sync(this.fileLocations)
+  const locations = filePath ? [filePath] : this.fileLocations
+  const errors = glob.sync(locations)
     .map((filePath) => {
       return linter.verify({
         moduleId: filePath,
@@ -89,8 +91,12 @@ HtmlbarsLinter.prototype.lint = function () {
 
 // If file was called via CLI
 if (require.main === module) {
+  let filePath
+  if (process.argv.length === 3) {
+    filePath = process.argv[2]
+  }
   const linter = new HtmlbarsLinter()
-  linter.lint()
+  linter.lint(filePath)
 
 // If file was required by another Node module
 } else {

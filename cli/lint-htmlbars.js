@@ -86,7 +86,7 @@ HtmlbarsLinter.prototype.lint = function (filePath) {
     process.exit(1)
   }
 
-  return errors.length
+  return errors.length !== 0
 }
 
 // If file was called via CLI

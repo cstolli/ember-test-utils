@@ -1,3 +1,7 @@
+# 5.1.1 (2017-06-02)
+* **Fixed** bug where `lint-all-the-things` exited with `0` even with `htmlbars` lint errors (resolves [#82](https://github.com/ciena-blueplanet/ember-test-utils/issues/82))
+
+
 # 5.1.0 (2017-05-26)
  * **Added** `docs/**/*.md` to the default file locations covered by `lint-markdown`
 

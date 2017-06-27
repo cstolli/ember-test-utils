@@ -1,3 +1,4 @@
+/* eslint-env node */
 const Reporter = require('./reporter')
 
 module.exports = {

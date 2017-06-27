@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$EMBER_TRY_SCENARIO" != "default" ]
+if [ "$EMBER_TRY_SCENARIO" != "ember-default" ]
 then
   echo "Skipping version bump for EMBER_TRY_SCENARIO ${EMBER_TRY_SCENARIO}"
   exit 0

@@ -67,8 +67,7 @@ describe('lint-javascript', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.eslintrc.js') !== -1) {
-            console.log('filePath: ', filePath)
+          if (filePath.indexOf('.eslintrc') !== -1) {
             return JSON.stringify({
               rules: {
                 'complexity': ['error', 2],
@@ -193,7 +192,7 @@ describe('lint-javascript', function () {
   describe('when config file found', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
-      files.push('.eslintrc.js')
+      files.push('.eslintrc')
 
       sandbox.stub(fs, 'readdirSync', function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
@@ -218,7 +217,7 @@ describe('lint-javascript', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.eslintrc.js') !== -1) {
+          if (filePath.indexOf('.eslintrc') !== -1) {
             return JSON.stringify({
               rules: {
                 'complexity': ['error', 2],
@@ -344,7 +343,7 @@ describe('lint-javascript', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.eslintrc.js') !== -1) {
+          if (filePath.indexOf('.eslintrc') !== -1) {
             return JSON.stringify({
               globals: {
                 andThen: false

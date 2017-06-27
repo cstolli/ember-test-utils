@@ -32,7 +32,7 @@ const CONFIG_FILE_NAMES = [
 const JavascriptLinter = function () {
   Linter.call(this, {
     configFileNames: CONFIG_FILE_NAMES,
-    defaultConfig: '.eslintrc.js',
+    defaultConfig: '.eslintrc',
     fileLocations: FILE_LOCATIONS
   })
 }

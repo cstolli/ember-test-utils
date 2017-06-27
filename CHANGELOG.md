@@ -1,3 +1,10 @@
+# 5.1.2 (2017-06-27)
+* **Updated** the build scripts to publish under `ember-default`
+Listing changes that were not picked up from previous PR: https://github.com/ciena-blueplanet/ember-test-utils/pull/85
+* **Updated** to Ember CLI 2.12.3 and Ember 2.12.x
+* **Updated** ember-try config matrix with Ember LTS 2.8
+* **Updated** travis.yml build matrix to run Ember LTS 2.8 and default (Ember LTS 2.12) 
+
 # 5.1.1 (2017-06-02)
 * **Fixed** bug where `lint-all-the-things` exited with `0` even with `htmlbars` lint errors (resolves [#82](https://github.com/ciena-blueplanet/ember-test-utils/issues/82))
 

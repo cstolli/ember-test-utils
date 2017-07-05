@@ -67,13 +67,14 @@ describe('lint-javascript', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.eslintrc') !== -1) {
-            return JSON.stringify({
+          if (filePath.indexOf('.eslintrc.js') !== -1) {
+            const exportsStr = JSON.stringify({
               rules: {
                 'complexity': ['error', 2],
                 'no-console': ['warn']
               }
             })
+            return `module.exports = ${exportsStr}`
           }
 
           return originalFn(...arguments)
@@ -192,7 +193,7 @@ describe('lint-javascript', function () {
   describe('when config file found', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
-      files.push('.eslintrc')
+      files.push('.eslintrc.js')
 
       sandbox.stub(fs, 'readdirSync', function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
@@ -217,13 +218,14 @@ describe('lint-javascript', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.eslintrc') !== -1) {
-            return JSON.stringify({
+          if (filePath.indexOf('.eslintrc.js') !== -1) {
+            const exportsStr = JSON.stringify({
               rules: {
                 'complexity': ['error', 2],
                 'no-console': ['warn']
               }
             })
+            return `module.exports = ${exportsStr}`
           }
 
           return originalFn(...arguments)
@@ -343,8 +345,8 @@ describe('lint-javascript', function () {
         const originalFn = fs.readFileSync
 
         sandbox.stub(fs, 'readFileSync', function (filePath) {
-          if (filePath.indexOf('.eslintrc') !== -1) {
-            return JSON.stringify({
+          if (filePath.indexOf('.eslintrc.js') !== -1) {
+            const exportsStr = JSON.stringify({
               globals: {
                 andThen: false
               },
@@ -353,6 +355,7 @@ describe('lint-javascript', function () {
                 'no-console': ['warn']
               }
             })
+            return `module.exports = ${exportsStr}`
           }
 
           return originalFn(...arguments)

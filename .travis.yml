@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-- '6.9.1'
+- '6.11.0'
 - 'stable'
 addons:
   apt:
@@ -30,7 +30,7 @@ matrix:
 
 before_install:
 - npm config set spin false
-- npm install -g coveralls pr-bumper@^1.0.0
+- npm install -g coveralls pr-bumper@^2.0.0
 - $(npm root -g)/pr-bumper/.travis/maybe-check-scope.sh
 install:
 - $(npm root -g)/pr-bumper/.travis/maybe-install.sh
@@ -53,7 +53,7 @@ deploy:
   on:
     all_branches: true
     condition: "$EMBER_TRY_SCENARIO = 'ember-default'"
-    node: '6.9.1'
+    node: '6.11.0'
     tags: true
 notifications:
   slack:

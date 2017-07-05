@@ -2,8 +2,8 @@
  * dummy company model
  */
 import computed, {readOnly} from 'ember-computed-decorators'
-const {Model, attr} = DS
 import DS from 'ember-data'
+const {Model, attr} = DS
 
 export default Model.extend({
   name: attr('string'),

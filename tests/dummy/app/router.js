@@ -3,7 +3,7 @@ const {Router} = Ember
 
 import config from './config/environment'
 
-var MyRouter = Router.extend({
+const MyRouter = Router.extend({
   location: config.locationType,
   rootURL: config.rootURL
 })

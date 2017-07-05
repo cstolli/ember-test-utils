@@ -2,8 +2,8 @@
  * Dummy person model
  */
 import computed, {readOnly} from 'ember-computed-decorators'
-const {Model, attr, belongsTo} = DS
 import DS from 'ember-data'
+const {Model, attr, belongsTo} = DS
 
 export default Model.extend({
   company: belongsTo('company'),

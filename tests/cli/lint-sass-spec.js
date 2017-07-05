@@ -73,7 +73,7 @@ describe('lint-sass', function () {
         sandbox.stub(fs, 'readFileSync').returns('not-json')
       })
 
-      it('throws an error', function () {
+      it('should throw an error', function () {
         expect(function () {
           linter.lint()
         }).to.throw()
@@ -115,7 +115,7 @@ describe('lint-sass', function () {
           sandbox.stub(glob, 'sync').returns([])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(linter.lint()).to.equal(false)
         })
       })
@@ -128,13 +128,13 @@ describe('lint-sass', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[1m\u001b[42m SASS: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -147,7 +147,7 @@ describe('lint-sass', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/warn-1.scss\u001b[24m',
             '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
@@ -161,7 +161,7 @@ describe('lint-sass', function () {
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -174,7 +174,7 @@ describe('lint-sass', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/error-1.scss\u001b[24m',
             '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `width`, found' +
@@ -192,7 +192,7 @@ describe('lint-sass', function () {
           ])
         })
 
-        it('returns true', function () {
+        it('should return true', function () {
           expect(result).to.equal(true)
         })
       })
@@ -215,7 +215,7 @@ describe('lint-sass', function () {
         sandbox.stub(fs, 'readFileSync').returns('not-json')
       })
 
-      it('throws an error', function () {
+      it('should throw an error', function () {
         expect(function () {
           linter.lint()
         }).to.throw()
@@ -257,7 +257,7 @@ describe('lint-sass', function () {
           sandbox.stub(glob, 'sync').returns([])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(linter.lint()).to.equal(false)
         })
       })
@@ -270,13 +270,13 @@ describe('lint-sass', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[1m\u001b[42m SASS: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -289,7 +289,7 @@ describe('lint-sass', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/warn-1.scss\u001b[24m',
             '  \u001b[2m2:16\u001b[22m  \u001b[33mwarning\u001b[39m  !important not allowed' +
@@ -303,7 +303,7 @@ describe('lint-sass', function () {
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -316,7 +316,7 @@ describe('lint-sass', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/error-1.scss\u001b[24m',
             '  \u001b[2m2:3\u001b[22m  \u001b[31merror\u001b[39m  Expected `width`, found' +
@@ -334,7 +334,7 @@ describe('lint-sass', function () {
           ])
         })
 
-        it('returns true', function () {
+        it('should return true', function () {
           expect(result).to.equal(true)
         })
       })

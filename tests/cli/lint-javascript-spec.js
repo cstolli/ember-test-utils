@@ -55,7 +55,7 @@ describe('lint-javascript', function () {
         sandbox.stub(fs, 'readFileSync').returns('not-json')
       })
 
-      it('throws an error', function () {
+      it('should throw an error', function () {
         expect(function () {
           linter.lint()
         }).to.throw()
@@ -89,7 +89,7 @@ describe('lint-javascript', function () {
           })
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(linter.lint()).to.equal(false)
         })
       })
@@ -109,13 +109,13 @@ describe('lint-javascript', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[1m\u001b[42m Javascript: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -135,7 +135,7 @@ describe('lint-javascript', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/warn-1.js\u001b[24m',
             '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  Unexpected console ' +
@@ -149,7 +149,7 @@ describe('lint-javascript', function () {
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -168,7 +168,7 @@ describe('lint-javascript', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/error-1.js\u001b[24m',
             '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function ' +
@@ -182,7 +182,7 @@ describe('lint-javascript', function () {
           ])
         })
 
-        it('returns true', function () {
+        it('should return true', function () {
           expect(result).to.equal(true)
         })
       })
@@ -205,7 +205,7 @@ describe('lint-javascript', function () {
         sandbox.stub(fs, 'readFileSync').returns('not-json')
       })
 
-      it('throws an error', function () {
+      it('should throw an error', function () {
         expect(function () {
           linter.lint()
         }).to.throw()
@@ -239,7 +239,7 @@ describe('lint-javascript', function () {
           })
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(linter.lint()).to.equal(false)
         })
       })
@@ -259,13 +259,13 @@ describe('lint-javascript', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[1m\u001b[42m Javascript: 0 errors, 0 warnings \u001b[49m\u001b[22m\n'
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -285,7 +285,7 @@ describe('lint-javascript', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/warn-1.js\u001b[24m',
             '  \u001b[2m1:1\u001b[22m  \u001b[33mwarning\u001b[39m  Unexpected console ' +
@@ -299,7 +299,7 @@ describe('lint-javascript', function () {
           ])
         })
 
-        it('returns false', function () {
+        it('should return false', function () {
           expect(result).to.equal(false)
         })
       })
@@ -318,7 +318,7 @@ describe('lint-javascript', function () {
           result = linter.lint()
         })
 
-        it('logs expected output', function () {
+        it('should log expected output', function () {
           expect(logOutput).to.eql([
             '\u001b[4mtests/cli/fixtures/error-1.js\u001b[24m',
             '  \u001b[2m1:18\u001b[22m  \u001b[31merror\u001b[39m  Function ' +
@@ -332,7 +332,7 @@ describe('lint-javascript', function () {
           ])
         })
 
-        it('returns true', function () {
+        it('should return true', function () {
           expect(result).to.equal(true)
         })
       })
@@ -368,7 +368,7 @@ describe('lint-javascript', function () {
           })
         })
 
-        it('does not throw error', function () {
+        it('should not throw error', function () {
           expect(function () {
             linter.lint()
           }).not.to.throw()

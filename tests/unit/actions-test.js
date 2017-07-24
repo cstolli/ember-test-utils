@@ -31,7 +31,7 @@ describe('Unit / utils / actions /', function () {
       expect(context).to.equal(object)
     })
 
-    it('return the return value of the action', function () {
+    it('should return the return value of the action', function () {
       expect(ret).to.equal('ret-value')
     })
   })
@@ -49,7 +49,7 @@ describe('Unit / utils / actions /', function () {
       expect(actionArgs).to.eql(['foo', 'bar'])
     })
 
-    it('return the return value of the action', function () {
+    it('should return the return value of the action', function () {
       expect(ret).to.equal('ret-value')
     })
   })

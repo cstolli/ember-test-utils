@@ -55,11 +55,11 @@ function testSorter (a, b) {
  * @param {Boolean} verbose - whether or not to show additional error information
  */
 function testWriter (test, verbose) {
-  var launcher = test.launcher
-  var result = test.result
+  const launcher = test.launcher
+  const result = test.result
 
   // Other properties that may be useful: logs, error, launcherId, items
-  var humanFriendlyDuration = getHumanReadableDuration(result.runDuration)
+  const humanFriendlyDuration = getHumanReadableDuration(result.runDuration)
   this.out.write('[' + humanFriendlyDuration + '] [' + launcher + '] ' + result.name + '\n')
 
   if (verbose) {
@@ -72,7 +72,7 @@ function testWriter (test, verbose) {
     }
 
     if (result.error) {
-      var e = result.error
+      const e = result.error
       this.out.write('\n\tError: ' + e.message + '\n')
 
       if (e.stack) {
@@ -102,10 +102,10 @@ function writePassedTests () {
  * @param {String} humanReadableDuration - human readable test run duration
  */
 function writeSummary (humanReadableDuration) {
-  var passed = this.pass
-  var pending = this.skipped
-  var total = this.total
-  var failed = total - pending - passed
+  const passed = this.pass
+  const pending = this.skipped
+  const total = this.total
+  const failed = total - pending - passed
 
   this.out.write(
     'ran ' + total + ' tests in ' + humanReadableDuration + ' [' + passed +
@@ -142,8 +142,8 @@ Reporter.prototype = {
 
     this.endTime = new Date()
 
-    var duration = Math.round(this.endTime - this.startTime)
-    var humanReadableDuration = getHumanReadableDuration(duration)
+    const duration = Math.round(this.endTime - this.startTime)
+    const humanReadableDuration = getHumanReadableDuration(duration)
 
     if (this.failedTests.length === 0) {
       writeSummary.call(this, humanReadableDuration)
@@ -156,7 +156,7 @@ Reporter.prototype = {
   },
 
   report: function (prefix, data) {
-    var test = {
+    const test = {
       launcher: prefix,
       result: data
     }

@@ -1,3 +1,8 @@
+# 6.0.0 (2017-07-24)
+* **Upgraded** `eslint-config-frost-standard` to `^7.0.0` (without this, consumers can't go past `6.x` b/c even if they have `7.0` in their `package.json`, `ember-test-utils` will get it's own `6.x` version that it will use instead. 
+* **Fixed**: Issue with using `.eslintrc.js` in this repo (Resolves [#86](https://github.com/ciena-blueplanet/ember-test-utils/issues/86))
+
+
 # 5.1.2 (2017-06-27)
 * **Updated** the build scripts to publish under `ember-default`
 Listing changes that were not picked up from previous PR: https://github.com/ciena-blueplanet/ember-test-utils/pull/85

@@ -72,7 +72,7 @@
     "ember-cli-babel": "^5.1.5",
     "ember-template-lint": "^0.8.12",
     "eslint": "^4.0.0",
-    "eslint-config-frost-standard": "^7.0.0",
+    "eslint-config-frost-standard": "git://github.com/juwara0/eslint-config-frost-standard#updateDependencies",
     "glob-all": "^3.1.0",
     "node-yaml": "^3.0.3",
     "remark": "^8.0.0",

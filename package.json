@@ -75,8 +75,8 @@
     "eslint-config-frost-standard": "git://github.com/juwara0/eslint-config-frost-standard#updateDependencies",
     "glob-all": "^3.1.0",
     "node-yaml": "^3.0.3",
-    "remark": "^8.0.0",
-    "remark-lint": "^6.0.1",
+    "remark": "^6.2.0",
+    "remark-lint": "^5.4.0",
     "sass-lint": "^1.10.2"
   },
   "ember-addon": {

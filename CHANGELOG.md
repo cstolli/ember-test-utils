@@ -1,3 +1,7 @@
+# 7.0.1 (2017-11-21)
+* **Updated** travis CI and pr-bumper publishing scripts
+
+
 # 7.0.0 (2017-11-21)
 * **Added** `bower` to devDependencies since it is no longer provided by Ember CLI
 * **Updated** `ember-cli-htmlbars-inline-precompile` to pinned version per conflict with `ember-cli-code-coverage`

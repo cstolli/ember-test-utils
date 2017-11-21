@@ -36,6 +36,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "bower": "^1.8.2",
     "broccoli-asset-rev": "^2.4.5",
     "chai-jquery": "^2.0.0",
     "ember-cli": "2.12.3",
@@ -43,7 +44,7 @@
     "ember-cli-code-coverage": "^0.3.12",
     "ember-cli-dependency-checker": "^1.3.0",
     "ember-cli-htmlbars": "^1.1.1",
-    "ember-cli-htmlbars-inline-precompile": "^0.3.6",
+    "ember-cli-htmlbars-inline-precompile": "0.3.12",
     "ember-cli-inject-live-reload": "^1.4.1",
     "ember-cli-mocha": "0.13.2",
     "ember-cli-shims": "^1.0.2",
@@ -67,12 +68,12 @@
     "ember-addon"
   ],
   "dependencies": {
-    "chalk": "^1.1.3",
-    "dockerfile_lint": "^0.2.6",
+    "chalk": "^2.3.0",
+    "dockerfile_lint": "^0.2.7",
     "ember-cli-babel": "^5.1.5",
-    "ember-template-lint": "^0.6.3",
+    "ember-template-lint": "^0.8.12",
     "eslint": "^4.0.0",
-    "eslint-config-frost-standard": "^7.0.0",
+    "eslint-config-frost-standard": "^8.0.0",
     "glob-all": "^3.1.0",
     "node-yaml": "^3.0.3",
     "remark": "^6.2.0",

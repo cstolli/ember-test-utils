@@ -1,3 +1,11 @@
+# 7.0.0 (2017-11-21)
+* **Added** `bower` to devDependencies since it is no longer provided by Ember CLI
+* **Updated** `ember-cli-htmlbars-inline-precompile` to pinned version per conflict with `ember-cli-code-coverage`
+* **Updated** to version 2 of `chalk`
+* **Updated** to version of ^0.2.7 `dockerfile_lint`
+* **Updated** to version ^0.8.12 of `ember-template-lint`
+* **Updated** to version 8 of `eslint-config-frost-standard`
+
 # 6.0.0 (2017-07-24)
 * **Upgraded** `eslint-config-frost-standard` to `^7.0.0` (without this, consumers can't go past `6.x` b/c even if they have `7.0` in their `package.json`, `ember-test-utils` will get it's own `6.x` version that it will use instead. 
 * **Fixed**: Issue with using `.eslintrc.js` in this repo (Resolves [#86](https://github.com/ciena-blueplanet/ember-test-utils/issues/86))

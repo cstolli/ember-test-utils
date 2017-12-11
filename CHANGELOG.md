@@ -1,3 +1,6 @@
+# 7.0.2 (2017-12-11)
+* **Removed** `included` hook from `index.js` since it was not being used to add additional functionality.
+
 # 7.0.1 (2017-11-21)
 * **Updated** travis CI and pr-bumper publishing scripts
 

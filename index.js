@@ -4,10 +4,6 @@
 module.exports = {
   name: 'ember-test-utils',
 
-  included: function (app) {
-    this._super.included(app)
-  },
-
   treeForAddon (tree) {
     const environment = this.app.env
     const config = this.pkg['ember-test-utils'] || {}

@@ -68,7 +68,7 @@
   "dependencies": {
     "chalk": "^2.3.0",
     "dockerfile_lint": "^0.2.7",
-    "ember-cli-babel": "^5.1.5",
+    "ember-cli-babel": "^5.1.7",
     "ember-template-lint": "^0.8.12",
     "eslint": "^4.0.0",
     "eslint-config-frost-standard": "^8.0.0",

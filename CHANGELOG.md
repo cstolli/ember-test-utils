@@ -1,3 +1,7 @@
+# 7.0.3 (2017-12-18)
+* **Removed** unused `ember-lodash-shim` package
+* **Removed** unused `lodash-es` package
+
 # 7.0.2 (2017-12-11)
 * **Removed** `included` hook from `index.js` since it was not being used to add additional functionality.
 

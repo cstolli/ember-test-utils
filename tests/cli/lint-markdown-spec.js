@@ -43,7 +43,7 @@ describe('lint-markdown', function () {
     linter = new MarkdownLinter()
     logOutput = []
     sandbox = sinon.sandbox.create()
-    sandbox.stub(console, 'log', function (text) {
+    sandbox.stub(console, 'log').callsFake(function (text) {
       logOutput.push(text)
     })
   })
@@ -76,7 +76,7 @@ describe('lint-markdown', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })
@@ -98,7 +98,7 @@ describe('lint-markdown', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.remarkrc') !== -1) {
             return JSON.stringify({
               plugins: {
@@ -176,7 +176,7 @@ describe('lint-markdown', function () {
       const files = Array.from(rootProjectFiles)
       files.push('.remarkrc')
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })
@@ -198,7 +198,7 @@ describe('lint-markdown', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.remarkrc') !== -1) {
             return JSON.stringify({
               plugins: {
@@ -278,7 +278,7 @@ describe('lint-markdown', function () {
       const files = Array.from(rootProjectFiles)
       files.push('.remarkignore')
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })

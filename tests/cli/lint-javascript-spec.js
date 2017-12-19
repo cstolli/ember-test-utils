@@ -31,7 +31,7 @@ describe('lint-javascript', function () {
     logOutput = []
     sandbox = sinon.sandbox.create()
 
-    sandbox.stub(console, 'log', function (text) {
+    sandbox.stub(console, 'log').callsFake(function (text) {
       logOutput.push(text)
     })
   })
@@ -44,7 +44,7 @@ describe('lint-javascript', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })
@@ -66,7 +66,7 @@ describe('lint-javascript', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.eslintrc.js') !== -1) {
             const exportsStr = JSON.stringify({
               rules: {
@@ -85,7 +85,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [])
           })
         })
@@ -101,7 +101,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [
               'tests/cli/fixtures/valid-*.js'
             ])
@@ -127,7 +127,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [
               'tests/cli/fixtures/warn-*.js'
             ])
@@ -161,7 +161,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [
               'tests/cli/fixtures/error-*.js'
             ])
@@ -195,7 +195,7 @@ describe('lint-javascript', function () {
       const files = Array.from(rootProjectFiles)
       files.push('.eslintrc.js')
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })
@@ -217,7 +217,7 @@ describe('lint-javascript', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.eslintrc.js') !== -1) {
             const exportsStr = JSON.stringify({
               rules: {
@@ -236,7 +236,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [])
           })
         })
@@ -252,7 +252,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [
               'tests/cli/fixtures/valid-*.js'
             ])
@@ -278,7 +278,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [
               'tests/cli/fixtures/warn-*.js'
             ])
@@ -312,7 +312,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [
               'tests/cli/fixtures/error-*.js'
             ])
@@ -344,7 +344,7 @@ describe('lint-javascript', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.eslintrc.js') !== -1) {
             const exportsStr = JSON.stringify({
               globals: {
@@ -366,7 +366,7 @@ describe('lint-javascript', function () {
         beforeEach(function () {
           const originalFn = CLIEngine.prototype.executeOnFiles
 
-          sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+          sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
             return originalFn.call(this, [])
           })
         })
@@ -385,7 +385,7 @@ describe('lint-javascript', function () {
     beforeEach(function () {
       const originalFn = CLIEngine.prototype.executeOnFiles
 
-      sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+      sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
         return originalFn.call(this, [])
       })
 
@@ -431,7 +431,7 @@ describe('lint-javascript', function () {
     beforeEach(function () {
       const originalFn = CLIEngine.prototype.executeOnFiles
 
-      sandbox.stub(CLIEngine.prototype, 'executeOnFiles', function () {
+      sandbox.stub(CLIEngine.prototype, 'executeOnFiles').callsFake(function () {
         return originalFn.call(this, [])
       })
 

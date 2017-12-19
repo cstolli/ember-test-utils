@@ -1,3 +1,19 @@
+# 8.0.0 (2017-12-19)
+* **Updated** to version `^5.1.7` of `ember-cli-babel`
+* **Removed** unused `ember-disable-proxy-controllers package` package
+* **Updated** to version `^3.1.1` of `node-yaml`
+* **Updated** to version `^2.14.0` of `sinon-chai`
+* **Updated** to version `0.14.4` of `ember-cli-mocha`
+* **Updated** to version `0.4.3` of `ember-cli-chai`
+* **Updated** to version `^0.7.0` of `ember-sinon`
+* **Updated** by pinning to version `0.3.12` of `ember-cli-code-coverage`
+* **Updated** to version `^9.0.0` of `eslint-config-frost-standard`
+* **Updated** stub methods to use new `callsFake()` since old method has been deprecated
+* **Updated** linting to ignore the `CHANGELOG.md` file
+* **Removed** unused `chai-query` package
+* **Updated** to version `^4.11.0` of `eslint`
+
+
 # 7.0.3 (2017-12-18)
 * **Removed** unused `ember-lodash-shim` package
 * **Removed** unused `lodash-es` package

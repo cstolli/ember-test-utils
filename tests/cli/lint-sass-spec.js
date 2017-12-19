@@ -49,7 +49,7 @@ describe('lint-sass', function () {
     linter = new SassLinter()
     logOutput = []
     sandbox = sinon.sandbox.create()
-    sandbox.stub(console, 'log', function (text) {
+    sandbox.stub(console, 'log').callsFake(function (text) {
       logOutput.push(text)
     })
   })
@@ -62,7 +62,7 @@ describe('lint-sass', function () {
     beforeEach(function () {
       const files = Array.from(rootProjectFiles)
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })
@@ -84,7 +84,7 @@ describe('lint-sass', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.sass-lint.yml') !== -1) {
             return JSON.stringify({
               files: {
@@ -204,7 +204,7 @@ describe('lint-sass', function () {
       const files = Array.from(rootProjectFiles)
       files.push('.sass-lint.yml')
 
-      sandbox.stub(fs, 'readdirSync', function (directory) {
+      sandbox.stub(fs, 'readdirSync').callsFake(function (directory) {
         fs.readdirSync.restore() // Restore original method so sass-lint can use it
         return files
       })
@@ -226,7 +226,7 @@ describe('lint-sass', function () {
       beforeEach(function () {
         const originalFn = fs.readFileSync
 
-        sandbox.stub(fs, 'readFileSync', function (filePath) {
+        sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
           if (filePath.indexOf('.sass-lint.yml') !== -1) {
             return JSON.stringify({
               files: {

@@ -36,7 +36,8 @@ use `ember-cli-mocha` and `ember-mocha` as your testing framework. It provides s
 
 Provided test helpers:
 
- * [`mockComponent`](#mockcomponent) - creates a mock component to easily test the component dependency injection pattern
+ * [`mockComponent`](#mockcomponent) - creates a mock component to easily test the component dependency
+ injection pattern
  * [`stubService`](#stubservice) - allows you to stub a service
 
 ## `setupComponentTest`
@@ -569,7 +570,9 @@ describe(test.label, function () {
 
 ## Build Optimization
 
-Out of box having `ember-test-utils` in your project will make your vendor.js asset slightly larger, as of 2017-02-15 this increase in size is approximately 0.08 KB. If you want to keep this out of your build for certain environments you can add the following configuration to your `package.json`:
+Out of box having `ember-test-utils` in your project will make your vendor.js asset slightly larger, as of 2017-02-15
+ this increase in size is approximately 0.08 KB. If you want to keep this out of your build for certain environments
+ you can add the following configuration to your `package.json`:
 
 ```json
 {
@@ -679,7 +682,8 @@ and run
 npm run lint-js
 ```
 
-If you would like any Javascript files to be ignored during linting simply create a `.eslintignore` file in the root of your project and populate it with one
+If you would like any Javascript files to be ignored during linting simply create a `.eslintignore` file in the root
+ of your project and populate it with one
 [glob pattern](http://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) per line.
 
 
@@ -707,7 +711,8 @@ and run
 npm run lint-md
 ```
 
-If you would like any Markdown files to be ignored during linting simply create a `.remarkignore` file in the root of your project and populate it with one
+If you would like any Markdown files to be ignored during linting simply create a `.remarkignore` file in the root
+ of your project and populate it with one
 [glob pattern](https://github.com/unifiedjs/unified-engine/blob/master/doc/ignore.md) per line.
 
 

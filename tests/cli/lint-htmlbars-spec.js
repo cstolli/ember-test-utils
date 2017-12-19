@@ -26,7 +26,7 @@ describe('lint-htmlbars', function () {
     sandbox = sinon.sandbox.create()
     sandbox.stub(linter, 'getConfig').returns({the: 'config'})
     sandbox.stub(linter, 'printLintSummary')
-    sandbox.stub(console, 'log', function (text) {
+    sandbox.stub(console, 'log').callsFake(function (text) {
       logOutput.push(text)
     })
 

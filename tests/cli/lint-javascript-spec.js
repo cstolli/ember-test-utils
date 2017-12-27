@@ -1,9 +1,13 @@
-const expect = require('chai').expect
+const chai = require('chai')
+const expect = chai.expect
 const CLIEngine = require('eslint').CLIEngine
 const fs = require('fs')
 const sinon = require('sinon')
+const sinonChai = require('sinon-chai')
 
 const JavascriptLinter = require('../../cli/lint-javascript')
+
+chai.use(sinonChai)
 
 const rootProjectFiles = [
   '.bowerrc',
@@ -441,6 +445,60 @@ describe('lint-javascript', function () {
 
     it('should only lint that one file', function () {
       expect(fileLocations).to.eql(['foo/bar/baz.js'])
+    })
+  })
+
+  describe('when checking file with fixable errors without "--fix"', function () {
+    let result
+    beforeEach(function () {
+      const originalFn = fs.readFileSync
+
+      sandbox.stub(fs, 'readFileSync').callsFake(function (filePath) {
+        if (filePath.indexOf('.eslintrc.js') !== -1) {
+          const exportsStr = JSON.stringify({
+            parser: 'babel-eslint',
+            rules: {
+              'no-var': ['error']
+            }
+          })
+          return `module.exports = ${exportsStr}`
+        }
+
+        return originalFn(...arguments)
+      })
+      sandbox.stub(CLIEngine, 'outputFixes')
+      result = linter.lint('tests/cli/fixtures/fixable-error-1.js')
+    })
+
+    it('should not call CLIEngine.outputFixes', function () {
+      expect(CLIEngine.outputFixes).to.have.callCount(0)
+    })
+
+    it('should report error', function () {
+      expect(logOutput[3]).to.match(/Javascript: 1 errors, 0 warnings/)
+    })
+
+    it('should return true', function () {
+      expect(result).to.equal(true)
+    })
+
+    describe('when specifying "--fix" argument', function () {
+      beforeEach(function () {
+        logOutput = []
+        result = linter.lint('tests/cli/fixtures/fixable-error-1.js', ['--fix'])
+      })
+
+      it('should call CLIEngine.outputFixes', function () {
+        expect(CLIEngine.outputFixes).to.have.callCount(1)
+      })
+
+      it('should not report fixable errors', function () {
+        expect(logOutput[0]).to.match(/Javascript: 0 errors, 0 warnings/)
+      })
+
+      it('should return false', function () {
+        expect(result).to.equal(false)
+      })
     })
   })
 })

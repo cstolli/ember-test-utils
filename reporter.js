@@ -72,12 +72,7 @@ function testWriter (test, verbose) {
     }
 
     if (result.error) {
-      const e = result.error
-      this.out.write('\n\tError: ' + e.message + '\n')
-
-      if (e.stack) {
-        this.out.write('\n\t\t' + e.stack.toString().replace(/\n/g, '\n\t\t') + '\n')
-      }
+      writeIndividualError(result.error)
     }
   }
 }
@@ -111,6 +106,18 @@ function writeSummary (humanReadableDuration) {
     'ran ' + total + ' tests in ' + humanReadableDuration + ' [' + passed +
     ' passed / ' + failed + ' failed / ' + pending + ' pending]\n\n'
   )
+}
+
+/**
+ * Write out error in individual test result
+ * @param {Object} error - the error to write
+ */
+function writeIndividualError (error) {
+  this.out.write('\n\tError: ' + error.message + '\n')
+
+  if (error.stack) {
+    this.out.write('\n\t\t' + error.stack.toString().replace(/\n/g, '\n\t\t') + '\n')
+  }
 }
 
 function Reporter (silent, out) {

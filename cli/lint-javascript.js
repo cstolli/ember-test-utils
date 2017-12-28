@@ -79,6 +79,11 @@ JavascriptLinter.prototype.lint = function (filePath, specificArgs) {
     config.fix = true
   }
 
+  if (args.includes('--no-ignore')) {
+    // This allows us to test with fixtures that would normally fail linting and are thus in the .eslintignore file
+    config.ignore = false
+  }
+
   const cli = new CLIEngine(config)
 
   const locations = filePath ? [filePath] : this.fileLocations

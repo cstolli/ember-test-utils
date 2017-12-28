@@ -467,7 +467,7 @@ describe('lint-javascript', function () {
         return originalFn(...arguments)
       })
       sandbox.stub(CLIEngine, 'outputFixes')
-      result = linter.lint('tests/cli/fixtures/fixable-error-1.js')
+      result = linter.lint('tests/cli/fixtures/fixable-error-1.js', ['--no-ignore'])
     })
 
     it('should not call CLIEngine.outputFixes', function () {
@@ -485,7 +485,7 @@ describe('lint-javascript', function () {
     describe('when specifying "--fix" argument', function () {
       beforeEach(function () {
         logOutput = []
-        result = linter.lint('tests/cli/fixtures/fixable-error-1.js', ['--fix'])
+        result = linter.lint('tests/cli/fixtures/fixable-error-1.js', ['--fix', '--no-ignore'])
       })
 
       it('should call CLIEngine.outputFixes', function () {

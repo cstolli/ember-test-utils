@@ -1,3 +1,7 @@
+# 8.1.0 (2017-12-28)
+* **Added** ability to specify `--fix` with lint-all-the-things to automatically apply eslint fixes
+
+
 # 8.0.0 (2017-12-19)
 * **Updated** to version `^5.1.7` of `ember-cli-babel`
 * **Removed** unused `ember-disable-proxy-controllers package` package

@@ -62,15 +62,26 @@ function getSeverityLabel (severity) {
 /**
  * Lint Javascript files
  * @param {String} [filePath] - single path to a file to lint (if given)
+ * @params {String[]} [specificArgs] - command line arguments to use instead of process args
  * @returns {Boolean} returns true if there are linting errors
  */
-JavascriptLinter.prototype.lint = function (filePath) {
+JavascriptLinter.prototype.lint = function (filePath, specificArgs) {
   const config = this.getConfig()
+  const args = specificArgs || process.argv
 
   // .eslintrc expects globals to be an object but CLIEngine expects an array
   // @see https://github.com/eslint/eslint/issues/7967
   if (typeof config.globals === 'object' && !Array.isArray(config.globals)) {
     config.globals = Object.keys(config.globals)
+  }
+
+  if (args.includes('--fix')) {
+    config.fix = true
+  }
+
+  if (args.includes('--no-ignore')) {
+    // This allows us to test with fixtures that would normally fail linting and are thus in the .eslintignore file
+    config.ignore = false
   }
 
   const cli = new CLIEngine(config)
@@ -95,6 +106,10 @@ JavascriptLinter.prototype.lint = function (filePath) {
   })
 
   this.printLintSummary('Javascript', report.errorCount, report.warningCount)
+
+  if (config.fix) {
+    CLIEngine.outputFixes(report)
+  }
 
   // If file was called via CLI and there are errors exit process with failed status
   if (require.main === module && report.errorCount !== 0) {

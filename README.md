@@ -634,6 +634,16 @@ and run
 npm run lint-all-the-things
 ```
 
+Many eslint errors and warnings can be automatically fixed using the `--fix` command line argument. For example,
+
+```bash
+./node_modules/.bin/lint-all-the-things --fix
+```
+
+```bash
+npm run lint-all-the-things -- --fix
+```
+
 ### Dockerfile
 
 If you want to lint your template files you can simply run:

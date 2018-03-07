@@ -23,7 +23,10 @@
     "test-addon": "EMBER_TRY_SCENARIO=${EMBER_TRY_SCENARIO:=ember-default} && ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test",
     "test-cli": "istanbul cover --dir coverage _mocha -- --recursive tests/cli/"
   },
-  "repository": "git@github.com:ciena-blueplanet/ember-test-utils.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ciena-blueplanet/ember-test-utils.git"
+  },
   "engines": {
     "node": ">= 6.9.1"
   },
@@ -70,7 +73,7 @@
     "ember-cli-babel": "^5.1.7",
     "ember-template-lint": "^0.8.12",
     "eslint": "^4.11.0",
-    "eslint-config-frost-standard": "^9.0.0",
+    "eslint-config-frost-standard": "^9.0.1",
     "glob-all": "^3.1.0",
     "node-yaml": "^3.1.1",
     "remark": "^6.2.0",

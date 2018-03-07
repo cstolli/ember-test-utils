@@ -1,3 +1,1 @@
-This repository has _devDependencies_ on all of the same libraries that are _dependencies_ of `ember-frost-test` 
-because it is a dependency of `ember-frost-test` but needs its own copy for its own development. These _devDepenencies_
-entries are to be kept in sync version-wise not because they need to be but to keep things cleaner.
+This respository has a dependency on `remark-lint` @ `^5.4.0` because even though `remark-lint` is provided by `eslint-plugin-ocd` which is provided by `eslint-config-frost-standard` that version is `^6.0.1` which is incompatible with this repositories code.

@@ -1,3 +1,12 @@
+# 8.1.1 (2018-03-07)
+* **Updated** pull request template
+* **Added** issue template
+* **Updated** to `pr-bumper` version `3`
+* **Updated** to node 8
+* **Added** slack integration
+* **Updated** `eslint-config-frost-standard` to `^9.0.1`
+* **Updated** `package-lock.json` file
+
 # 8.1.0 (2017-12-28)
 * **Added** ability to specify `--fix` with lint-all-the-things to automatically apply eslint fixes
 

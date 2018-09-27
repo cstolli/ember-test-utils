@@ -3,12 +3,13 @@
  */
 import {expect} from 'chai'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
+import {setupTest} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
 
 const test = integration('setup-component-test')
 describe(test.label, function () {
-  test.setup()
+  setupTest()
 
   describe('when rendereed', function () {
     beforeEach(function () {

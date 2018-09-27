@@ -11,5 +11,6 @@ module.exports = {
   launch_in_dev: [
     'Chrome'
   ],
-  reporter: new Reporter()
+  reporter: new Reporter(),
+  src_files_ignore: ['tests/cli/*.js']
 }

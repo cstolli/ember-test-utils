@@ -62,9 +62,10 @@ function getSeverityLabel (severity) {
 /**
  * Lint Javascript files
  * @param {String} [filePath] - single path to a file to lint (if given)
- * @params {String[]} [specificArgs] - command line arguments to use instead of process args
+ * @param {String[]} [specificArgs] - command line arguments to use instead of process args
  * @returns {Boolean} returns true if there are linting errors
  */
+/* eslint complexity:0 */
 JavascriptLinter.prototype.lint = function (filePath, specificArgs) {
   const config = this.getConfig()
   const args = specificArgs || process.argv
@@ -118,6 +119,7 @@ JavascriptLinter.prototype.lint = function (filePath, specificArgs) {
 
   return report.errorCount !== 0
 }
+/* eslint complexity:1 */
 
 // If file was called via CLI
 if (require.main === module) {

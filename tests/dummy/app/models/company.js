@@ -1,8 +1,8 @@
 /**
  * dummy company model
  */
-import computed, {readOnly} from 'ember-computed-decorators'
 import DS from 'ember-data'
+import computed, {readOnly} from 'ember-decorators/object'
 const {Model, attr} = DS
 
 export default Model.extend({
@@ -12,9 +12,8 @@ export default Model.extend({
   state: attr('string'),
   zip: attr('string'),
 
-  @readOnly
   @computed('street', 'city', 'state', 'zip')
-  address (street, city, state, zip) {
-    return street + '\n' + `${city}, ${state} ${zip}`
+  get address () {
+    return this.get('street') + '\n' + `${this.get('city')}, ${this.get('state')} ${this.get('zip')}`
   }
 })

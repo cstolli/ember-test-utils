@@ -79,7 +79,7 @@ function reportReducer (linter, summary, filePath) {
 function getIgnoredFiles () {
   const filePath = path.join(process.cwd(), '.remarkignore')
   const ignoredFilesSource = fs.existsSync(filePath) ? fs.readFileSync(filePath, {encoding: 'utf8'}) : ''
-  var ignoredFiles = ignoredFilesSource.split('\n')
+  let ignoredFiles = ignoredFilesSource.split('\n')
 
   ignoredFiles = ignoredFiles.filter(function (item) {
     return item !== ''

@@ -1,9 +1,9 @@
 /**
  * Dummy my-greeting component
  */
-import Ember from 'ember'
-const {Component} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+import Component from '@ember/component'
+
+import computed, {readOnly} from 'ember-decorators/object'
 import layout from './template'
 
 export default Component.extend({
@@ -16,10 +16,9 @@ export default Component.extend({
 
   // == Computed Properties ===================================================
 
-  @readOnly
   @computed('name')
-  greeting (name) {
-    return `Hello, ${name}`
+  get greeting () {
+    return `Hello, ${this.get('name')}`
   },
 
   // == Functions =============================================================

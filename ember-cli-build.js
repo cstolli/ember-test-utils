@@ -4,7 +4,10 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon')
 module.exports = function (defaults) {
   const app = new EmberAddon(defaults, {
     babel: {
-      optional: ['es7.decorators']
+      plugins: ['transform-decorators'],
+      options: {
+        ignore: ['tests/cli/*.js']
+      }
     },
     sassOptions: {
       includePaths: [

@@ -2,14 +2,18 @@
  * Integration test of the mock-component helper on a the dependency-inject-component
  */
 import {expect} from 'chai'
-import {registerMockComponent, unregisterMockComponent} from 'ember-test-utils/test-support/mock-component'
+import {
+  registerMockComponent,
+  unregisterMockComponent
+} from 'ember-test-utils/test-support/mock-component'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
+import {setupRenderingTest} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 
 const test = integration('mock-component')
 describe(test.label, function () {
-  test.setup()
+  setupRenderingTest()
 
   describe('when mock-component is used to set the injected component', function () {
     beforeEach(function () {

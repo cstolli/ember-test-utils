@@ -3,15 +3,15 @@
  */
 
 /* eslint-disable ember-standard/destructure */
-import Ember from 'ember'
-import {setupComponentTest} from 'ember-mocha'
-const assign = Ember.assign || Ember.merge // NOTE: only use two params in assign() since merge() doesn't take more
+import {assign as assignPolyfill, merge as mergePolyfill} from '@ember/polyfills'
+import {setupRenderingTest} from 'ember-mocha'
+const assign = assignPolyfill || mergePolyfill // NOTE: only use two params in assign() since merge() doesn't take more
 
 import './typedefs'
 
 // Workaround to allow stubbing dependencies during testing
 export const deps = {
-  setupComponentTest
+  setupRenderingTest
 }
 
 /**
@@ -26,7 +26,7 @@ function component (name, options = {}) {
   return {
     label: `${testType} / Component / ${name} /`,
     setup () {
-      deps.setupComponentTest(name, options)
+      deps.setupRenderingTest()
     }
   }
 }

@@ -3,7 +3,11 @@
 
 module.exports = {
   name: 'ember-test-utils',
-
+  options: {
+    babel: {
+      ignore: ['tests/cli/*.js']
+    }
+  },
   treeForAddon (tree) {
     const environment = this.app.env
     const config = this.pkg['ember-test-utils'] || {}

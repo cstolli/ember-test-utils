@@ -61,7 +61,6 @@ function testWriter (test, verbose) {
   // Other properties that may be useful: logs, error, launcherId, items
   const humanFriendlyDuration = getHumanReadableDuration(result.runDuration)
   this.out.write('[' + humanFriendlyDuration + '] [' + launcher + '] ' + result.name + '\n')
-
   if (verbose) {
     if (result.logs && result.logs.length !== 0) {
       this.out.write('\tLogs:\n')
@@ -72,7 +71,7 @@ function testWriter (test, verbose) {
     }
 
     if (result.error) {
-      writeIndividualError(result.error)
+      writeIndividualError(result.error, this.out)
     }
   }
 }
@@ -111,18 +110,19 @@ function writeSummary (humanReadableDuration) {
 /**
  * Write out error in individual test result
  * @param {Object} error - the error to write
+ * @param {Object} out - output stream to use
  */
-function writeIndividualError (error) {
-  this.out.write('\n\tError: ' + error.message + '\n')
+function writeIndividualError (error, out) {
+  out.write('\n\tError: ' + error.message + '\n')
 
   if (error.stack) {
-    this.out.write('\n\t\t' + error.stack.toString().replace(/\n/g, '\n\t\t') + '\n')
+    out.write('\n\t\t' + error.stack.toString().replace(/\n/g, '\n\t\t') + '\n')
   }
 }
 
 function Reporter (silent, out) {
   // Set options
-  this.out = out || process.stdout
+  this.out = process.stdout
   this.silent = silent
 
   // Set test arrays
